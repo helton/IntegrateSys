@@ -8,4 +8,6 @@ Contribuidores:
 ---------------
 Helton Carlos de Souza <helton.development@gmail.com>
 
+Raquel Kühl Rocha <rak.k.rocha@gmail.com>
+
 Waldeilson Éder dos Santos <wwesantos@gmail.com>
