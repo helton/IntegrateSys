@@ -1,0 +1,23 @@
+EXPORTS
+    getTemperatura @1
+    getUmidade @2
+    hasAgua @3
+    hasEnergia @4
+    hasIncendio @5
+    hasLuminosidade @6
+    setAgua @7
+    setAlarme @8
+    setAquecedores @9
+    setEnergia @10
+    setIncendio @11
+    setLampadas @12
+    setLuminosidade @13
+    setTemperatura @14
+    setUmedecedores @15
+    setUmidade @16
+    setVentiladores @17
+    statusAlarme @18
+    statusAquecedores @19
+    statusLampadas @20
+    statusUmedecedores @21
+    statusVentiladores @22
