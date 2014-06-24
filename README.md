@@ -1,7 +1,8 @@
 IntegrateSys
 ============
 
-IntegrateSys - Projeto da disciplina de Sistemas Orientados a Objetos (Prof. Dr. Frank Jose Affonso)
+Projeto da disciplina de Sistemas Orientados a Objetos (Prof. Dr. Frank Jose Affonso)
+
 Universidade Júlio de Mesquita Filho (UNESP).
 
 Contribuidores:
