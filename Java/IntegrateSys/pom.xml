@@ -27,7 +27,7 @@
             <resource>
                 <directory>./../../C++/IntegrateSysLib/x64/Release</directory>
                 <includes>
-                    <include>IntegrateSysLib.dll</include>
+                    <include>**/*.dll</include>
                 </includes>
             </resource>
         </resources>

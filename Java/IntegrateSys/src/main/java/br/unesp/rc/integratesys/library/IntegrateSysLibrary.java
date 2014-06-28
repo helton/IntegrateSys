@@ -19,31 +19,31 @@ public interface IntegrateSysLibrary extends Library {
     // gets - sensores
     int getTemperatura();
     int getUmidade();
-    boolean hasLuminosidade();
+    int getLuminosidade();
     boolean hasAgua();
     boolean hasEnergia();
-    boolean hasIncendio();
+    boolean inIncendio();
     
     // gets - atuadores
     boolean statusAlarme();
-    boolean statusAquecedores();
-    boolean statusLampadas();
-    boolean statusUmedecedores();
-    boolean statusVentiladores();
+    boolean statusAquecedor();
+    boolean statusLampada();
+    boolean statusUmedecedor();
+    boolean statusVentilador();
     
     // sets - sensores
     void setAgua(boolean agua);
     void setEnergia(boolean energia);
     void setIncendio(boolean incendio);
-    void setLuminosidade(boolean luminosidade);
+    void setLuminosidade(int luminosidade);
     void setTemperatura(int temperatura);
     void setUmidade(int umidade);
 
     // sets - atuadores
     void setAlarme(boolean alarme);
-    void setAquecedores(boolean aquecedores);
-    void setLampadas(boolean lampadas);
-    void setUmedecedores(boolean umedecedores);
-    void setVentiladores(boolean ventiladores);    
-    
+    void setAquecedor(boolean aquecedor);
+    void setLampada(boolean lampada);
+    void setUmedecedor(boolean umedecedor);
+    void setVentilador(boolean ventilador);    
+        
 }
