@@ -21,7 +21,10 @@ public class IntegrateSysLibraryLoader {
             try {
                 library = (IntegrateSysLibrary) Native.loadLibrary(IntegrateSysLibrary.LIBRARY_NAME, IntegrateSysLibrary.class);
             } catch(UnsatisfiedLinkError ex) {
-                System.err.println("Dll " + IntegrateSysLibrary.LIBRARY_NAME + " não pode ser carregada. Certifique-se de possuir esse arquivo no diretório da aplicaçao.");
+                System.err.println("Dll " + IntegrateSysLibrary.LIBRARY_NAME 
+                        + " não pode ser carregada. Certifique-se de possuir esse "
+                        + "arquivo no diretório da aplicação e que ele seja compatível "
+                        + "com a arquitetura de seu sistema operacional (32 ou 64 bits).");
                 System.err.println("Erro: " + ex.getMessage());
             }        
         }
