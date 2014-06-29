@@ -33,7 +33,7 @@ public class TesteAmbiente {
         Assert.assertEquals(30, ambiente.getSensores().getSensorTemperatura().getTemperatura());
         Assert.assertEquals(60, ambiente.getSensores().getSensorUmidade().getUmidade());
         Assert.assertFalse(ambiente.getAtuadores().getVentilador().isLigado());
-        Assert.assertFalse(ambiente.getAtuadores().getUmedecedor().isLigado());
+        Assert.assertFalse(ambiente.getAtuadores().getUmidificador().isLigado());
         Assert.assertFalse(ambiente.getAtuadores().getLampada().isLigado());
         Assert.assertFalse(ambiente.getAtuadores().getAquecedor().isLigado());        
         Assert.assertFalse(ambiente.getAtuadores().getAlarme().isLigado());                        

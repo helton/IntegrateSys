@@ -28,7 +28,7 @@ public interface IntegrateSysLibrary extends Library {
     boolean statusAlarme();
     boolean statusAquecedor();
     boolean statusLampada();
-    boolean statusUmedecedor();
+    boolean statusUmidificador();
     boolean statusVentilador();
     
     // sets - sensores
@@ -43,7 +43,7 @@ public interface IntegrateSysLibrary extends Library {
     void setAlarme(boolean alarme);
     void setAquecedor(boolean aquecedor);
     void setLampada(boolean lampada);
-    void setUmedecedor(boolean umedecedor);
+    void setUmidificador(boolean umidificador);
     void setVentilador(boolean ventilador);    
         
 }

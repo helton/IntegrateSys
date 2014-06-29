@@ -19,7 +19,7 @@ public class Atuadores extends ArrayList<Atuador> {
     private final Alarme alarme;
     private final Aquecedor aquecedor;
     private final Lampada lampada;
-    private final Umedecedor umedecedor;
+    private final Umidificador umidificador;
     private final Ventilador ventilador;
     
     public Atuadores(Sensores sensores, AgendadorTarefas agendadorTarefas) {
@@ -27,7 +27,7 @@ public class Atuadores extends ArrayList<Atuador> {
                 sensores.getSensorEnergia(), sensores.getSensorIncendio());
         aquecedor = new Aquecedor(agendadorTarefas, sensores.getSensorTemperatura());
         lampada = new Lampada(agendadorTarefas, sensores.getSensorLuminosidade());        
-        umedecedor = new Umedecedor(agendadorTarefas, sensores.getSensorUmidade());
+        umidificador = new Umidificador(agendadorTarefas, sensores.getSensorUmidade());
         ventilador = new Ventilador(agendadorTarefas, sensores.getSensorTemperatura());
     }
     
@@ -39,10 +39,10 @@ public class Atuadores extends ArrayList<Atuador> {
     }
 
     /**
-     * @return the umedecedor
+     * @return the umidificador
      */
-    public Umedecedor getUmedecedor() {
-        return umedecedor;
+    public Umidificador getUmidificador() {
+        return umidificador;
     }
 
     /**

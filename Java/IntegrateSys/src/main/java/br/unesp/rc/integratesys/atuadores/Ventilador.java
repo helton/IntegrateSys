@@ -6,41 +6,35 @@
 
 package br.unesp.rc.integratesys.atuadores;
 
-import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.SensorTemperatura;
 import br.unesp.rc.integratesys.utils.AgendadorTarefas;
-import br.unesp.rc.integratesys.utils.Tarefa;
 
 /**
  *
  * @author Helton
  */
-public class Ventilador extends Atuador {
+public class Ventilador extends AtuadorDeTemperatura {
 
-    private final int MAXIMO_INCREMENTO_TEMPERATURA_POR_CICLO = 2;
-    private final SensorTemperatura sensorTemperatura;
-    
+    private final int VARIACAO_TEMPERATURA   = 4;
+    private final int INCREMENTO_TEMPERATURA = 1;
+
     public Ventilador(AgendadorTarefas agendadorTarefas, SensorTemperatura sensorTemperatura) {
-        super(agendadorTarefas);
-        this.sensorTemperatura = sensorTemperatura;
+        super(agendadorTarefas, sensorTemperatura);
+    }
+       
+    @Override
+    public int getVariacaoAoLigar() {
+        return - VARIACAO_TEMPERATURA;
+    }
+    
+    @Override
+    public int getVariacaoAoDesligar() {
+        return VARIACAO_TEMPERATURA;        
+    }
+    
+    @Override
+    public int getIncremento() {
+        return INCREMENTO_TEMPERATURA;        
     }    
 
-    @Override
-    public void setLigado(boolean ligado) {
-        if (isLigado() != ligado) {
-            super.setLigado(ligado);
-            if (isLigado()) {
-//                int diferenca = 30/* substituir por parametros.getTemperaturaIdeal()*/ - sensorTemperatura.getTemperatura();
-//                int quantidadeCiclos = Math.round(diferenca / MAXIMO_INCREMENTO_TEMPERATURA_POR_CICLO);
-//                for (int ciclo = 1; ciclo <= quantidadeCiclos; ciclo++) {
-//                    getAgendadorTarefas().agendarTarefa(new Tarefa() {
-//                        @Override
-//                        public void executar() {
-//                            IntegrateSysLibraryLoader.getLibrary().setTemperatura(sensorTemperatura.getTemperatura() + MAXIMO_INCREMENTO_TEMPERATURA_POR_CICLO);
-//                        }
-//                    });
-//                }
-            }
-        }
-    }
 }

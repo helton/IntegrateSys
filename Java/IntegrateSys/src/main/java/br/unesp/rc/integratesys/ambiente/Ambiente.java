@@ -42,7 +42,7 @@ public class Ambiente {
         IntegrateSysLibraryLoader.getLibrary().setAlarme(false);        
         IntegrateSysLibraryLoader.getLibrary().setAquecedor(false);
         IntegrateSysLibraryLoader.getLibrary().setLampada(false);
-        IntegrateSysLibraryLoader.getLibrary().setUmedecedor(false);
+        IntegrateSysLibraryLoader.getLibrary().setUmidificador(false);
         IntegrateSysLibraryLoader.getLibrary().setVentilador(false);        
     }
 

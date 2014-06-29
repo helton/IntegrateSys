@@ -11,7 +11,7 @@ bool _incendio = false;
 // atuadores
 bool _ventilador = false;
 bool _aquecedor = false;
-bool _umedecedor = false;
+bool _umidificador = false;
 bool _lampada = true;
 bool _alarme = false;
 
@@ -47,8 +47,8 @@ bool statusAquecedor() {
 	return _aquecedor;
 }
 
-bool statusUmedecedor() {
-	return _umedecedor;
+bool statusUmidificador() {
+	return _umidificador;
 }
 
 bool statusLampada() {
@@ -95,8 +95,8 @@ void setLampada(bool lampada) {
 	_lampada = lampada;
 }
 
-void setUmedecedor(bool umedecedor) {
-	_umedecedor = umedecedor;
+void setUmidificador(bool umidificador) {
+	_umidificador = umidificador;
 }
 
 void setVentilador(bool ventilador) {

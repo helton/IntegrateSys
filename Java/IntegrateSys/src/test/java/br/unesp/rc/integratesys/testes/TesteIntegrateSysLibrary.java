@@ -96,12 +96,12 @@ public class TesteIntegrateSysLibrary {
     }  
     
     @Test
-    public void testeStatusAndSetUmedecedores() {
-        IntegrateSysLibraryLoader.getLibrary().setUmedecedor(false);
-        Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusUmedecedor());
+    public void testeStatusAndSetUmidificadores() {
+        IntegrateSysLibraryLoader.getLibrary().setUmidificador(false);
+        Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusUmidificador());
 
-        IntegrateSysLibraryLoader.getLibrary().setUmedecedor(true);
-        Assert.assertTrue(IntegrateSysLibraryLoader.getLibrary().statusUmedecedor());
+        IntegrateSysLibraryLoader.getLibrary().setUmidificador(true);
+        Assert.assertTrue(IntegrateSysLibraryLoader.getLibrary().statusUmidificador());
     }    
     
     @Test

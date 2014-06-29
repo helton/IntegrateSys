@@ -7,48 +7,48 @@
 package br.unesp.rc.integratesys.atuadores;
 
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
-import br.unesp.rc.integratesys.sensores.SensorLuminosidade;
+import br.unesp.rc.integratesys.sensores.SensorUmidade;
 import br.unesp.rc.integratesys.utils.AgendadorTarefas;
 
 /**
  *
  * @author Helton
  */
-public class Lampada extends AtuadorSimples {
+public class Umidificador extends AtuadorSimples {
 
-    private final int VARIACAO_LUMINOSIDADE   = 35;
-    private final int INCREMENTO_LUMINOSIDADE = 10;
+    private final int VARIACAO_UMIDADE   = 30;
+    private final int INCREMENTO_UMIDADE = 10;
 
-    private final SensorLuminosidade sensorLuminosidade;
+    private final SensorUmidade sensorUmidade;
     
-    public Lampada(AgendadorTarefas agendadorTarefas, SensorLuminosidade sensorLuminosidade) {
+    public Umidificador(AgendadorTarefas agendadorTarefas, SensorUmidade sensorUmidade) {
         super(agendadorTarefas);
-        this.sensorLuminosidade = sensorLuminosidade;
+        this.sensorUmidade = sensorUmidade;
     }
 
     @Override
     public int getVariacaoAoLigar() {
-        return VARIACAO_LUMINOSIDADE;
+        return VARIACAO_UMIDADE;
     }
     
     @Override
     public int getVariacaoAoDesligar() {
-        return - VARIACAO_LUMINOSIDADE;        
+        return - VARIACAO_UMIDADE;        
     }
     
     @Override
     public int getIncremento() {
-        return INCREMENTO_LUMINOSIDADE;        
+        return INCREMENTO_UMIDADE;        
     }      
     
     @Override
     public int getValorSensor() {
-        return sensorLuminosidade.getLuminosidade();
+        return sensorUmidade.getUmidade();
     }
     
     @Override
     public void setValor(int valor) {
-        IntegrateSysLibraryLoader.getLibrary().setLuminosidade(valor);
-    }    
+        IntegrateSysLibraryLoader.getLibrary().setUmidade(valor);
+    }
     
 }

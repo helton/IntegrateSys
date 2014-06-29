@@ -36,7 +36,9 @@ public class AgendadorTarefas {
     }
     
     public void executarProximoCiclo() {
-        ciclos.remove(indiceProximoCiclo++).processarTarefas();
+        if (!ciclos.isEmpty()) {
+            ciclos.remove(indiceProximoCiclo++).processarTarefas();
+        }
     }
 
 }

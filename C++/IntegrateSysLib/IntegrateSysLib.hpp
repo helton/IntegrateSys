@@ -14,7 +14,7 @@ DLL_EXPORT bool inIncendio();
 // gets - atuadores
 DLL_EXPORT bool statusVentilador();
 DLL_EXPORT bool statusAquecedor();
-DLL_EXPORT bool statusUmedecedor();
+DLL_EXPORT bool statusUmidificador();
 DLL_EXPORT bool statusLampada();
 DLL_EXPORT bool statusAlarme();
 
@@ -30,7 +30,7 @@ DLL_EXPORT void setUmidade(int);
 DLL_EXPORT void setAlarme(bool);
 DLL_EXPORT void setAquecedor(bool);
 DLL_EXPORT void setLampada(bool);
-DLL_EXPORT void setUmedecedor(bool);
+DLL_EXPORT void setUmidificador(bool);
 DLL_EXPORT void setVentilador(bool);
 
 #endif

@@ -13,13 +13,27 @@ import br.unesp.rc.integratesys.utils.AgendadorTarefas;
  *
  * @author Helton
  */
-public class Aquecedor extends Atuador {
+public class Aquecedor extends AtuadorDeTemperatura {
 
-    private final SensorTemperatura sensorTemperatura;
-    
+    private final int VARIACAO_TEMPERATURA   = 4;
+    private final int INCREMENTO_TEMPERATURA = 2;
+
     public Aquecedor(AgendadorTarefas agendadorTarefas, SensorTemperatura sensorTemperatura) {
-        super(agendadorTarefas);
-        this.sensorTemperatura = sensorTemperatura;
+        super(agendadorTarefas, sensorTemperatura);
     }
-
+       
+    @Override
+    public int getVariacaoAoLigar() {
+        return VARIACAO_TEMPERATURA;
+    }
+    
+    @Override
+    public int getVariacaoAoDesligar() {
+        return - VARIACAO_TEMPERATURA;        
+    }
+    
+    @Override
+    public int getIncremento() {
+        return INCREMENTO_TEMPERATURA;        
+    }   
 }
