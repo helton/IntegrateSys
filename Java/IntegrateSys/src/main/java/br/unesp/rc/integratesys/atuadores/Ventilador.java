@@ -17,6 +17,7 @@ import br.unesp.rc.integratesys.utils.Tarefa;
  */
 public class Ventilador extends Atuador {
 
+    private final int MAXIMO_INCREMENTO_TEMPERATURA_POR_CICLO = 2;
     private final SensorTemperatura sensorTemperatura;
     
     public Ventilador(AgendadorTarefas agendadorTarefas, SensorTemperatura sensorTemperatura) {
@@ -29,12 +30,16 @@ public class Ventilador extends Atuador {
         if (isLigado() != ligado) {
             super.setLigado(ligado);
             if (isLigado()) {
-                getAgendadorTarefas().agendarTarefa(new Tarefa() {
-                    @Override
-                    public void executar() {
-                        IntegrateSysLibraryLoader.getLibrary().setTemperatura(sensorTemperatura.getTemperatura() + 1);
-                    }
-                });
+//                int diferenca = 30/* substituir por parametros.getTemperaturaIdeal()*/ - sensorTemperatura.getTemperatura();
+//                int quantidadeCiclos = Math.round(diferenca / MAXIMO_INCREMENTO_TEMPERATURA_POR_CICLO);
+//                for (int ciclo = 1; ciclo <= quantidadeCiclos; ciclo++) {
+//                    getAgendadorTarefas().agendarTarefa(new Tarefa() {
+//                        @Override
+//                        public void executar() {
+//                            IntegrateSysLibraryLoader.getLibrary().setTemperatura(sensorTemperatura.getTemperatura() + MAXIMO_INCREMENTO_TEMPERATURA_POR_CICLO);
+//                        }
+//                    });
+//                }
             }
         }
     }
