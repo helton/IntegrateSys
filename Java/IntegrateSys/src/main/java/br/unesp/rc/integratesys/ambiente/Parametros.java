@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.unesp.rc.integratesys.ambiente;
 
 /**
@@ -11,12 +10,20 @@ package br.unesp.rc.integratesys.ambiente;
  * @author Helton
  */
 public class Parametros {
-    
+
+    //condições iniciais
+    private final int temperaturaInicial;
+    private final int umidadeInicial;
+    private final int luminosidadeInicial;
+    private final boolean aguaInicial;
+    private final boolean energiaInicial;
+    private final boolean incendioInicial;
+
     //Condições ideais
     private int temperaturaIdeal;
     private int umidadeIdeal;
     private int luminosidadeIdeal;
-    
+
     //Condições críticas
     private int temperaturaMinimaCritica;
     private int temperaturaMaximaCritica;
@@ -24,6 +31,15 @@ public class Parametros {
     private int umidadeMaximaCritica;
     private int luminosidadeMinimaCritica;
     private int luminosidadeMaximaCritica;
+
+    public Parametros() {
+        temperaturaInicial = 30;
+        umidadeInicial = 60;
+        luminosidadeInicial = 50;
+        aguaInicial = true;
+        energiaInicial = true;
+        incendioInicial = false;
+    }
 
     /**
      * @return the temperaturaIdeal
@@ -150,6 +166,47 @@ public class Parametros {
     public void setLuminosidadeMaximaCritica(int luminosidadeMaximaCritica) {
         this.luminosidadeMaximaCritica = luminosidadeMaximaCritica;
     }
-    
-    
+
+    /**
+     * @return the temperaturaInicial
+     */
+    public int getTemperaturaInicial() {
+        return temperaturaInicial;
+    }
+
+    /**
+     * @return the umidadeInicial
+     */
+    public int getUmidadeInicial() {
+        return umidadeInicial;
+    }
+
+    /**
+     * @return the luminosidadeInicial
+     */
+    public int getLuminosidadeInicial() {
+        return luminosidadeInicial;
+    }
+
+    /**
+     * @return the aguaInicial
+     */
+    public boolean hasAguaInicial() {
+        return aguaInicial;
+    }
+
+    /**
+     * @return the energiaInicial
+     */
+    public boolean hasEnergiaInicial() {
+        return energiaInicial;
+    }
+
+    /**
+     * @return the incendioInicial
+     */
+    public boolean inIncendioInicial() {
+        return incendioInicial;
+    }
+
 }

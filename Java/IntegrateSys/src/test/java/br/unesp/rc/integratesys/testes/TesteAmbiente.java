@@ -25,18 +25,17 @@ public class TesteAmbiente {
     }
 
     @Test
-    public void testValoresPadrao() {
-        Assert.assertEquals(0, ambiente.getTemperatura());
-        Assert.assertEquals(0, ambiente.getUmidade());
-        Assert.assertEquals(0, ambiente.getLuminosidade());
-        Assert.assertFalse(ambiente.hasAgua());
-        Assert.assertFalse(ambiente.hasEnergia());
-        Assert.assertFalse(ambiente.inIncendio());
-        Assert.assertFalse(ambiente.getVentilador().isLigado());
-        Assert.assertFalse(ambiente.getUmedecedor().isLigado());
-        Assert.assertFalse(ambiente.getLampada().isLigado());
-        Assert.assertFalse(ambiente.getAquecedor().isLigado());        
-        Assert.assertFalse(ambiente.getAlarme().isLigado());                
-        Assert.assertEquals(ambiente.getControle(), Ambiente.Controle.AUTOMATICO);                        
+    public void testeCondicoesIniciais() {
+        Assert.assertTrue(ambiente.getSensores().getSensorAgua().hasAgua());
+        Assert.assertTrue(ambiente.getSensores().getSensorEnergia().hasEnergia());
+        Assert.assertFalse(ambiente.getSensores().getSensorIncendio().inIncendio());        
+        Assert.assertEquals(50, ambiente.getSensores().getSensorLuminosidade().getLuminosidade());
+        Assert.assertEquals(30, ambiente.getSensores().getSensorTemperatura().getTemperatura());
+        Assert.assertEquals(60, ambiente.getSensores().getSensorUmidade().getUmidade());
+        Assert.assertFalse(ambiente.getAtuadores().getVentilador().isLigado());
+        Assert.assertFalse(ambiente.getAtuadores().getUmedecedor().isLigado());
+        Assert.assertFalse(ambiente.getAtuadores().getLampada().isLigado());
+        Assert.assertFalse(ambiente.getAtuadores().getAquecedor().isLigado());        
+        Assert.assertFalse(ambiente.getAtuadores().getAlarme().isLigado());                        
     }
 }

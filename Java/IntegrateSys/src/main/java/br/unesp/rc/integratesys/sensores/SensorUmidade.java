@@ -14,8 +14,7 @@ import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
  */
 public class SensorUmidade extends Sensor {
     
-    @Override
-    public int getValor() {
+    public int getUmidade() {
         return IntegrateSysLibraryLoader.getLibrary().getUmidade();
     }    
     

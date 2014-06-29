@@ -6,14 +6,20 @@
 
 package br.unesp.rc.integratesys.atuadores;
 
+import br.unesp.rc.integratesys.sensores.SensorLuminosidade;
+import br.unesp.rc.integratesys.utils.AgendadorTarefas;
+
 /**
  *
  * @author Helton
  */
 public class Lampada extends Atuador {
 
-    public Lampada(boolean ligado) {
-        super(ligado);
+    private final SensorLuminosidade sensorLuminosidade;
+    
+    public Lampada(AgendadorTarefas agendadorTarefas, SensorLuminosidade sensorLuminosidade) {
+        super(agendadorTarefas);
+        this.sensorLuminosidade = sensorLuminosidade;
     }
     
 }

@@ -12,10 +12,10 @@ import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
  *
  * @author Helton
  */
-public class SensorTemperatura extends Sensor {
+public class SensorIncendio extends Sensor {
     
-    public int getTemperatura() {
-        return IntegrateSysLibraryLoader.getLibrary().getTemperatura();
-    }
+    public boolean inIncendio() {
+        return IntegrateSysLibraryLoader.getLibrary().inIncendio();
+    }     
     
 }

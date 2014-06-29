@@ -6,16 +6,19 @@
 
 package br.unesp.rc.integratesys.atuadores;
 
+import br.unesp.rc.integratesys.utils.AgendadorTarefas;
+
 /**
  *
  * @author Helton
  */
 public abstract class Atuador {
     
-    private boolean ligado;
+    private boolean ligado;  
+    private final AgendadorTarefas agendadorTarefas;
     
-    public Atuador(boolean ligado) {
-        setLigado(ligado);
+    public Atuador(AgendadorTarefas agendadorTarefas) {
+        this.agendadorTarefas = agendadorTarefas;
     }
     
     public void setLigado(boolean ligado) {
@@ -25,5 +28,12 @@ public abstract class Atuador {
     public boolean isLigado() {
         return ligado;
     }     
+
+    /**
+     * @return the agendadorTarefas
+     */
+    public AgendadorTarefas getAgendadorTarefas() {
+        return agendadorTarefas;
+    }
     
 }

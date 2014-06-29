@@ -6,14 +6,20 @@
 
 package br.unesp.rc.integratesys.atuadores;
 
+import br.unesp.rc.integratesys.sensores.SensorTemperatura;
+import br.unesp.rc.integratesys.utils.AgendadorTarefas;
+
 /**
  *
  * @author Helton
  */
 public class Aquecedor extends Atuador {
 
-    public Aquecedor(boolean ligado) {
-        super(ligado);
-    }
+    private final SensorTemperatura sensorTemperatura;
     
+    public Aquecedor(AgendadorTarefas agendadorTarefas, SensorTemperatura sensorTemperatura) {
+        super(agendadorTarefas);
+        this.sensorTemperatura = sensorTemperatura;
+    }
+
 }

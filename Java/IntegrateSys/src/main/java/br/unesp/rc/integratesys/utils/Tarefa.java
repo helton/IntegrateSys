@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 
-package br.unesp.rc.integratesys.sensores;
+package br.unesp.rc.integratesys.utils;
 
 /**
  *
  * @author Helton
  */
-public abstract class Sensor {
+public interface Tarefa {
+    
+    void executar();
+    
 }

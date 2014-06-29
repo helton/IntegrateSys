@@ -6,14 +6,27 @@
 
 package br.unesp.rc.integratesys.atuadores;
 
+import br.unesp.rc.integratesys.sensores.SensorAgua;
+import br.unesp.rc.integratesys.sensores.SensorEnergia;
+import br.unesp.rc.integratesys.sensores.SensorIncendio;
+import br.unesp.rc.integratesys.utils.AgendadorTarefas;
+
 /**
  *
  * @author Helton
  */
 public class Alarme extends Atuador {
 
-    public Alarme(boolean ligado) {
-        super(ligado);
+    private final SensorAgua sensorAgua;
+    private final SensorEnergia sensorEnergia;
+    private final SensorIncendio sensorIncendio;
+    
+    public Alarme(AgendadorTarefas agendadorTarefas, SensorAgua sensorAgua,
+            SensorEnergia sensorEnergia, SensorIncendio sensorIncendio) {
+        super(agendadorTarefas);
+        this.sensorAgua = sensorAgua;
+        this.sensorEnergia = sensorEnergia;
+        this.sensorIncendio = sensorIncendio;
     }
     
 }

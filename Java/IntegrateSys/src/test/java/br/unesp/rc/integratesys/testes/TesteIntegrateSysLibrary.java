@@ -18,13 +18,13 @@ import org.junit.Test;
 public class TesteIntegrateSysLibrary {   
     
     @Test
-    public void testLoadLibrary() {
-        IntegrateSysLibrary library = IntegrateSysLibraryLoader.getLibrary();
+    public void testeLoadLibrary() {
+        IntegrateSysLibrary library = IntegrateSysLibraryLoader.getLibrary();        
         Assert.assertNotNull(library);
     }   
 
     @Test
-    public void testGetAndSetTemperatura() {
+    public void testeGetAndSetTemperatura() {
         IntegrateSysLibraryLoader.getLibrary().setTemperatura(99);
         Assert.assertEquals(99, IntegrateSysLibraryLoader.getLibrary().getTemperatura());
 
@@ -33,7 +33,7 @@ public class TesteIntegrateSysLibrary {
     }
     
     @Test
-    public void testGetAndSetUmidade() {
+    public void testeGetAndSetUmidade() {
         IntegrateSysLibraryLoader.getLibrary().setUmidade(99);
         Assert.assertEquals(99, IntegrateSysLibraryLoader.getLibrary().getUmidade());
 
@@ -42,7 +42,7 @@ public class TesteIntegrateSysLibrary {
     }    
         
     @Test
-    public void testGetAndSetLuminosidade() {
+    public void testeGetAndSetLuminosidade() {
         IntegrateSysLibraryLoader.getLibrary().setLuminosidade(99);
         Assert.assertEquals(99, IntegrateSysLibraryLoader.getLibrary().getLuminosidade());
 
@@ -51,7 +51,7 @@ public class TesteIntegrateSysLibrary {
     }  
     
     @Test
-    public void testHasAndSetAgua() {
+    public void testeHasAndSetAgua() {
         IntegrateSysLibraryLoader.getLibrary().setAgua(false);
         Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().hasAgua());
 
@@ -60,7 +60,7 @@ public class TesteIntegrateSysLibrary {
     }     
     
     @Test
-    public void testHasAndSetEnergia() {
+    public void testeHasAndSetEnergia() {
         IntegrateSysLibraryLoader.getLibrary().setEnergia(false);
         Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().hasEnergia());
 
@@ -69,7 +69,7 @@ public class TesteIntegrateSysLibrary {
     }  
     
     @Test
-    public void testStatusAndSetAlarme() {
+    public void testeStatusAndSetAlarme() {
         IntegrateSysLibraryLoader.getLibrary().setAlarme(false);
         Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusAlarme());
 
@@ -78,7 +78,7 @@ public class TesteIntegrateSysLibrary {
     }     
     
     @Test
-    public void testStatusAndSetAquecedores() {
+    public void testeStatusAndSetAquecedores() {
         IntegrateSysLibraryLoader.getLibrary().setAquecedor(false);
         Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusAquecedor());
 
@@ -87,7 +87,7 @@ public class TesteIntegrateSysLibrary {
     }     
     
     @Test
-    public void testStatusAndSetLampadas() {
+    public void testeStatusAndSetLampadas() {
         IntegrateSysLibraryLoader.getLibrary().setLampada(false);
         Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusLampada());
 
@@ -96,7 +96,7 @@ public class TesteIntegrateSysLibrary {
     }  
     
     @Test
-    public void testStatusAndSetUmedecedores() {
+    public void testeStatusAndSetUmedecedores() {
         IntegrateSysLibraryLoader.getLibrary().setUmedecedor(false);
         Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusUmedecedor());
 

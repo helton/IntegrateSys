@@ -6,135 +6,72 @@
 
 package br.unesp.rc.integratesys.ambiente;
 
-import br.unesp.rc.integratesys.atuadores.Alarme;
-import br.unesp.rc.integratesys.atuadores.Aquecedor;
-import br.unesp.rc.integratesys.atuadores.Lampada;
-import br.unesp.rc.integratesys.atuadores.Umedecedor;
-import br.unesp.rc.integratesys.atuadores.Ventilador;
+import br.unesp.rc.integratesys.atuadores.Atuadores;
+import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
+import br.unesp.rc.integratesys.sensores.Sensores;
+import br.unesp.rc.integratesys.utils.AgendadorTarefas;
 
 /**
  *
  * @author Helton
  */
 public class Ambiente {
-
-    public enum Controle {
-        AUTOMATICO,
-        MANUAL
-    }
     
-    private int temperatura;
-    private int umidade;
-    private int luminosidade;
-    private boolean agua;
-    private boolean energia;
-    private boolean incendio;
-    
-    private Alarme alarme;
-    private Aquecedor aquecedor;
-    private Lampada lampada;
-    private Umedecedor umedecedor;
-    private Ventilador ventilador;
-    
-    private Controle controle;
+    private final Atuadores atuadores;
+    private final Sensores sensores;
+    private final AgendadorTarefas agendadorTarefas;
+    private final Parametros parametros;
     
     public Ambiente() {
-        temperatura = 0;
-        umidade = 0;
-        luminosidade = 0;
-        agua = false;
-        energia = false;
-        incendio = false;
-        alarme = new Alarme(false);
-        aquecedor = new Aquecedor(false);
-        lampada = new Lampada(false);        
-        umedecedor = new Umedecedor(false);
-        ventilador = new Ventilador(false);
-        controle = Controle.AUTOMATICO;
-    }
-
-    /**
-     * @return the temperatura
-     */
-    public int getTemperatura() {
-        return temperatura;
-    }
-
-    /**
-     * @return the umidade
-     */
-    public int getUmidade() {
-        return umidade;
-    }
-
-    /**
-     * @return the luminosidade
-     */
-    public int getLuminosidade() {
-        return luminosidade;
-    }
-
-    /**
-     * @return the agua
-     */
-    public boolean hasAgua() {
-        return agua;
-    }
-
-    /**
-     * @return the energia
-     */
-    public boolean hasEnergia() {
-        return energia;
-    }
-
-    /**
-     * @return the incendio
-     */
-    public boolean inIncendio() {
-        return incendio;
-    }
-
-    /**
-     * @return the ventilador
-     */
-    public Ventilador getVentilador() {
-        return ventilador;
-    }
-
-    /**
-     * @return the umedecedor
-     */
-    public Umedecedor getUmedecedor() {
-        return umedecedor;
-    }
-
-    /**
-     * @return the lampada
-     */
-    public Lampada getLampada() {
-        return lampada;
-    }
-
-    /**
-     * @return the aquecedor
-     */
-    public Aquecedor getAquecedor() {
-        return aquecedor;
-    }
-
-    /**
-     * @return the alarme
-     */
-    public Alarme getAlarme() {
-        return alarme;
+        this.parametros = new Parametros();
+        this.agendadorTarefas = new AgendadorTarefas();
+        sensores = new Sensores();
+        atuadores = new Atuadores(sensores, agendadorTarefas);
+        configuraCondicoesIniciais();
     }
     
+    private void configuraCondicoesIniciais() {
+        //apenas os valores iniciais dos sensores são disponibilizados
+        IntegrateSysLibraryLoader.getLibrary().setAgua(parametros.hasAguaInicial());
+        IntegrateSysLibraryLoader.getLibrary().setEnergia(parametros.hasEnergiaInicial());
+        IntegrateSysLibraryLoader.getLibrary().setIncendio(parametros.inIncendioInicial());
+        IntegrateSysLibraryLoader.getLibrary().setLuminosidade(parametros.getLuminosidadeInicial());
+        IntegrateSysLibraryLoader.getLibrary().setTemperatura(parametros.getTemperaturaInicial());        
+        IntegrateSysLibraryLoader.getLibrary().setUmidade(parametros.getUmidadeInicial());                
+        //todos os atuadores ficam desligados por padrão
+        IntegrateSysLibraryLoader.getLibrary().setAlarme(false);        
+        IntegrateSysLibraryLoader.getLibrary().setAquecedor(false);
+        IntegrateSysLibraryLoader.getLibrary().setLampada(false);
+        IntegrateSysLibraryLoader.getLibrary().setUmedecedor(false);
+        IntegrateSysLibraryLoader.getLibrary().setVentilador(false);        
+    }
+
     /**
-     * @return the controle
+     * @return the atuadores
      */
-    public Controle getControle() {
-        return controle;
-    }    
-    
+    public Atuadores getAtuadores() {
+        return atuadores;
+    }
+
+    /**
+     * @return the sensores
+     */
+    public Sensores getSensores() {
+        return sensores;
+    }
+
+    /**
+     * @return the parametros
+     */
+    public Parametros getParametros() {
+        return parametros;
+    }
+
+    /**
+     * @return the agendadorTarefas
+     */
+    public AgendadorTarefas getAgendadorTarefas() {
+        return agendadorTarefas;
+    }
+   
 }

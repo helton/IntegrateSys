@@ -14,8 +14,7 @@ import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
  */
 public class SensorLuminosidade extends Sensor {
   
-    @Override
-    public int getValor() {
+    public int getLuminosidade() {
         return IntegrateSysLibraryLoader.getLibrary().getLuminosidade();
     }    
     
