@@ -22,6 +22,7 @@ Lista de tarefas
 - [ ] Permitir definir condições ideais
 - [ ] Permitir definir estado crítico
 - [ ] Permitir definir mensagens customizadas para quando o sistema estiver em condições ideais ou em estado crítico
+- [ ] {Confirmar} Remover sensores e atuadores que não estão sendo utilizados (alarme, sensor de água, etc...)
 - [ ] {Opcional} Usar valoeres de previsão do tempo no simulador (ver alguma API disponível)
 - [ ] {Opcional} Permitir notificar por e-mail quando sistema chegar em estado crítico
 - [ ] {Opcional} Mostrar variação do valor (ex. mudança de 27º C para 25º C => 25º C [-2ºC] )

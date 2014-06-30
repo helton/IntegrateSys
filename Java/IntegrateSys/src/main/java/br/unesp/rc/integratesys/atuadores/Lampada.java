@@ -53,6 +53,7 @@ public class Lampada extends AtuadorSimples {
     
     @Override
     public void setLigado(boolean ligado) {
+        super.setLigado(ligado);        
         IntegrateSysLibraryLoader.getLibrary().setLampada(ligado);
     }        
     

@@ -40,6 +40,7 @@ public class Aquecedor extends AtuadorDeTemperatura {
     
     @Override
     public void setLigado(boolean ligado) {
+        super.setLigado(ligado);
         IntegrateSysLibraryLoader.getLibrary().setAquecedor(ligado);
     }    
 }

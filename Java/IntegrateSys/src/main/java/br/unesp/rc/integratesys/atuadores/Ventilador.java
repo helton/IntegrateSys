@@ -40,6 +40,7 @@ public class Ventilador extends AtuadorDeTemperatura {
     
     @Override
     public void setLigado(boolean ligado) {
+        super.setLigado(ligado);        
         IntegrateSysLibraryLoader.getLibrary().setVentilador(ligado);
     }        
 
