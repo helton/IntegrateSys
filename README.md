@@ -8,8 +8,9 @@ Universidade Estadual Paulista Júlio de Mesquita Filho (UNESP).
 Lista de tarefas
 ---------------
 - [x] Estrutura inicial com testes
-- [ ] Documentação (JavaDoc)
 - [ ] Interface gráfica
+- [ ] Implementar alarme e sensores de água, energia e incêndio
+- [ ] Documentação (JavaDoc)
 
 Licença:
 ---------------

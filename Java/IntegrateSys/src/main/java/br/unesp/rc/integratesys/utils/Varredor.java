@@ -6,10 +6,43 @@
 
 package br.unesp.rc.integratesys.utils;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
  *
  * @author Helton
  */
 public class Varredor {
+    
+    private final int INTERVALO_CICLO = 3;
+    private final Runnable tarefaPeriodica;
+    private ScheduledExecutorService executorTarefa;
+    
+    public Varredor(final AgendadorTarefas agendadorTarefas, final Tarefa callback) {
+        tarefaPeriodica = new Runnable() {
+            @Override
+            public void run() {
+                agendadorTarefas.executarProximoCiclo();
+                if (callback != null) {
+                    callback.executar();
+                }
+            }
+        };        
+    }
+    
+    public void iniciar() {
+        if (executorTarefa != null) {
+            executorTarefa.shutdown();
+        }
+        executorTarefa = Executors.newSingleThreadScheduledExecutor();
+        executorTarefa.scheduleAtFixedRate(tarefaPeriodica, 0, INTERVALO_CICLO, TimeUnit.SECONDS);        
+    }
+    
+    public void pausar() {
+        executorTarefa.shutdown();
+        executorTarefa = null;
+    }
     
 }

@@ -10,6 +10,7 @@ import br.unesp.rc.integratesys.atuadores.Atuadores;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.Sensores;
 import br.unesp.rc.integratesys.utils.AgendadorTarefas;
+import br.unesp.rc.integratesys.utils.Varredor;
 
 /**
  *
@@ -23,8 +24,8 @@ public class Ambiente {
     private final Parametros parametros;
     
     public Ambiente() {
-        this.parametros = new Parametros();
-        this.agendadorTarefas = new AgendadorTarefas();
+        parametros = new Parametros();
+        agendadorTarefas = new AgendadorTarefas();        
         sensores = new Sensores();
         atuadores = new Atuadores(sensores, agendadorTarefas);
         configuraCondicoesIniciais();

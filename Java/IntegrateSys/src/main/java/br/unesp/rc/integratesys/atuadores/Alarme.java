@@ -29,4 +29,8 @@ public class Alarme extends Atuador {
         this.sensorIncendio = sensorIncendio;
     }
     
+    public boolean sistemaEmEstadoCritico() {
+        return !(sensorAgua.hasAgua() || sensorEnergia.hasEnergia() || sensorIncendio.inIncendio());
+    }
+    
 }
