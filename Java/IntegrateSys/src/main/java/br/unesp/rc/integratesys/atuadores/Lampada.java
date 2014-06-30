@@ -49,6 +49,11 @@ public class Lampada extends AtuadorSimples {
     @Override
     public void setValor(int valor) {
         IntegrateSysLibraryLoader.getLibrary().setLuminosidade(valor);
-    }    
+    }  
+    
+    @Override
+    public void setLigado(boolean ligado) {
+        IntegrateSysLibraryLoader.getLibrary().setLampada(ligado);
+    }        
     
 }

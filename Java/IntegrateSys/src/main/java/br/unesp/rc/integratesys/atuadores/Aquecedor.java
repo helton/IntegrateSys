@@ -6,6 +6,7 @@
 
 package br.unesp.rc.integratesys.atuadores;
 
+import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.SensorTemperatura;
 import br.unesp.rc.integratesys.utils.AgendadorTarefas;
 
@@ -36,4 +37,9 @@ public class Aquecedor extends AtuadorDeTemperatura {
     public int getIncremento() {
         return INCREMENTO_TEMPERATURA;        
     }   
+    
+    @Override
+    public void setLigado(boolean ligado) {
+        IntegrateSysLibraryLoader.getLibrary().setAquecedor(ligado);
+    }    
 }

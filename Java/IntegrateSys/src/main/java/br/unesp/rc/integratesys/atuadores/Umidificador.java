@@ -51,4 +51,9 @@ public class Umidificador extends AtuadorSimples {
         IntegrateSysLibraryLoader.getLibrary().setUmidade(valor);
     }
     
+    @Override
+    public void setLigado(boolean ligado) {
+        IntegrateSysLibraryLoader.getLibrary().setUmidificador(ligado);
+    }        
+    
 }
