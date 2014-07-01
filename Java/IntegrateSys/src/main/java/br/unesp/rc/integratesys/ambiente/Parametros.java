@@ -24,10 +24,10 @@ public class Parametros {
     //Condições críticas
     private int temperaturaMinimaCritica = 22;
     private int temperaturaMaximaCritica = 30;
-    private int umidadeMinimaCritica;
-    private int umidadeMaximaCritica;
-    private int luminosidadeMinimaCritica;
-    private int luminosidadeMaximaCritica;
+    private int umidadeMinimaCritica = 60;
+    private int umidadeMaximaCritica = 80;
+    private int luminosidadeMinimaCritica = 50;
+    private int luminosidadeMaximaCritica = 100;
 
     public Parametros() {
         temperaturaInicial = 30;
