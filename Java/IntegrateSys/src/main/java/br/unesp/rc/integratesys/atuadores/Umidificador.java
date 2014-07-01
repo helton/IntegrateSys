@@ -18,8 +18,8 @@ public class Umidificador extends Atuador {
 
     private final int UMIDADE_MAXIMA = 100;
     private final int UMIDADE_MINIMA = 0;    
-    private final int VARIACAO_UMIDADE_POR_NIVEL   = 30;
-    private final int INCREMENTO_UMIDADE_POR_CICLO = 10;
+    private final int VARIACAO_UMIDADE_POR_NIVEL   = 10;
+    private final int INCREMENTO_UMIDADE_POR_CICLO = 5;
 
     private final SensorUmidade sensorUmidade;
     

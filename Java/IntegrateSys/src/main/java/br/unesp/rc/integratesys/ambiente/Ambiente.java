@@ -11,6 +11,7 @@ import br.unesp.rc.integratesys.atuadores.Nivel;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.Sensores;
 import br.unesp.rc.integratesys.utils.AgendadorTarefas;
+import br.unesp.rc.integratesys.utils.SimuladorCondicoesMeteorologicas;
 import br.unesp.rc.integratesys.utils.Varredor;
 
 /**
@@ -23,12 +24,14 @@ public class Ambiente {
     private final Sensores sensores;
     private final AgendadorTarefas agendadorTarefas;
     private final Parametros parametros;
+    private final SimuladorCondicoesMeteorologicas simulador;
     
     public Ambiente() {
         parametros = new Parametros();
         agendadorTarefas = new AgendadorTarefas();        
         sensores = new Sensores();
         atuadores = new Atuadores(sensores, agendadorTarefas);
+        simulador = new SimuladorCondicoesMeteorologicas(agendadorTarefas);
         configuraCondicoesIniciais();
     }
     
@@ -70,6 +73,13 @@ public class Ambiente {
      */
     public AgendadorTarefas getAgendadorTarefas() {
         return agendadorTarefas;
+    }
+
+    /**
+     * @return the simulador
+     */
+    public SimuladorCondicoesMeteorologicas getSimulador() {
+        return simulador;
     }
    
 }

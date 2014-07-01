@@ -49,12 +49,8 @@ public class TesteAtuadores {
         Assert.assertEquals(28, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(27, sensores.getSensorTemperatura().getTemperatura());
-        agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(26, sensores.getSensorTemperatura().getTemperatura());
 
         ventilador.setNivel(Nivel.DESLIGADO);
-        agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(27, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(28, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();
@@ -86,17 +82,13 @@ public class TesteAtuadores {
         
         umidificador.setNivel(Nivel.BAIXO);
         agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(70, sensores.getSensorUmidade().getUmidade());
+        Assert.assertEquals(65, sensores.getSensorUmidade().getUmidade());
         agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(80, sensores.getSensorUmidade().getUmidade());        
-        agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(90, sensores.getSensorUmidade().getUmidade());        
+        Assert.assertEquals(70, sensores.getSensorUmidade().getUmidade());        
         
         umidificador.setNivel(Nivel.DESLIGADO);
         agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(80, sensores.getSensorUmidade().getUmidade());
-        agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(70, sensores.getSensorUmidade().getUmidade());        
+        Assert.assertEquals(65, sensores.getSensorUmidade().getUmidade());        
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(60, sensores.getSensorUmidade().getUmidade());        
     }    
@@ -107,23 +99,15 @@ public class TesteAtuadores {
         
         lampada.setNivel(Nivel.BAIXO);
         agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(60, sensores.getSensorLuminosidade().getLuminosidade());
+        Assert.assertEquals(55, sensores.getSensorLuminosidade().getLuminosidade());
         agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(70, sensores.getSensorLuminosidade().getLuminosidade());        
-        agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(80, sensores.getSensorLuminosidade().getLuminosidade());        
-        agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(85, sensores.getSensorLuminosidade().getLuminosidade());        
+        Assert.assertEquals(60, sensores.getSensorLuminosidade().getLuminosidade());        
         
         lampada.setNivel(Nivel.DESLIGADO);
         agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(75, sensores.getSensorLuminosidade().getLuminosidade());
-        agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(65, sensores.getSensorLuminosidade().getLuminosidade());        
-        agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(55, sensores.getSensorLuminosidade().getLuminosidade());
         agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(50, sensores.getSensorLuminosidade().getLuminosidade());
+        Assert.assertEquals(50, sensores.getSensorLuminosidade().getLuminosidade());        
     }     
     
 }

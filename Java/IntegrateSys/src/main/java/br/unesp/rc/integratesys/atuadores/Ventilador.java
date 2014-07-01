@@ -16,7 +16,7 @@ import br.unesp.rc.integratesys.utils.AgendadorTarefas;
  */
 public class Ventilador extends AtuadorDeTemperatura {
 
-    private final int VARIACAO_TEMPERATURA_POR_NIVEL   = 4;
+    private final int VARIACAO_TEMPERATURA_POR_NIVEL   = 3;
     private final int INCREMENTO_TEMPERATURA_POR_CICLO = 1;
 
     public Ventilador(AgendadorTarefas agendadorTarefas, SensorTemperatura sensorTemperatura) {
