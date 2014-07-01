@@ -14,8 +14,10 @@ import br.unesp.rc.integratesys.utils.AgendadorTarefas;
  *
  * @author Helton
  */
-public abstract class AtuadorDeTemperatura extends AtuadorSimples {
+public abstract class AtuadorDeTemperatura extends Atuador {
     
+    private final int TEMPERATURA_MAXIMA = 100;
+    private final int TEMPERATURA_MINIMA = 0;
     private final SensorTemperatura sensorTemperatura;
     
     public AtuadorDeTemperatura(AgendadorTarefas agendadorTarefas, SensorTemperatura sensorTemperatura) {
@@ -30,6 +32,7 @@ public abstract class AtuadorDeTemperatura extends AtuadorSimples {
     
     @Override
     public void setValor(int valor) {
+        valor = Math.max(Math.min(valor, TEMPERATURA_MAXIMA), TEMPERATURA_MINIMA);
         IntegrateSysLibraryLoader.getLibrary().setTemperatura(valor);
     }
     

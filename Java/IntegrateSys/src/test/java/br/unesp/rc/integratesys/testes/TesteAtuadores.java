@@ -8,6 +8,7 @@ package br.unesp.rc.integratesys.testes;
 import br.unesp.rc.integratesys.atuadores.Aquecedor;
 import br.unesp.rc.integratesys.atuadores.Atuadores;
 import br.unesp.rc.integratesys.atuadores.Lampada;
+import br.unesp.rc.integratesys.atuadores.Nivel;
 import br.unesp.rc.integratesys.atuadores.Umidificador;
 import br.unesp.rc.integratesys.atuadores.Ventilador;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
@@ -41,7 +42,7 @@ public class TesteAtuadores {
     public void testeVentilador() {
         Ventilador ventilador = atuadores.getVentilador();
         
-        ventilador.setLigado(true);        
+        ventilador.setNivel(Nivel.BAIXO);        
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(29, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();
@@ -51,7 +52,7 @@ public class TesteAtuadores {
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(26, sensores.getSensorTemperatura().getTemperatura());
 
-        ventilador.setLigado(false);
+        ventilador.setNivel(Nivel.DESLIGADO);
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(27, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();
@@ -66,13 +67,13 @@ public class TesteAtuadores {
     public void testeAquecedor() {
         Aquecedor aquecedor = atuadores.getAquecedor();
         
-        aquecedor.setLigado(true);
+        aquecedor.setNivel(Nivel.BAIXO);
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(32, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(34, sensores.getSensorTemperatura().getTemperatura());        
         
-        aquecedor.setLigado(false);
+        aquecedor.setNivel(Nivel.DESLIGADO);
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(32, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();
@@ -83,7 +84,7 @@ public class TesteAtuadores {
     public void testeUmidificador() {
         Umidificador umidificador = atuadores.getUmidificador();
         
-        umidificador.setLigado(true);
+        umidificador.setNivel(Nivel.BAIXO);
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(70, sensores.getSensorUmidade().getUmidade());
         agendadorTarefas.executarProximoCiclo();
@@ -91,7 +92,7 @@ public class TesteAtuadores {
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(90, sensores.getSensorUmidade().getUmidade());        
         
-        umidificador.setLigado(false);
+        umidificador.setNivel(Nivel.DESLIGADO);
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(80, sensores.getSensorUmidade().getUmidade());
         agendadorTarefas.executarProximoCiclo();
@@ -104,7 +105,7 @@ public class TesteAtuadores {
     public void testeLampada() {
         Lampada lampada = atuadores.getLampada();
         
-        lampada.setLigado(true);
+        lampada.setNivel(Nivel.BAIXO);
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(60, sensores.getSensorLuminosidade().getLuminosidade());
         agendadorTarefas.executarProximoCiclo();
@@ -114,7 +115,7 @@ public class TesteAtuadores {
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(85, sensores.getSensorLuminosidade().getLuminosidade());        
         
-        lampada.setLigado(false);
+        lampada.setNivel(Nivel.DESLIGADO);
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(75, sensores.getSensorLuminosidade().getLuminosidade());
         agendadorTarefas.executarProximoCiclo();

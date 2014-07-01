@@ -7,6 +7,7 @@
 package br.unesp.rc.integratesys.testes;
 
 import br.unesp.rc.integratesys.ambiente.Ambiente;
+import br.unesp.rc.integratesys.atuadores.Nivel;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,16 +27,12 @@ public class TesteAmbiente {
 
     @Test
     public void testeCondicoesIniciais() {
-        Assert.assertTrue(ambiente.getSensores().getSensorAgua().hasAgua());
-        Assert.assertTrue(ambiente.getSensores().getSensorEnergia().hasEnergia());
-        Assert.assertFalse(ambiente.getSensores().getSensorIncendio().inIncendio());        
         Assert.assertEquals(50, ambiente.getSensores().getSensorLuminosidade().getLuminosidade());
         Assert.assertEquals(30, ambiente.getSensores().getSensorTemperatura().getTemperatura());
         Assert.assertEquals(60, ambiente.getSensores().getSensorUmidade().getUmidade());
-        Assert.assertFalse(ambiente.getAtuadores().getVentilador().isLigado());
-        Assert.assertFalse(ambiente.getAtuadores().getUmidificador().isLigado());
-        Assert.assertFalse(ambiente.getAtuadores().getLampada().isLigado());
-        Assert.assertFalse(ambiente.getAtuadores().getAquecedor().isLigado());        
-        Assert.assertFalse(ambiente.getAtuadores().getAlarme().isLigado());                        
+        Assert.assertEquals(Nivel.DESLIGADO, ambiente.getAtuadores().getVentilador().getNivel());
+        Assert.assertEquals(Nivel.DESLIGADO, ambiente.getAtuadores().getUmidificador().getNivel());
+        Assert.assertEquals(Nivel.DESLIGADO, ambiente.getAtuadores().getLampada().getNivel());
+        Assert.assertEquals(Nivel.DESLIGADO, ambiente.getAtuadores().getAquecedor().getNivel());                             
     }
 }

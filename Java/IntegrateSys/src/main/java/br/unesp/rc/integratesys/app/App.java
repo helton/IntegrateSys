@@ -15,7 +15,21 @@ import java.awt.EventQueue;
  */
 public class App {
     
+    private static void defineLookAndFeel() {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FormAmbiente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }        
+    }
+    
     public static void main(String[] args) {
+        defineLookAndFeel();        
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

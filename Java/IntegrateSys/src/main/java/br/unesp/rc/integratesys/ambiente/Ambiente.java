@@ -7,6 +7,7 @@
 package br.unesp.rc.integratesys.ambiente;
 
 import br.unesp.rc.integratesys.atuadores.Atuadores;
+import br.unesp.rc.integratesys.atuadores.Nivel;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.Sensores;
 import br.unesp.rc.integratesys.utils.AgendadorTarefas;
@@ -33,18 +34,14 @@ public class Ambiente {
     
     private void configuraCondicoesIniciais() {
         //apenas os valores iniciais dos sensores são disponibilizados
-        IntegrateSysLibraryLoader.getLibrary().setAgua(parametros.hasAguaInicial());
-        IntegrateSysLibraryLoader.getLibrary().setEnergia(parametros.hasEnergiaInicial());
-        IntegrateSysLibraryLoader.getLibrary().setIncendio(parametros.inIncendioInicial());
         IntegrateSysLibraryLoader.getLibrary().setLuminosidade(parametros.getLuminosidadeInicial());
         IntegrateSysLibraryLoader.getLibrary().setTemperatura(parametros.getTemperaturaInicial());        
         IntegrateSysLibraryLoader.getLibrary().setUmidade(parametros.getUmidadeInicial());                
         //todos os atuadores ficam desligados por padrão
-        IntegrateSysLibraryLoader.getLibrary().setAlarme(false);        
-        IntegrateSysLibraryLoader.getLibrary().setAquecedor(false);
-        IntegrateSysLibraryLoader.getLibrary().setLampada(false);
-        IntegrateSysLibraryLoader.getLibrary().setUmidificador(false);
-        IntegrateSysLibraryLoader.getLibrary().setVentilador(false);        
+        IntegrateSysLibraryLoader.getLibrary().setNivelAquecedor(Nivel.DESLIGADO.getValor());
+        IntegrateSysLibraryLoader.getLibrary().setNivelLampada(Nivel.DESLIGADO.getValor());
+        IntegrateSysLibraryLoader.getLibrary().setNivelUmidificador(Nivel.DESLIGADO.getValor());
+        IntegrateSysLibraryLoader.getLibrary().setNivelVentilador(Nivel.DESLIGADO.getValor());        
     }
 
     /**

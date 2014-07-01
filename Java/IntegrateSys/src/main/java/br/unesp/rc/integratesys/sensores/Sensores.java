@@ -14,41 +14,14 @@ import java.util.ArrayList;
  */
 public class Sensores extends ArrayList<Sensor> {
     
-    private final SensorAgua sensorAgua;
-    private final SensorEnergia sensorEnergia;
-    private final SensorIncendio sensorIncendio;
     private final SensorTemperatura sensorTemperatura;
     private final SensorLuminosidade sensorLuminosidade;
     private final SensorUmidade sensorUmidade;   
     
     public Sensores() {
-        sensorAgua = new SensorAgua();
-        sensorEnergia = new SensorEnergia();
-        sensorIncendio = new SensorIncendio();
         sensorTemperatura = new SensorTemperatura();
         sensorLuminosidade = new SensorLuminosidade();
         sensorUmidade = new SensorUmidade();
-    }
-
-    /**
-     * @return the sensorAgua
-     */
-    public SensorAgua getSensorAgua() {
-        return sensorAgua;
-    }
-
-    /**
-     * @return the sensorEnergia
-     */
-    public SensorEnergia getSensorEnergia() {
-        return sensorEnergia;
-    }
-
-    /**
-     * @return the sensorIncendio
-     */
-    public SensorIncendio getSensorIncendio() {
-        return sensorIncendio;
     }
 
     /**

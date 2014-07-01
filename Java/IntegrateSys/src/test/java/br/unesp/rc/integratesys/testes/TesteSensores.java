@@ -22,33 +22,6 @@ public class TesteSensores {
     @Before
     public void setUp() {
         sensores = new Sensores();
-    }
-
-    @Test
-    public void testeSensorAgua() {
-        IntegrateSysLibraryLoader.getLibrary().setAgua(false);
-        Assert.assertFalse(sensores.getSensorAgua().hasAgua());
-
-        IntegrateSysLibraryLoader.getLibrary().setAgua(true);
-        Assert.assertTrue(sensores.getSensorAgua().hasAgua());
-    }
-    
-    @Test
-    public void testeSensorEnergia() {
-        IntegrateSysLibraryLoader.getLibrary().setEnergia(false);
-        Assert.assertFalse(sensores.getSensorEnergia().hasEnergia());
-
-        IntegrateSysLibraryLoader.getLibrary().setEnergia(true);
-        Assert.assertTrue(sensores.getSensorEnergia().hasEnergia());
-    }
-    
-    @Test
-    public void testeSensorIncendio() {
-        IntegrateSysLibraryLoader.getLibrary().setIncendio(false);
-        Assert.assertFalse(sensores.getSensorIncendio().inIncendio());
-
-        IntegrateSysLibraryLoader.getLibrary().setIncendio(true);
-        Assert.assertTrue(sensores.getSensorIncendio().inIncendio());
     }        
 
     @Test

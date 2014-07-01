@@ -16,15 +16,12 @@ import java.util.ArrayList;
  */
 public class Atuadores extends ArrayList<Atuador> {
     
-    private final Alarme alarme;
     private final Aquecedor aquecedor;
     private final Lampada lampada;
     private final Umidificador umidificador;
     private final Ventilador ventilador;
     
     public Atuadores(Sensores sensores, AgendadorTarefas agendadorTarefas) {
-        alarme = new Alarme(agendadorTarefas, sensores.getSensorAgua(), 
-                sensores.getSensorEnergia(), sensores.getSensorIncendio());
         aquecedor = new Aquecedor(agendadorTarefas, sensores.getSensorTemperatura());
         lampada = new Lampada(agendadorTarefas, sensores.getSensorLuminosidade());        
         umidificador = new Umidificador(agendadorTarefas, sensores.getSensorUmidade());
@@ -57,13 +54,6 @@ public class Atuadores extends ArrayList<Atuador> {
      */
     public Aquecedor getAquecedor() {
         return aquecedor;
-    }
-
-    /**
-     * @return the alarme
-     */
-    public Alarme getAlarme() {
-        return alarme;
     }
     
 }

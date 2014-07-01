@@ -15,35 +15,27 @@ import com.sun.jna.Library;
 public interface IntegrateSysLibrary extends Library {
     
     static final String LIBRARY_NAME = "IntegrateSysLib";
-
+    
     // gets - sensores
+    int getLuminosidade();
     int getTemperatura();
     int getUmidade();
-    int getLuminosidade();
-    boolean hasAgua();
-    boolean hasEnergia();
-    boolean inIncendio();
-    
-    // gets - atuadores
-    boolean statusAlarme();
-    boolean statusAquecedor();
-    boolean statusLampada();
-    boolean statusUmidificador();
-    boolean statusVentilador();
-    
+
     // sets - sensores
-    void setAgua(boolean agua);
-    void setEnergia(boolean energia);
-    void setIncendio(boolean incendio);
-    void setLuminosidade(int luminosidade);
-    void setTemperatura(int temperatura);
-    void setUmidade(int umidade);
+    void setLuminosidade(int Luminosidade);
+    void setTemperatura(int Temperatura);
+    void setUmidade(int Umidade);
+
+    // gets - atuadores
+    int getNivelAquecedor();
+    int getNivelLampada();
+    int getNivelUmidificador();
+    int getNivelVentilador();
 
     // sets - atuadores
-    void setAlarme(boolean alarme);
-    void setAquecedor(boolean aquecedor);
-    void setLampada(boolean lampada);
-    void setUmidificador(boolean umidificador);
-    void setVentilador(boolean ventilador);    
+    void setNivelAquecedor(int nivelAquecedor);
+    void setNivelLampada(int nivelLampada);
+    void setNivelUmidificador(int nivelUmidificador);
+    void setNivelVentilador(int nivelVentilador);  
         
 }

@@ -51,66 +51,39 @@ public class TesteIntegrateSysLibrary {
     }  
     
     @Test
-    public void testeHasAndSetAgua() {
-        IntegrateSysLibraryLoader.getLibrary().setAgua(false);
-        Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().hasAgua());
+    public void testGetAndSetNivelAquecedor() {
+        IntegrateSysLibraryLoader.getLibrary().setNivelAquecedor(0);
+        Assert.assertEquals(0, IntegrateSysLibraryLoader.getLibrary().getNivelAquecedor());
 
-        IntegrateSysLibraryLoader.getLibrary().setAgua(true);
-        Assert.assertTrue(IntegrateSysLibraryLoader.getLibrary().hasAgua());
+        IntegrateSysLibraryLoader.getLibrary().setNivelAquecedor(1);
+        Assert.assertEquals(1, IntegrateSysLibraryLoader.getLibrary().getNivelAquecedor());
     }     
     
     @Test
-    public void testeHasAndSetEnergia() {
-        IntegrateSysLibraryLoader.getLibrary().setEnergia(false);
-        Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().hasEnergia());
+    public void testGetAndSetNivelLampada() {
+        IntegrateSysLibraryLoader.getLibrary().setNivelLampada(0);
+        Assert.assertEquals(0, IntegrateSysLibraryLoader.getLibrary().getNivelLampada());
 
-        IntegrateSysLibraryLoader.getLibrary().setEnergia(true);
-        Assert.assertTrue(IntegrateSysLibraryLoader.getLibrary().hasEnergia());
+        IntegrateSysLibraryLoader.getLibrary().setNivelLampada(1);
+        Assert.assertEquals(1, IntegrateSysLibraryLoader.getLibrary().getNivelLampada());
     }  
     
     @Test
-    public void testeStatusAndSetAlarme() {
-        IntegrateSysLibraryLoader.getLibrary().setAlarme(false);
-        Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusAlarme());
+    public void testGetAndSetNivelUmidificador() {
+        IntegrateSysLibraryLoader.getLibrary().setNivelUmidificador(0);
+        Assert.assertEquals(0, IntegrateSysLibraryLoader.getLibrary().getNivelUmidificador());
 
-        IntegrateSysLibraryLoader.getLibrary().setAlarme(true);
-        Assert.assertTrue(IntegrateSysLibraryLoader.getLibrary().statusAlarme());
-    }     
-    
-    @Test
-    public void testeStatusAndSetAquecedores() {
-        IntegrateSysLibraryLoader.getLibrary().setAquecedor(false);
-        Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusAquecedor());
-
-        IntegrateSysLibraryLoader.getLibrary().setAquecedor(true);
-        Assert.assertTrue(IntegrateSysLibraryLoader.getLibrary().statusAquecedor());
-    }     
-    
-    @Test
-    public void testeStatusAndSetLampadas() {
-        IntegrateSysLibraryLoader.getLibrary().setLampada(false);
-        Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusLampada());
-
-        IntegrateSysLibraryLoader.getLibrary().setLampada(true);
-        Assert.assertTrue(IntegrateSysLibraryLoader.getLibrary().statusLampada());
-    }  
-    
-    @Test
-    public void testeStatusAndSetUmidificadores() {
-        IntegrateSysLibraryLoader.getLibrary().setUmidificador(false);
-        Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusUmidificador());
-
-        IntegrateSysLibraryLoader.getLibrary().setUmidificador(true);
-        Assert.assertTrue(IntegrateSysLibraryLoader.getLibrary().statusUmidificador());
+        IntegrateSysLibraryLoader.getLibrary().setNivelUmidificador(1);
+        Assert.assertEquals(1, IntegrateSysLibraryLoader.getLibrary().getNivelUmidificador());
     }    
     
     @Test
-    public void testStatusAndSetVentiladores() {
-        IntegrateSysLibraryLoader.getLibrary().setVentilador(false);
-        Assert.assertFalse(IntegrateSysLibraryLoader.getLibrary().statusVentilador());
+    public void testGetAndSetNivelVentilador() {
+        IntegrateSysLibraryLoader.getLibrary().setNivelVentilador(0);
+        Assert.assertEquals(0, IntegrateSysLibraryLoader.getLibrary().getNivelVentilador());
 
-        IntegrateSysLibraryLoader.getLibrary().setVentilador(true);
-        Assert.assertTrue(IntegrateSysLibraryLoader.getLibrary().statusVentilador());
+        IntegrateSysLibraryLoader.getLibrary().setNivelVentilador(1);
+        Assert.assertEquals(1, IntegrateSysLibraryLoader.getLibrary().getNivelVentilador());
     }      
     
 }

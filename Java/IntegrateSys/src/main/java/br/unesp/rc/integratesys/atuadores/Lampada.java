@@ -14,10 +14,12 @@ import br.unesp.rc.integratesys.utils.AgendadorTarefas;
  *
  * @author Helton
  */
-public class Lampada extends AtuadorSimples {
+public class Lampada extends Atuador {
 
-    private final int VARIACAO_LUMINOSIDADE   = 35;
-    private final int INCREMENTO_LUMINOSIDADE = 10;
+    private final int LUMINOSIDADE_MAXIMA = 100;
+    private final int LUMINOSIDADE_MINIMA = 0;       
+    private final int VARIACAO_LUMINOSIDADE_POR_NIVEL   = 10;
+    private final int INCREMENTO_LUMINOSIDADE_POR_CICLO = 5;
 
     private final SensorLuminosidade sensorLuminosidade;
     
@@ -27,18 +29,13 @@ public class Lampada extends AtuadorSimples {
     }
 
     @Override
-    public int getVariacaoAoLigar() {
-        return VARIACAO_LUMINOSIDADE;
+    public int getVariacaoPorNivel() {
+        return VARIACAO_LUMINOSIDADE_POR_NIVEL;
     }
     
     @Override
-    public int getVariacaoAoDesligar() {
-        return - VARIACAO_LUMINOSIDADE;        
-    }
-    
-    @Override
-    public int getIncremento() {
-        return INCREMENTO_LUMINOSIDADE;        
+    public int getIncrementoPorCiclo() {
+        return INCREMENTO_LUMINOSIDADE_POR_CICLO;        
     }      
     
     @Override
@@ -48,13 +45,14 @@ public class Lampada extends AtuadorSimples {
     
     @Override
     public void setValor(int valor) {
+        valor = Math.max(Math.min(valor, LUMINOSIDADE_MAXIMA), LUMINOSIDADE_MINIMA);        
         IntegrateSysLibraryLoader.getLibrary().setLuminosidade(valor);
     }  
     
     @Override
-    public void setLigado(boolean ligado) {
-        super.setLigado(ligado);        
-        IntegrateSysLibraryLoader.getLibrary().setLampada(ligado);
+    public void setNivel(Nivel nivel) {
+        super.setNivel(nivel);        
+        IntegrateSysLibraryLoader.getLibrary().setNivelLampada(getNivel().getValor());
     }        
     
 }

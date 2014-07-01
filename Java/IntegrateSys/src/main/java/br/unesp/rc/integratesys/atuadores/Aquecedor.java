@@ -16,31 +16,27 @@ import br.unesp.rc.integratesys.utils.AgendadorTarefas;
  */
 public class Aquecedor extends AtuadorDeTemperatura {
 
-    private final int VARIACAO_TEMPERATURA   = 4;
-    private final int INCREMENTO_TEMPERATURA = 2;
+    private final int VARIACAO_TEMPERATURA_POR_NIVEL   = 4;
+    private final int INCREMENTO_TEMPERATURA_POR_CICLO = 2;
 
     public Aquecedor(AgendadorTarefas agendadorTarefas, SensorTemperatura sensorTemperatura) {
         super(agendadorTarefas, sensorTemperatura);
     }
        
     @Override
-    public int getVariacaoAoLigar() {
-        return VARIACAO_TEMPERATURA;
+    public int getVariacaoPorNivel() {
+        return VARIACAO_TEMPERATURA_POR_NIVEL;
     }
     
     @Override
-    public int getVariacaoAoDesligar() {
-        return - VARIACAO_TEMPERATURA;        
-    }
-    
-    @Override
-    public int getIncremento() {
-        return INCREMENTO_TEMPERATURA;        
+    public int getIncrementoPorCiclo() {
+        return INCREMENTO_TEMPERATURA_POR_CICLO;        
     }   
     
     @Override
-    public void setLigado(boolean ligado) {
-        super.setLigado(ligado);
-        IntegrateSysLibraryLoader.getLibrary().setAquecedor(ligado);
-    }    
+    public void setNivel(Nivel nivel) {
+        super.setNivel(nivel);        
+        IntegrateSysLibraryLoader.getLibrary().setNivelAquecedor(getNivel().getValor());
+    } 
+    
 }

@@ -14,10 +14,12 @@ import br.unesp.rc.integratesys.utils.AgendadorTarefas;
  *
  * @author Helton
  */
-public class Umidificador extends AtuadorSimples {
+public class Umidificador extends Atuador {
 
-    private final int VARIACAO_UMIDADE   = 30;
-    private final int INCREMENTO_UMIDADE = 10;
+    private final int UMIDADE_MAXIMA = 100;
+    private final int UMIDADE_MINIMA = 0;    
+    private final int VARIACAO_UMIDADE_POR_NIVEL   = 30;
+    private final int INCREMENTO_UMIDADE_POR_CICLO = 10;
 
     private final SensorUmidade sensorUmidade;
     
@@ -27,18 +29,13 @@ public class Umidificador extends AtuadorSimples {
     }
 
     @Override
-    public int getVariacaoAoLigar() {
-        return VARIACAO_UMIDADE;
+    public int getVariacaoPorNivel() {
+        return VARIACAO_UMIDADE_POR_NIVEL;
     }
     
     @Override
-    public int getVariacaoAoDesligar() {
-        return - VARIACAO_UMIDADE;        
-    }
-    
-    @Override
-    public int getIncremento() {
-        return INCREMENTO_UMIDADE;        
+    public int getIncrementoPorCiclo() {
+        return INCREMENTO_UMIDADE_POR_CICLO;        
     }      
     
     @Override
@@ -48,13 +45,14 @@ public class Umidificador extends AtuadorSimples {
     
     @Override
     public void setValor(int valor) {
+        valor = Math.max(Math.min(valor, UMIDADE_MAXIMA), UMIDADE_MINIMA);
         IntegrateSysLibraryLoader.getLibrary().setUmidade(valor);
     }
     
     @Override
-    public void setLigado(boolean ligado) {
-        super.setLigado(ligado);        
-        IntegrateSysLibraryLoader.getLibrary().setUmidificador(ligado);
-    }        
+    public void setNivel(Nivel nivel) {
+        super.setNivel(nivel);        
+        IntegrateSysLibraryLoader.getLibrary().setNivelUmidificador(getNivel().getValor());
+    }     
     
 }
