@@ -87,8 +87,20 @@ public class FormAmbiente extends FormBase {
                     lblSensorTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/temperatura.png")));
                 }
 
-                lblSensorUmidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/umidade.png")));
-                lblSensorLuminosidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/luminosidade.png")));
+                if (ambiente.getSensores().getSensorUmidade().getUmidade() >= ambiente.getParametros().getUmidadeMaximaCritica()) {
+                    lblSensorUmidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/umidade_alta.png")));
+                } else if (ambiente.getSensores().getSensorUmidade().getUmidade() <= ambiente.getParametros().getUmidadeMinimaCritica()) {
+                    lblSensorUmidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/umidade_baixa.png")));
+                } else {
+                    lblSensorUmidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/umidade.png")));
+                }
+
+                if(ambiente.getSensores().getSensorLuminosidade().getLuminosidade() <= ambiente.getParametros().getLuminosidadeMinimaCritica()){
+                    lblSensorLuminosidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/luminosidade_escuro.png")));
+                }else{
+                    lblSensorLuminosidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/luminosidade.png")));
+                }
+                
             }
 
             private void definirImagemAtuadores() {
@@ -107,14 +119,23 @@ public class FormAmbiente extends FormBase {
                     lblAquecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/aquecedor_ligado.png")));
                     sliVentilador.setEnabled(false);
                 }
-                
+
                 //resolvendo deadlock
                 if (!sliVentilador.isEnabled() && !sliAquecedor.isEnabled()) {
                     sliVentilador.setEnabled(true);
                 }
 
-                lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada.png")));
-                lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador.png")));
+                if (ambiente.getAtuadores().getUmidificador().getNivel().getValor() == 0) {
+                    lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador.png")));
+                }else{
+                    lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador_ligado.png")));
+                }
+                
+                if(ambiente.getAtuadores().getLampada().getNivel().getValor()==0){
+                    lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada.png")));
+                }else{
+                    lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada_ligada.png")));
+                }
 
             }
 
