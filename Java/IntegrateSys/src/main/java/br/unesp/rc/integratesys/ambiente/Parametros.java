@@ -15,9 +15,6 @@ public class Parametros {
     private final int temperaturaInicial;
     private final int umidadeInicial;
     private final int luminosidadeInicial;
-    private final boolean aguaInicial;
-    private final boolean energiaInicial;
-    private final boolean incendioInicial;
 
     //Condições ideais
     private int temperaturaIdeal;
@@ -36,9 +33,6 @@ public class Parametros {
         temperaturaInicial = 30;
         umidadeInicial = 60;
         luminosidadeInicial = 50;
-        aguaInicial = true;
-        energiaInicial = true;
-        incendioInicial = false;
     }
 
     /**
@@ -186,27 +180,6 @@ public class Parametros {
      */
     public int getLuminosidadeInicial() {
         return luminosidadeInicial;
-    }
-
-    /**
-     * @return the aguaInicial
-     */
-    public boolean hasAguaInicial() {
-        return aguaInicial;
-    }
-
-    /**
-     * @return the energiaInicial
-     */
-    public boolean hasEnergiaInicial() {
-        return energiaInicial;
-    }
-
-    /**
-     * @return the incendioInicial
-     */
-    public boolean inIncendioInicial() {
-        return incendioInicial;
     }
 
 }

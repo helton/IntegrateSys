@@ -115,7 +115,7 @@ public class FormAmbiente extends FormBase {
 
         sliVentilador = new javax.swing.JSlider();
         sliAquecedor = new javax.swing.JSlider();
-        jSeparator1 = new javax.swing.JSeparator();
+        sepAtuadores = new javax.swing.JSeparator();
         sliLampada = new javax.swing.JSlider();
         sliUmidificador = new javax.swing.JSlider();
         jPanel1 = new javax.swing.JPanel();
@@ -180,7 +180,7 @@ public class FormAmbiente extends FormBase {
         sliAquecedor.setSnapToTicks(true);
         sliAquecedor.setValue(0);
 
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        sepAtuadores.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout pnlAtuadoresTemperaturaLayout = new javax.swing.GroupLayout(pnlAtuadoresTemperatura);
         pnlAtuadoresTemperatura.setLayout(pnlAtuadoresTemperaturaLayout);
@@ -196,7 +196,7 @@ public class FormAmbiente extends FormBase {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(sliVentilador, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sepAtuadores, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAtuadoresTemperaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAtuadoresTemperaturaLayout.createSequentialGroup()
@@ -217,7 +217,7 @@ public class FormAmbiente extends FormBase {
                     .addComponent(sliVentilador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sliAquecedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(pnlAtuadoresTemperaturaLayout.createSequentialGroup()
-                .addComponent(jSeparator1)
+                .addComponent(sepAtuadores)
                 .addContainerGap())
         );
 
@@ -423,16 +423,16 @@ public class FormAmbiente extends FormBase {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(tbtnIniciarSimulacao)
-                .addGap(49, 49, 49))
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(tbtnIniciarSimulacao)
-                .addGap(17, 17, 17))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -495,7 +495,6 @@ public class FormAmbiente extends FormBase {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
     private final javax.swing.JLabel lblAquecedor = new javax.swing.JLabel();
     private final javax.swing.JLabel lblLampada = new javax.swing.JLabel();
     private final javax.swing.JLabel lblLuminosidade = new javax.swing.JLabel();
@@ -515,6 +514,7 @@ public class FormAmbiente extends FormBase {
     private final javax.swing.JPanel pnlSensorLuminosidade = new javax.swing.JPanel();
     private final javax.swing.JPanel pnlSensorTemperatura = new javax.swing.JPanel();
     private final javax.swing.JPanel pnlSensorUmidade = new javax.swing.JPanel();
+    private javax.swing.JSeparator sepAtuadores;
     private javax.swing.JSlider sliAquecedor;
     private javax.swing.JSlider sliLampada;
     private javax.swing.JSlider sliUmidificador;
