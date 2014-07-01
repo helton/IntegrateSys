@@ -22,8 +22,8 @@ public class Parametros {
     private int luminosidadeIdeal;
 
     //Condições críticas
-    private int temperaturaMinimaCritica;
-    private int temperaturaMaximaCritica;
+    private int temperaturaMinimaCritica = 22;
+    private int temperaturaMaximaCritica = 30;
     private int umidadeMinimaCritica;
     private int umidadeMaximaCritica;
     private int luminosidadeMinimaCritica;
