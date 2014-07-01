@@ -26,7 +26,7 @@ public class AgendadorTarefas {
     }
     
     public void agendarTarefa(Tarefa tarefa, int numeroCiclosEspera) {
-        int indice = indiceProximoCiclo + numeroCiclosEspera;
+        int indice = getIndiceProximoCiclo() + numeroCiclosEspera;
         Ciclo ciclo = ciclos.get(indice);
         if (ciclo == null) {
             ciclo = new Ciclo();
@@ -37,8 +37,16 @@ public class AgendadorTarefas {
     
     public void executarProximoCiclo() {
         if (!ciclos.isEmpty()) {
-            ciclos.remove(indiceProximoCiclo++).processarTarefas();
+            ciclos.remove(getIndiceProximoCiclo()).processarTarefas();
         }
+        indiceProximoCiclo++;
+    }
+
+    /**
+     * @return the indiceProximoCiclo
+     */
+    public int getIndiceProximoCiclo() {
+        return indiceProximoCiclo;
     }
 
 }

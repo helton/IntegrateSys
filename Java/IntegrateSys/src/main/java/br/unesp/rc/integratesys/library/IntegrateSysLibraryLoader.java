@@ -7,6 +7,7 @@
 package br.unesp.rc.integratesys.library;
 
 import com.sun.jna.Native;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,11 +22,11 @@ public class IntegrateSysLibraryLoader {
             try {
                 library = (IntegrateSysLibrary) Native.loadLibrary(IntegrateSysLibrary.LIBRARY_NAME, IntegrateSysLibrary.class);
             } catch(UnsatisfiedLinkError ex) {
-                System.err.println("Dll " + IntegrateSysLibrary.LIBRARY_NAME 
-                        + " não pode ser carregada. Certifique-se de possuir esse "
+                JOptionPane.showMessageDialog(null, "Arquivo \"" + IntegrateSysLibrary.LIBRARY_NAME 
+                        + ".dll\" não pode ser carregado.\nCertifique-se de possuir esse "
                         + "arquivo no diretório da aplicação e que ele seja compatível "
-                        + "com a arquitetura de seu sistema operacional (32 ou 64 bits).");
-                System.err.println("Erro: " + ex.getMessage());
+                        + "com seu sistema operacional (32 ou 64 bits).", "IntegrateSys - Erro", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
             }        
         }
         return IntegrateSysLibraryLoader.library;

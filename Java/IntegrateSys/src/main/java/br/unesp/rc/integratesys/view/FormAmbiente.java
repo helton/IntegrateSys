@@ -123,6 +123,7 @@ public class FormAmbiente extends FormBase {
                 lblTemperatura.setText(ambiente.getSensores().getSensorTemperatura().getTemperatura() + " ºC");
                 lblUmidade.setText(ambiente.getSensores().getSensorUmidade().getUmidade() + " %");
                 lblLuminosidade.setText(ambiente.getSensores().getSensorLuminosidade().getLuminosidade() + " %");
+                lblCiclos.setText(Integer.toString(ambiente.getAgendadorTarefas().getIndiceProximoCiclo() - 1));
                 definirImagemSensores();
                 definirImagemAtuadores();
                 verificarSituacaoCritica();
@@ -147,6 +148,10 @@ public class FormAmbiente extends FormBase {
         sliLampada = new javax.swing.JSlider();
         sliUmidificador = new javax.swing.JSlider();
         jPanel1 = new javax.swing.JPanel();
+        lblCiclos = new javax.swing.JLabel();
+        lblTituloCiclos = new javax.swing.JLabel();
+        lblTituloTempo = new javax.swing.JLabel();
+        lblTempo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IntegrateSys v1.0");
@@ -446,21 +451,47 @@ public class FormAmbiente extends FormBase {
             }
         });
 
+        lblCiclos.setText("0");
+
+        lblTituloCiclos.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblTituloCiclos.setText("Ciclos:");
+
+        lblTituloTempo.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblTituloTempo.setText("Tempo:");
+
+        lblTempo.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addComponent(tbtnIniciarSimulacao)
-                .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tbtnIniciarSimulacao)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTituloCiclos)
+                            .addComponent(lblTituloTempo))
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTempo)
+                            .addComponent(lblCiclos))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(tbtnIniciarSimulacao)
-                .addGap(20, 20, 20))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTituloCiclos)
+                    .addComponent(lblCiclos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTituloTempo)
+                    .addComponent(lblTempo)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -489,8 +520,8 @@ public class FormAmbiente extends FormBase {
                     .addComponent(pnlControleLuminosidade, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlControleTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlControleTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -524,12 +555,16 @@ public class FormAmbiente extends FormBase {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private final javax.swing.JLabel lblAquecedor = new javax.swing.JLabel();
+    private javax.swing.JLabel lblCiclos;
     private final javax.swing.JLabel lblLampada = new javax.swing.JLabel();
     private final javax.swing.JLabel lblLuminosidade = new javax.swing.JLabel();
     private final javax.swing.JLabel lblSensorLuminosidade = new javax.swing.JLabel();
     private final javax.swing.JLabel lblSensorTemperatura = new javax.swing.JLabel();
     private final javax.swing.JLabel lblSensorUmidade = new javax.swing.JLabel();
     private final javax.swing.JLabel lblTemperatura = new javax.swing.JLabel();
+    private javax.swing.JLabel lblTempo;
+    private javax.swing.JLabel lblTituloCiclos;
+    private javax.swing.JLabel lblTituloTempo;
     private final javax.swing.JLabel lblUmidade = new javax.swing.JLabel();
     private final javax.swing.JLabel lblUmidificador = new javax.swing.JLabel();
     private final javax.swing.JLabel lblVentilador = new javax.swing.JLabel();

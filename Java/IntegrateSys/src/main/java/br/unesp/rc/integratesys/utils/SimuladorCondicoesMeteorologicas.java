@@ -8,6 +8,7 @@ package br.unesp.rc.integratesys.utils;
 
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,8 +61,7 @@ public class SimuladorCondicoesMeteorologicas {
     }
     
     public void simular() {
-        //melhorar!!!
-        /*final PrevisaoTempo previsaoTempo = getPrevisaoTempo();
+        final PrevisaoTempo previsaoTempo = getPrevisaoTempo();
         agendadorTarefas.agendarTarefa(new Tarefa() {
             @Override
             public void executar() {
@@ -69,7 +69,7 @@ public class SimuladorCondicoesMeteorologicas {
                 IntegrateSysLibraryLoader.getLibrary().setUmidade(previsaoTempo.getUmidade());
                 IntegrateSysLibraryLoader.getLibrary().setLuminosidade(previsaoTempo.getLuminosidade());                
             }
-        }, 0);*/
+        }, 0);
     }
     
 }
