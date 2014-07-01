@@ -99,6 +99,7 @@ public class FormAmbiente extends FormBase {
                 definirImagemSensores();
                 definirImagemAtuadores();
                 verificarSituacaoCritica();
+                ambiente.getSimulador().simular();
             }
         });
         varredor.iniciar();
