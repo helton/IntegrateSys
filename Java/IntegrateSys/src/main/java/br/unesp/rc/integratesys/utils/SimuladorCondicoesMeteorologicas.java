@@ -69,7 +69,7 @@ public class SimuladorCondicoesMeteorologicas {
                 IntegrateSysLibraryLoader.getLibrary().setUmidade(previsaoTempo.getUmidade());
                 IntegrateSysLibraryLoader.getLibrary().setLuminosidade(previsaoTempo.getLuminosidade());                
             }
-        }, 0);
+        }, 1);
     }
     
 }
