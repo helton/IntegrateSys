@@ -20,7 +20,7 @@ public enum Nivel {
     ALTO(3);
     
     private final int valor;
-    private static final Map<Integer, Nivel> intToTypeMap = new HashMap<>();
+    private static final Map<Integer, Nivel> mapaConversaoIntParaEnum = new HashMap<>();
     
     private Nivel(int valor) {
         this.valor = valor;
@@ -31,15 +31,15 @@ public enum Nivel {
     }  
     
     public static Nivel fromInt(int i) {
-        Nivel type = intToTypeMap.get(Integer.valueOf(i));
-        if (type == null) 
+        Nivel tipo = mapaConversaoIntParaEnum.get(Integer.valueOf(i));
+        if (tipo == null) 
             return Nivel.DESLIGADO;
-        return type;
+        return tipo;
     }    
     
     static {
-        for (Nivel type: Nivel.values()) {
-            intToTypeMap.put(type.valor, type);
+        for (Nivel tipo: Nivel.values()) {
+            mapaConversaoIntParaEnum.put(tipo.valor, tipo);
         }
     }
     
