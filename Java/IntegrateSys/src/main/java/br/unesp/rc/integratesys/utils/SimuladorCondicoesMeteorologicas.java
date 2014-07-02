@@ -8,7 +8,6 @@ package br.unesp.rc.integratesys.utils;
 
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import java.util.Random;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,10 +15,12 @@ import javax.swing.JOptionPane;
  */
 public class SimuladorCondicoesMeteorologicas {
        
+    private boolean ligado;
     private final AgendadorTarefas agendadorTarefas;
     private final Random random;
     
     public SimuladorCondicoesMeteorologicas(AgendadorTarefas agendadorTarefas) {
+        this.ligado = false;
         this.agendadorTarefas = agendadorTarefas;                
         this.random = new Random();
     }
@@ -61,15 +62,31 @@ public class SimuladorCondicoesMeteorologicas {
     }
     
     public void simular() {
-        final PrevisaoTempo previsaoTempo = getPrevisaoTempo();
-        agendadorTarefas.agendarTarefa(new Tarefa() {
-            @Override
-            public void executar() {
-                IntegrateSysLibraryLoader.getLibrary().setTemperatura(previsaoTempo.getTemperatura());
-                IntegrateSysLibraryLoader.getLibrary().setUmidade(previsaoTempo.getUmidade());
-                IntegrateSysLibraryLoader.getLibrary().setLuminosidade(previsaoTempo.getLuminosidade());                
-            }
-        }, 1);
+        if (isLigado()) {
+            final PrevisaoTempo previsaoTempo = getPrevisaoTempo();
+            agendadorTarefas.agendarTarefa(new Tarefa() {
+                @Override
+                public void executar() {
+                    IntegrateSysLibraryLoader.getLibrary().setTemperatura(previsaoTempo.getTemperatura());
+                    IntegrateSysLibraryLoader.getLibrary().setUmidade(previsaoTempo.getUmidade());
+                    IntegrateSysLibraryLoader.getLibrary().setLuminosidade(previsaoTempo.getLuminosidade());                
+                }
+            }, 1);
+        }        
+    }
+
+    /**
+     * @return the ligado
+     */
+    public boolean isLigado() {
+        return ligado;
+    }
+
+    /**
+     * @param ligado the ligado to set
+     */
+    public void setLigado(boolean ligado) {
+        this.ligado = ligado;
     }
     
 }

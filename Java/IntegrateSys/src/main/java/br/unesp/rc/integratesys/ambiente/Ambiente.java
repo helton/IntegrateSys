@@ -10,9 +10,8 @@ import br.unesp.rc.integratesys.atuadores.Atuadores;
 import br.unesp.rc.integratesys.atuadores.Nivel;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.Sensores;
-import br.unesp.rc.integratesys.utils.AgendadorTarefas;
-import br.unesp.rc.integratesys.utils.SimuladorCondicoesMeteorologicas;
-import br.unesp.rc.integratesys.utils.Varredor;
+import br.unesp.rc.integratesys.utils.ControladorSimulacao;
+import br.unesp.rc.integratesys.utils.Tarefa;
 
 /**
  *
@@ -20,22 +19,20 @@ import br.unesp.rc.integratesys.utils.Varredor;
  */
 public class Ambiente {
     
+    private final ControladorSimulacao controladorSimulacao;
     private final Atuadores atuadores;
     private final Sensores sensores;
-    private final AgendadorTarefas agendadorTarefas;
     private final Parametros parametros;
-    private final SimuladorCondicoesMeteorologicas simulador;
     
-    public Ambiente() {
+    public Ambiente(Tarefa tarefaExecutadoPorCiclo) {
+        controladorSimulacao = new ControladorSimulacao(tarefaExecutadoPorCiclo);
         parametros = new Parametros();
-        agendadorTarefas = new AgendadorTarefas();        
         sensores = new Sensores();
-        atuadores = new Atuadores(sensores, agendadorTarefas);
-        simulador = new SimuladorCondicoesMeteorologicas(agendadorTarefas);
-        configuraCondicoesIniciais();
+        atuadores = new Atuadores(sensores, controladorSimulacao.getAgendadorTarefas());
+        configurarCondicoesIniciais();
     }
     
-    private void configuraCondicoesIniciais() {
+    private void configurarCondicoesIniciais() {
         //apenas os valores iniciais dos sensores são disponibilizados
         IntegrateSysLibraryLoader.getLibrary().setLuminosidade(parametros.getLuminosidadeInicial());
         IntegrateSysLibraryLoader.getLibrary().setTemperatura(parametros.getTemperaturaInicial());        
@@ -46,7 +43,7 @@ public class Ambiente {
         IntegrateSysLibraryLoader.getLibrary().setNivelUmidificador(Nivel.DESLIGADO.getValor());
         IntegrateSysLibraryLoader.getLibrary().setNivelVentilador(Nivel.DESLIGADO.getValor());        
     }
-
+    
     /**
      * @return the atuadores
      */
@@ -69,17 +66,10 @@ public class Ambiente {
     }
 
     /**
-     * @return the agendadorTarefas
+     * @return the controladorSimulacao
      */
-    public AgendadorTarefas getAgendadorTarefas() {
-        return agendadorTarefas;
-    }
-
-    /**
-     * @return the simulador
-     */
-    public SimuladorCondicoesMeteorologicas getSimulador() {
-        return simulador;
+    public ControladorSimulacao getControladorSimulacao() {
+        return controladorSimulacao;
     }
    
 }

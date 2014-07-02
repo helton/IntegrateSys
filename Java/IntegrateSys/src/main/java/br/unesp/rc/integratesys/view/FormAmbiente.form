@@ -26,7 +26,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="pnlControleUmidade" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -35,10 +35,10 @@
                   <Group type="102" attributes="0">
                       <Component id="pnlControleTemperatura" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel1" max="32767" attributes="0"/>
+                      <Component id="jPanel1" min="-2" pref="306" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -634,23 +634,35 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                  <Component id="tbtnIniciarSimulacao" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="tbtnIniciarSimulacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="chkSimuladorCondicoesMeteorologicas" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblTituloCiclos" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblTituloTempo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTituloTempoAtual" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTituloTempoAcumulado" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTituloIntervaloPorCiclo" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblTempo" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTempoAtual" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTempoAcumulado" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblIntervaloPorCiclo" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblCiclos" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -659,16 +671,28 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="tbtnIniciarSimulacao" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblTituloCiclos" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblCiclos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="9" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblTituloTempo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblTempo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTituloTempoAtual" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTempoAtual" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblTituloTempoAcumulado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTempoAcumulado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblTituloIntervaloPorCiclo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblIntervaloPorCiclo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="chkSimuladorCondicoesMeteorologicas" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -699,15 +723,46 @@
             <Property name="text" type="java.lang.String" value="Ciclos:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblTituloTempo">
+        <Component class="javax.swing.JLabel" name="lblTituloTempoAtual">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="sansserif" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Tempo:"/>
+            <Property name="text" type="java.lang.String" value="Tempo atual:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblTempo">
+        <Component class="javax.swing.JLabel" name="lblTempoAtual">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkSimuladorCondicoesMeteorologicas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ativar simulador de condi&#xe7;&#xf5;es meteorol&#xf3;gicas"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTituloTempoAcumulado">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="sansserif" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Tempo acumulado:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTempoAcumulado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTituloIntervaloPorCiclo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="sansserif" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Intervalo por ciclo:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblIntervaloPorCiclo">
           <Properties>
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>

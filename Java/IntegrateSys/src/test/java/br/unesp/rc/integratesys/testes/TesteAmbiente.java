@@ -22,7 +22,7 @@ public class TesteAmbiente {
     
     @Before
     public void setUp() {
-        ambiente = new Ambiente();
+        ambiente = new Ambiente(null);
     }
 
     @Test

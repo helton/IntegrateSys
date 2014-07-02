@@ -8,9 +8,9 @@ package br.unesp.rc.integratesys.view;
 import br.unesp.rc.integratesys.ambiente.Ambiente;
 import br.unesp.rc.integratesys.atuadores.Nivel;
 import br.unesp.rc.integratesys.utils.Tarefa;
-import br.unesp.rc.integratesys.utils.Varredor;
 import java.awt.Component;
 import java.util.Hashtable;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -23,7 +23,6 @@ import javax.swing.event.ChangeListener;
 public class FormAmbiente extends FormBase {
 
     private final Ambiente ambiente;
-    private final Varredor varredor;
 
     /**
      * Creates new form FormPrincipal
@@ -68,11 +67,20 @@ public class FormAmbiente extends FormBase {
         });
     }
 
+    private void configurarSimulador() {
+        chkSimuladorCondicoesMeteorologicas.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent ce) {
+                ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas().setLigado(((JCheckBox) ce.getSource()).isSelected());
+            }
+        });
+    }
+
     public FormAmbiente() {
         initComponents();
         configurarSliders();
-        ambiente = new Ambiente();
-        varredor = new Varredor(ambiente.getAgendadorTarefas(), new Tarefa() {
+        configurarSimulador();
+        ambiente = new Ambiente(new Tarefa() {
 
             private void verificarSituacaoCritica() {
                 //tratar!
@@ -95,12 +103,12 @@ public class FormAmbiente extends FormBase {
                     lblSensorUmidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/umidade.png")));
                 }
 
-                if(ambiente.getSensores().getSensorLuminosidade().getLuminosidade() <= ambiente.getParametros().getLuminosidadeMinimaCritica()){
+                if (ambiente.getSensores().getSensorLuminosidade().getLuminosidade() <= ambiente.getParametros().getLuminosidadeMinimaCritica()) {
                     lblSensorLuminosidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/luminosidade_escuro.png")));
-                }else{
+                } else {
                     lblSensorLuminosidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/luminosidade.png")));
                 }
-                
+
             }
 
             private void definirImagemAtuadores() {
@@ -127,15 +135,35 @@ public class FormAmbiente extends FormBase {
 
                 if (ambiente.getAtuadores().getUmidificador().getNivel().getValor() == 0) {
                     lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador.png")));
-                }else{
+                } else {
                     lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador_ligado.png")));
                 }
-                
-                if(ambiente.getAtuadores().getLampada().getNivel().getValor()==0){
+
+                if (ambiente.getAtuadores().getLampada().getNivel().getValor() == 0) {
                     lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada.png")));
-                }else{
+                } else {
                     lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada_ligada.png")));
                 }
+
+            }
+
+            public String formatarTempoDecorrido(long diferencaEmMilisegundos) {
+
+                long segundosEmMilisegundos = 1000;
+                long minutosEmMilisegundos = segundosEmMilisegundos * 60;
+                long horasEmMilisegundos = minutosEmMilisegundos * 60;
+
+                long horasDecorridas = diferencaEmMilisegundos / horasEmMilisegundos;
+                diferencaEmMilisegundos = diferencaEmMilisegundos % horasEmMilisegundos;
+
+                long minutosDecorridos = diferencaEmMilisegundos / minutosEmMilisegundos;
+                diferencaEmMilisegundos = diferencaEmMilisegundos % minutosEmMilisegundos;
+
+                long segundosDecorridos = diferencaEmMilisegundos / segundosEmMilisegundos;
+
+                return String.format(
+                        "%02d:%02d:%02d",
+                        horasDecorridas, minutosDecorridos, segundosDecorridos);
 
             }
 
@@ -144,14 +172,17 @@ public class FormAmbiente extends FormBase {
                 lblTemperatura.setText(ambiente.getSensores().getSensorTemperatura().getTemperatura() + " ºC");
                 lblUmidade.setText(ambiente.getSensores().getSensorUmidade().getUmidade() + " %");
                 lblLuminosidade.setText(ambiente.getSensores().getSensorLuminosidade().getLuminosidade() + " %");
-                lblCiclos.setText(Integer.toString(ambiente.getAgendadorTarefas().getIndiceProximoCiclo() - 1));
+                lblCiclos.setText(Integer.toString(ambiente.getControladorSimulacao().getAgendadorTarefas().getIndiceProximoCiclo() - 1));
+                lblTempoAtual.setText(formatarTempoDecorrido(ambiente.getControladorSimulacao().getTempoDecorridoSimulacaoAtual()));
+                lblTempoAcumulado.setText(formatarTempoDecorrido(ambiente.getControladorSimulacao().getTempoTotalSimulacaoDecorrido()));                
+                lblIntervaloPorCiclo.setText(ambiente.getControladorSimulacao().getVarredor().INTERVALO_POR_CICLO + " segundos");
                 definirImagemSensores();
                 definirImagemAtuadores();
                 verificarSituacaoCritica();
-                ambiente.getSimulador().simular();
+                ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas().simular();
             }
         });
-        varredor.iniciar();
+        ambiente.getControladorSimulacao().iniciarSimulacao();
     }
 
     /**
@@ -171,8 +202,13 @@ public class FormAmbiente extends FormBase {
         jPanel1 = new javax.swing.JPanel();
         lblCiclos = new javax.swing.JLabel();
         lblTituloCiclos = new javax.swing.JLabel();
-        lblTituloTempo = new javax.swing.JLabel();
-        lblTempo = new javax.swing.JLabel();
+        lblTituloTempoAtual = new javax.swing.JLabel();
+        lblTempoAtual = new javax.swing.JLabel();
+        chkSimuladorCondicoesMeteorologicas = new javax.swing.JCheckBox();
+        lblTituloTempoAcumulado = new javax.swing.JLabel();
+        lblTempoAcumulado = new javax.swing.JLabel();
+        lblTituloIntervaloPorCiclo = new javax.swing.JLabel();
+        lblIntervaloPorCiclo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IntegrateSys v1.0");
@@ -209,7 +245,7 @@ public class FormAmbiente extends FormBase {
                 .addComponent(lblSensorTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTemperatura)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlAtuadoresTemperatura.setBorder(javax.swing.BorderFactory.createTitledBorder("Atuadores"));
@@ -477,42 +513,74 @@ public class FormAmbiente extends FormBase {
         lblTituloCiclos.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lblTituloCiclos.setText("Ciclos:");
 
-        lblTituloTempo.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblTituloTempo.setText("Tempo:");
+        lblTituloTempoAtual.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblTituloTempoAtual.setText("Tempo atual:");
 
-        lblTempo.setText("0");
+        lblTempoAtual.setText("0");
+
+        chkSimuladorCondicoesMeteorologicas.setText("Ativar simulador de condições meteorológicas");
+
+        lblTituloTempoAcumulado.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblTituloTempoAcumulado.setText("Tempo acumulado:");
+
+        lblTempoAcumulado.setText("0");
+
+        lblTituloIntervaloPorCiclo.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblTituloIntervaloPorCiclo.setText("Intervalo por ciclo:");
+
+        lblIntervaloPorCiclo.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(tbtnIniciarSimulacao)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tbtnIniciarSimulacao)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(chkSimuladorCondicoesMeteorologicas)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTituloCiclos)
-                            .addComponent(lblTituloTempo))
-                        .addGap(45, 45, 45)
+                            .addComponent(lblTituloTempoAtual)
+                            .addComponent(lblTituloTempoAcumulado)
+                            .addComponent(lblTituloIntervaloPorCiclo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTempo)
-                            .addComponent(lblCiclos))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                            .addComponent(lblTempoAtual)
+                            .addComponent(lblTempoAcumulado)
+                            .addComponent(lblIntervaloPorCiclo)
+                            .addComponent(lblCiclos))
+                        .addGap(106, 106, 106))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tbtnIniciarSimulacao)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTituloCiclos)
                     .addComponent(lblCiclos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTituloTempo)
-                    .addComponent(lblTempo)))
+                    .addComponent(lblTituloTempoAtual)
+                    .addComponent(lblTempoAtual))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTituloTempoAcumulado)
+                    .addComponent(lblTempoAcumulado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTituloIntervaloPorCiclo)
+                    .addComponent(lblIntervaloPorCiclo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(chkSimuladorCondicoesMeteorologicas))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -521,7 +589,7 @@ public class FormAmbiente extends FormBase {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlControleUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -529,8 +597,8 @@ public class FormAmbiente extends FormBase {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlControleTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,10 +621,10 @@ public class FormAmbiente extends FormBase {
 
     private void tbtnIniciarSimulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtnIniciarSimulacaoActionPerformed
         if (tbtnIniciarSimulacao.isSelected()) {
-            varredor.iniciar();
+            ambiente.getControladorSimulacao().iniciarSimulacao();
             tbtnIniciarSimulacao.setText("Pausar simulação");
         } else {
-            varredor.pausar();
+            ambiente.getControladorSimulacao().pausarSimulacao();
             tbtnIniciarSimulacao.setText("Iniciar simulação");
         }
     }//GEN-LAST:event_tbtnIniciarSimulacaoActionPerformed
@@ -574,18 +642,23 @@ public class FormAmbiente extends FormBase {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chkSimuladorCondicoesMeteorologicas;
     private javax.swing.JPanel jPanel1;
     private final javax.swing.JLabel lblAquecedor = new javax.swing.JLabel();
     private javax.swing.JLabel lblCiclos;
+    private javax.swing.JLabel lblIntervaloPorCiclo;
     private final javax.swing.JLabel lblLampada = new javax.swing.JLabel();
     private final javax.swing.JLabel lblLuminosidade = new javax.swing.JLabel();
     private final javax.swing.JLabel lblSensorLuminosidade = new javax.swing.JLabel();
     private final javax.swing.JLabel lblSensorTemperatura = new javax.swing.JLabel();
     private final javax.swing.JLabel lblSensorUmidade = new javax.swing.JLabel();
     private final javax.swing.JLabel lblTemperatura = new javax.swing.JLabel();
-    private javax.swing.JLabel lblTempo;
+    private javax.swing.JLabel lblTempoAcumulado;
+    private javax.swing.JLabel lblTempoAtual;
     private javax.swing.JLabel lblTituloCiclos;
-    private javax.swing.JLabel lblTituloTempo;
+    private javax.swing.JLabel lblTituloIntervaloPorCiclo;
+    private javax.swing.JLabel lblTituloTempoAcumulado;
+    private javax.swing.JLabel lblTituloTempoAtual;
     private final javax.swing.JLabel lblUmidade = new javax.swing.JLabel();
     private final javax.swing.JLabel lblUmidificador = new javax.swing.JLabel();
     private final javax.swing.JLabel lblVentilador = new javax.swing.JLabel();

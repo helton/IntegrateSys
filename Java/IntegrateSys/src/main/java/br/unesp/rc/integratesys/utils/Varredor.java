@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Varredor {
     
-    private final int INTERVALO_CICLO = 3;
+    public final int INTERVALO_POR_CICLO = 3;
     private final Runnable tarefaPeriodica;
     private ScheduledExecutorService executorTarefa;
     
@@ -37,7 +37,7 @@ public class Varredor {
             executorTarefa.shutdown();
         }
         executorTarefa = Executors.newSingleThreadScheduledExecutor();
-        executorTarefa.scheduleAtFixedRate(tarefaPeriodica, 0, INTERVALO_CICLO, TimeUnit.SECONDS);        
+        executorTarefa.scheduleAtFixedRate(tarefaPeriodica, 0, INTERVALO_POR_CICLO, TimeUnit.SECONDS);        
     }
     
     public void pausar() {
