@@ -10,29 +10,33 @@ package br.unesp.rc.integratesys.ambiente;
  * @author Helton
  */
 public class Parametros {
-    
-    //condições iniciais
-    private final int temperaturaInicial;
-    private final int umidadeInicial;
-    private final int luminosidadeInicial;
 
-    //Condições ideais
-    private int temperaturaIdeal =  25;
-    private int umidadeIdeal = 70;
-    private int luminosidadeIdeal = 60;
-
-    //Condições críticas
-    private int temperaturaMinimaCritica = 22;
-    private int temperaturaMaximaCritica = 30;
-    private int umidadeMinimaCritica = 60;
-    private int umidadeMaximaCritica = 80;
-    private int luminosidadeMinimaCritica = 50;
-    private int luminosidadeMaximaCritica = 95;
+    private int temperaturaInicial;
+    private int umidadeInicial;
+    private int luminosidadeInicial;
+    private int temperaturaIdeal;
+    private int umidadeIdeal;
+    private int luminosidadeIdeal;
+    private int temperaturaMinimaCritica;
+    private int temperaturaMaximaCritica;
+    private int umidadeMinimaCritica;
+    private int umidadeMaximaCritica;
+    private int luminosidadeMinimaCritica;
+    private int luminosidadeMaximaCritica;
 
     public Parametros() {
-        temperaturaInicial = 30;
-        umidadeInicial = 60;
-        luminosidadeInicial = 60;
+        temperaturaInicial = ParametrosArmazenados.getTemperaturaInicial();
+        umidadeInicial = ParametrosArmazenados.getUmidadeInicial();
+        luminosidadeInicial = ParametrosArmazenados.getLuminosidadeInicial();
+        temperaturaIdeal = ParametrosArmazenados.getTemperaturaIdeal();
+        umidadeIdeal = ParametrosArmazenados.getUmidadeIdeal();
+        luminosidadeIdeal = ParametrosArmazenados.getLuminosidadeIdeal();
+        temperaturaMinimaCritica = ParametrosArmazenados.getTemperaturaMinimaCritica();
+        temperaturaMaximaCritica = ParametrosArmazenados.getTemperaturaMaximaCritica();
+        umidadeMinimaCritica = ParametrosArmazenados.getUmidadeMinimaCritica();
+        umidadeMaximaCritica = ParametrosArmazenados.getUmidadeMaximaCritica();
+        luminosidadeMinimaCritica = ParametrosArmazenados.getLuminosidadeMinimaCritica();
+        luminosidadeMaximaCritica = ParametrosArmazenados.getLuminosidadeMaximaCritica();
     }
 
     /**
