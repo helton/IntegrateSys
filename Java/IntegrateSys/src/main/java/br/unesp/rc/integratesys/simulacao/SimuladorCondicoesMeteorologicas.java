@@ -28,9 +28,16 @@ public class SimuladorCondicoesMeteorologicas {
     private boolean ligado;
     private final Random random;
 
-    private static final int VARIACAO_TEMPERATURA_PREVISAO_TEMPO = 2;
-    private static final int VARIACAO_UMIDADE_PREVISAO_TEMPO = 3;
-    private static final int VARIACAO_LUMINOSIDADE_PREVISAO_TEMPO = 3;
+    private static final int VARIACAO_TEMPERATURA_PREVISAO_TEMPO = 1;
+    private static final int VARIACAO_UMIDADE_PREVISAO_TEMPO = 2;
+    private static final int VARIACAO_LUMINOSIDADE_PREVISAO_TEMPO = 2;
+    
+    private final int TEMPERATURA_LIMITE_MAXIMA = 100;
+    private final int TEMPERATURA_LIMITE_MINIMA = 0;
+    private final int UMIDADE_LIMITE_MAXIMA = 100;
+    private final int UMIDADE_LIMITE_MINIMA = 0;    
+    private final int LUMINOSIDADE_LIMITE_MAXIMA = 100;
+    private final int LUMINOSIDADE_LIMITE_MINIMA = 0;           
 
     public SimuladorCondicoesMeteorologicas(Sensores sensores, AgendadorTarefas agendadorTarefas, Parametros parametros) {
         this.ligado = false;
@@ -49,19 +56,19 @@ public class SimuladorCondicoesMeteorologicas {
             previsaoTempo = new EstadoAmbiente();
             switch (getCondicaoTempo()) {
                 case DIA_CHUVOSO:
-                    previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(10, 20)));
-                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(70, 90)));
-                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(10, 30)));
+                    previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(18, 20)));
+                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(50, 60)));
+                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(30, 50)));
                     break;
                 case DIA_NUBLADO:
-                    previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(10, 20)));
-                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(50, 65)));
-                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(30, 50)));
+                    previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(18, 25)));
+                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(50, 60)));
+                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(50, 55)));
                     break;                    
                 case DIA_ENSOLARADO:
-                    previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(25, 35)));
-                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(40, 60)));
-                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(70, 90)));
+                    previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(20, 25)));
+                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(20, 40)));
+                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(50, 90)));
                     break;                    
             }
         }
@@ -133,7 +140,7 @@ public class SimuladorCondicoesMeteorologicas {
 
             @Override
             public void setValor(int valor) {
-                IntegrateSysLibraryLoader.getLibrary().setTemperatura(valor);
+                IntegrateSysLibraryLoader.getLibrary().setTemperatura(Math.max(Math.min(valor, TEMPERATURA_LIMITE_MAXIMA), TEMPERATURA_LIMITE_MINIMA));
             }
         }, variacaoTemperatura);        
     }
@@ -159,7 +166,7 @@ public class SimuladorCondicoesMeteorologicas {
 
             @Override
             public void setValor(int valor) {
-                IntegrateSysLibraryLoader.getLibrary().setUmidade(valor);
+                IntegrateSysLibraryLoader.getLibrary().setUmidade(Math.max(Math.min(valor, UMIDADE_LIMITE_MAXIMA), UMIDADE_LIMITE_MINIMA));
             }
         }, variacaoUmidade);        
     }
@@ -185,7 +192,7 @@ public class SimuladorCondicoesMeteorologicas {
 
             @Override
             public void setValor(int valor) {
-                IntegrateSysLibraryLoader.getLibrary().setLuminosidade(valor);
+                IntegrateSysLibraryLoader.getLibrary().setLuminosidade(Math.max(Math.min(valor, LUMINOSIDADE_LIMITE_MAXIMA), LUMINOSIDADE_LIMITE_MINIMA));                
             }
         }, variacaoLuminosidade);        
     }            

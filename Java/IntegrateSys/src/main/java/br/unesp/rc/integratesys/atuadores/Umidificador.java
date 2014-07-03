@@ -16,8 +16,8 @@ import br.unesp.rc.integratesys.simulacao.AgendadorTarefas;
  */
 public class Umidificador extends Atuador {
 
-    private final int UMIDADE_MAXIMA = 100;
-    private final int UMIDADE_MINIMA = 0;    
+    private final int UMIDADE_LIMITE_MAXIMA = 100;
+    private final int UMIDADE_LIMITE_MINIMA = 0;    
     private final int VARIACAO_UMIDADE_POR_NIVEL   = 10;
     private final int INCREMENTO_UMIDADE_POR_CICLO = 5;
 
@@ -45,7 +45,7 @@ public class Umidificador extends Atuador {
     
     @Override
     public void setValor(int valor) {
-        valor = Math.max(Math.min(valor, UMIDADE_MAXIMA), UMIDADE_MINIMA);
+        valor = Math.max(Math.min(valor, UMIDADE_LIMITE_MAXIMA), UMIDADE_LIMITE_MINIMA);
         IntegrateSysLibraryLoader.getLibrary().setUmidade(valor);
     }
     

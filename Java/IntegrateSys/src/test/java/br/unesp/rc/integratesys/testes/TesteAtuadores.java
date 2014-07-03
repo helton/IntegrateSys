@@ -47,12 +47,8 @@ public class TesteAtuadores {
         Assert.assertEquals(29, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(28, sensores.getSensorTemperatura().getTemperatura());
-        agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(27, sensores.getSensorTemperatura().getTemperatura());
 
         ventilador.setNivel(Nivel.DESLIGADO);
-        agendadorTarefas.executarProximoCiclo();
-        Assert.assertEquals(28, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();
         Assert.assertEquals(29, sensores.getSensorTemperatura().getTemperatura());
         agendadorTarefas.executarProximoCiclo();

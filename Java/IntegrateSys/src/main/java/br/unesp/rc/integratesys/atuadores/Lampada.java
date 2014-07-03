@@ -16,8 +16,8 @@ import br.unesp.rc.integratesys.simulacao.AgendadorTarefas;
  */
 public class Lampada extends Atuador {
 
-    private final int LUMINOSIDADE_MAXIMA = 100;
-    private final int LUMINOSIDADE_MINIMA = 0;       
+    private final int LUMINOSIDADE_LIMITE_MAXIMA = 100;
+    private final int LUMINOSIDADE_LIMITE_MINIMA = 0;       
     private final int VARIACAO_LUMINOSIDADE_POR_NIVEL   = 10;
     private final int INCREMENTO_LUMINOSIDADE_POR_CICLO = 5;
 
@@ -45,7 +45,7 @@ public class Lampada extends Atuador {
     
     @Override
     public void setValor(int valor) {
-        valor = Math.max(Math.min(valor, LUMINOSIDADE_MAXIMA), LUMINOSIDADE_MINIMA);        
+        valor = Math.max(Math.min(valor, LUMINOSIDADE_LIMITE_MAXIMA), LUMINOSIDADE_LIMITE_MINIMA);        
         IntegrateSysLibraryLoader.getLibrary().setLuminosidade(valor);
     }  
     

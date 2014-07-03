@@ -30,26 +30,26 @@ public class FormParametros extends FormBase {
 
     private void getParametros() {
         txtTemperaturaIdeal.setText(String.valueOf(parametros.getTemperaturaIdeal()));
-        txtTemperaturaMaxima.setText(String.valueOf(parametros.getTemperaturaMaximaCritica()));
-        txtTemperaturaMinima.setText(String.valueOf(parametros.getTemperaturaMinimaCritica()));
+        txtTemperaturaMaxima.setText(String.valueOf(parametros.getTemperaturaMaxima()));
+        txtTemperaturaMinima.setText(String.valueOf(parametros.getTemperaturaMinima()));
         txtUmidadeIdeal.setText(String.valueOf(parametros.getUmidadeIdeal()));
-        txtUmidadeMaxima.setText(String.valueOf(parametros.getUmidadeMaximaCritica()));
-        txtUmidadeMinima.setText(String.valueOf(parametros.getUmidadeMinimaCritica()));
+        txtUmidadeMaxima.setText(String.valueOf(parametros.getUmidadeMaxima()));
+        txtUmidadeMinima.setText(String.valueOf(parametros.getUmidadeMinima()));
         txtLuminosidadeIdeal.setText(String.valueOf(parametros.getLuminosidadeIdeal()));
-        txtLuminosidadeMaxima.setText(String.valueOf(parametros.getLuminosidadeMaximaCritica()));
-        txtLuminosidadeMinima.setText(String.valueOf(parametros.getLuminosidadeMinimaCritica()));
+        txtLuminosidadeMaxima.setText(String.valueOf(parametros.getLuminosidadeMaxima()));
+        txtLuminosidadeMinima.setText(String.valueOf(parametros.getLuminosidadeMinima()));
     }
 
     private void setParametros() {
         parametros.setTemperaturaIdeal(Integer.parseInt(txtTemperaturaIdeal.getText()));
-        parametros.setTemperaturaMaximaCritica(Integer.parseInt(txtTemperaturaMaxima.getText()));
-        parametros.setTemperaturaMinimaCritica(Integer.parseInt(txtTemperaturaMinima.getText()));
+        parametros.setTemperaturaMaxima(Integer.parseInt(txtTemperaturaMaxima.getText()));
+        parametros.setTemperaturaMinima(Integer.parseInt(txtTemperaturaMinima.getText()));
         parametros.setUmidadeIdeal(Integer.parseInt(txtUmidadeIdeal.getText()));
-        parametros.setUmidadeMaximaCritica(Integer.parseInt(txtUmidadeMaxima.getText()));
-        parametros.setUmidadeMinimaCritica(Integer.parseInt(txtUmidadeMinima.getText()));
+        parametros.setUmidadeMaxima(Integer.parseInt(txtUmidadeMaxima.getText()));
+        parametros.setUmidadeMinima(Integer.parseInt(txtUmidadeMinima.getText()));
         parametros.setLuminosidadeIdeal(Integer.parseInt(txtLuminosidadeIdeal.getText()));
-        parametros.setLuminosidadeMaximaCritica(Integer.parseInt(txtLuminosidadeMaxima.getText()));
-        parametros.setLuminosidadeMinimaCritica(Integer.parseInt(txtLuminosidadeMinima.getText()));
+        parametros.setLuminosidadeMaxima(Integer.parseInt(txtLuminosidadeMaxima.getText()));
+        parametros.setLuminosidadeMinima(Integer.parseInt(txtLuminosidadeMinima.getText()));
         dispose();
     }
 

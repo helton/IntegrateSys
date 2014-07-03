@@ -21,18 +21,18 @@ public class Parametros {
     private int umidadeIdeal = 70;
     private int luminosidadeIdeal = 60;
 
-    //Condições críticas
-    private int temperaturaMinimaCritica = 22;
-    private int temperaturaMaximaCritica = 30;
-    private int umidadeMinimaCritica = 60;
-    private int umidadeMaximaCritica = 80;
-    private int luminosidadeMinimaCritica = 50;
-    private int luminosidadeMaximaCritica = 95;
+    //Condições mínimas e máximas
+    private int temperaturaMinima = 22;
+    private int temperaturaMaxima = 30;
+    private int umidadeMinima = 55;
+    private int umidadeMaxima = 80;
+    private int luminosidadeMinima = 50;
+    private int luminosidadeMaxima = 95;
 
     public Parametros() {
-        temperaturaInicial = 30;
-        umidadeInicial = 60;
-        luminosidadeInicial = 60;
+        temperaturaInicial = 25;
+        umidadeInicial = 65;
+        luminosidadeInicial = 65;
     }
 
     /**
@@ -57,45 +57,45 @@ public class Parametros {
     }
 
     /**
-     * @return the temperaturaMinimaCritica
+     * @return the temperaturaMinima
      */
-    public int getTemperaturaMinimaCritica() {
-        return temperaturaMinimaCritica;
+    public int getTemperaturaMinima() {
+        return temperaturaMinima;
     }
 
     /**
-     * @return the temperaturaMaximaCritica
+     * @return the temperaturaMaxima
      */
-    public int getTemperaturaMaximaCritica() {
-        return temperaturaMaximaCritica;
+    public int getTemperaturaMaxima() {
+        return temperaturaMaxima;
     }
 
     /**
-     * @return the umidadeMinimaCritica
+     * @return the umidadeMinima
      */
-    public int getUmidadeMinimaCritica() {
-        return umidadeMinimaCritica;
+    public int getUmidadeMinima() {
+        return umidadeMinima;
     }
 
     /**
-     * @return the umidadeMaximaCritica
+     * @return the umidadeMaxima
      */
-    public int getUmidadeMaximaCritica() {
-        return umidadeMaximaCritica;
+    public int getUmidadeMaxima() {
+        return umidadeMaxima;
     }
 
     /**
-     * @return the luminosidadeMinimaCritica
+     * @return the luminosidadeMinima
      */
-    public int getLuminosidadeMinimaCritica() {
-        return luminosidadeMinimaCritica;
+    public int getLuminosidadeMinima() {
+        return luminosidadeMinima;
     }
 
     /**
-     * @return the luminosidadeMaximaCritica
+     * @return the luminosidadeMaxima
      */
-    public int getLuminosidadeMaximaCritica() {
-        return luminosidadeMaximaCritica;
+    public int getLuminosidadeMaxima() {
+        return luminosidadeMaxima;
     }
 
     /**
@@ -120,45 +120,45 @@ public class Parametros {
     }
 
     /**
-     * @param temperaturaMinimaCritica the temperaturaMinimaCritica to set
+     * @param temperaturaMinima the temperaturaMinima to set
      */
-    public void setTemperaturaMinimaCritica(int temperaturaMinimaCritica) {
-        this.temperaturaMinimaCritica = temperaturaMinimaCritica;
+    public void setTemperaturaMinima(int temperaturaMinima) {
+        this.temperaturaMinima = temperaturaMinima;
     }
 
     /**
-     * @param temperaturaMaximaCritica the temperaturaMaximaCritica to set
+     * @param temperaturaMaxima the temperaturaMaxima to set
      */
-    public void setTemperaturaMaximaCritica(int temperaturaMaximaCritica) {
-        this.temperaturaMaximaCritica = temperaturaMaximaCritica;
+    public void setTemperaturaMaxima(int temperaturaMaxima) {
+        this.temperaturaMaxima = temperaturaMaxima;
     }
 
     /**
-     * @param umidadeMinimaCritica the umidadeMinimaCritica to set
+     * @param umidadeMinima the umidadeMinima to set
      */
-    public void setUmidadeMinimaCritica(int umidadeMinimaCritica) {
-        this.umidadeMinimaCritica = umidadeMinimaCritica;
+    public void setUmidadeMinima(int umidadeMinima) {
+        this.umidadeMinima = umidadeMinima;
     }
 
     /**
-     * @param umidadeMaximaCritica the umidadeMaximaCritica to set
+     * @param umidadeMaxima the umidadeMaxima to set
      */
-    public void setUmidadeMaximaCritica(int umidadeMaximaCritica) {
-        this.umidadeMaximaCritica = umidadeMaximaCritica;
+    public void setUmidadeMaxima(int umidadeMaxima) {
+        this.umidadeMaxima = umidadeMaxima;
     }
 
     /**
-     * @param luminosidadeMinimaCritica the luminosidadeMinimaCritica to set
+     * @param luminosidadeMinima the luminosidadeMinima to set
      */
-    public void setLuminosidadeMinimaCritica(int luminosidadeMinimaCritica) {
-        this.luminosidadeMinimaCritica = luminosidadeMinimaCritica;
+    public void setLuminosidadeMinima(int luminosidadeMinima) {
+        this.luminosidadeMinima = luminosidadeMinima;
     }
 
     /**
-     * @param luminosidadeMaximaCritica the luminosidadeMaximaCritica to set
+     * @param luminosidadeMaxima the luminosidadeMaxima to set
      */
-    public void setLuminosidadeMaximaCritica(int luminosidadeMaximaCritica) {
-        this.luminosidadeMaximaCritica = luminosidadeMaximaCritica;
+    public void setLuminosidadeMaxima(int luminosidadeMaxima) {
+        this.luminosidadeMaxima = luminosidadeMaxima;
     }
 
     /**
