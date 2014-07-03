@@ -10,7 +10,7 @@ package br.unesp.rc.integratesys.view;
  *
  * @author Helton
  */
-public class FormPrincipal extends javax.swing.JFrame {
+public class FormPrincipal extends FormBase {
 
     /**
      * Creates new form FormPrincipal
@@ -43,18 +43,6 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormPrincipal().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

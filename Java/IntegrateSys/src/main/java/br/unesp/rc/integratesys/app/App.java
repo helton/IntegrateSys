@@ -7,6 +7,7 @@
 package br.unesp.rc.integratesys.app;
 
 import br.unesp.rc.integratesys.view.FormAmbiente;
+import br.unesp.rc.integratesys.view.FormPrincipal;
 import java.awt.EventQueue;
 
 /**
@@ -15,7 +16,7 @@ import java.awt.EventQueue;
  */
 public class App {
     
-    private static void defineLookAndFeel() {
+    private static void definirLookAndFeel() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -29,11 +30,11 @@ public class App {
     }
     
     public static void main(String[] args) {
-        defineLookAndFeel();        
+        definirLookAndFeel();        
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new FormAmbiente().exibir();
+                new FormPrincipal().exibir();
             }
         });
     }    
