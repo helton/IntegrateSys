@@ -6,6 +6,8 @@
 package br.unesp.rc.integratesys.ambiente;
 
 /**
+ * Classe utilizada para gerenciar os parametros da simulação da granja, estabelecendo
+ * valores para as consições ideais e críticas da temperatura, umidade e luminosidade
  *
  * @author Helton
  */
@@ -29,6 +31,9 @@ public class Parametros {
     private int luminosidadeMinima = 50;
     private int luminosidadeMaxima = 95;
 
+    /**
+     * Contrutor do método que inicializa os parâmetros de temperatura, umidade e luminosidade iniciais
+     */
     public Parametros() {
         temperaturaInicial = 25;
         umidadeInicial = 65;
@@ -36,83 +41,95 @@ public class Parametros {
     }
 
     /**
-     * @return the temperaturaIdeal
+     * Metodo get para retornar a temperatura ideal da granja
+     * @return a temperatura ideal
      */
     public int getTemperaturaIdeal() {
         return temperaturaIdeal;
     }
 
     /**
-     * @return the umidadeIdeal
+     * Metodo get para retornar a umidade ideal da granja
+     * @return a umidade ideal
      */
     public int getUmidadeIdeal() {
         return umidadeIdeal;
     }
 
     /**
-     * @return the luminosidadeIdeal
+     * Metodo get para retornar a luminosidade ideal da granja
+     * @return a luminosidade ideal
      */
     public int getLuminosidadeIdeal() {
         return luminosidadeIdeal;
     }
 
     /**
-     * @return the temperaturaMinima
+     * Metodo get para retornar a temperatura mínima aceitável para a granja
+     * @return a temperatura Minima Critica
      */
     public int getTemperaturaMinima() {
         return temperaturaMinima;
     }
 
     /**
-     * @return the temperaturaMaxima
+     * Metodo get para retornar a temperatura máxima aceitável para a granja
+     * @return a temperatura Maxima Critica
      */
     public int getTemperaturaMaxima() {
         return temperaturaMaxima;
     }
 
     /**
-     * @return the umidadeMinima
+     * Metodo get para retornar a umidade mínima aceitável para a granja
+     * @return a umidade Minima Critica
      */
     public int getUmidadeMinima() {
         return umidadeMinima;
     }
 
     /**
-     * @return the umidadeMaxima
+     * Metodo get para retornar a umidade máxima aceitável para a granja
+     * @return the umidade Maxima Critica
      */
     public int getUmidadeMaxima() {
         return umidadeMaxima;
     }
 
     /**
-     * @return the luminosidadeMinima
+     * Metodo get para retornar a luminosidade mínima aceitável para a granja
+     * @return A luminosidade Minima Critica
      */
     public int getLuminosidadeMinima() {
         return luminosidadeMinima;
     }
 
     /**
-     * @return the luminosidadeMaxima
+     * Metodo get para retornar a luminosidade máxima aceitável para a granja
+     * @return a luminosidade Maxima Critica
      */
     public int getLuminosidadeMaxima() {
         return luminosidadeMaxima;
     }
 
     /**
-     * @param temperaturaIdeal the temperaturaIdeal to set
+     * Metodo set para mudar a temperatura ideal da granja
+     * @param temperaturaIdeal a temperatura ideal a alterar
      */
     public void setTemperaturaIdeal(int temperaturaIdeal) {
         this.temperaturaIdeal = temperaturaIdeal;
     }
 
     /**
-     * @param umidadeIdeal the umidadeIdeal to set
+     * Metodo set para mudar a umidade ideal da granja
+     * @param umidadeIdeal a umidade ideal a alterar
      */
     public void setUmidadeIdeal(int umidadeIdeal) {
         this.umidadeIdeal = umidadeIdeal;
     }
 
     /**
+     * Metodo set para mudar a luminosidade ideal da granja
      * @param luminosidadeIdeal the luminosidadeIdeal to set
      */
     public void setLuminosidadeIdeal(int luminosidadeIdeal) {
@@ -120,63 +137,72 @@ public class Parametros {
     }
 
     /**
-     * @param temperaturaMinima the temperaturaMinima to set
+     * Metodo set para mudar a temperatura mínima aceitável para a granja
+     * @param temperaturaMinimaCritica a temperatura mínima crítica para setar
      */
     public void setTemperaturaMinima(int temperaturaMinima) {
         this.temperaturaMinima = temperaturaMinima;
     }
 
     /**
-     * @param temperaturaMaxima the temperaturaMaxima to set
+     * Metodo set para mudar a temperatura máxima aceitável para a granja
+     * @param temperaturaMaximaCritica a temperatura máxima crítica para setar
      */
     public void setTemperaturaMaxima(int temperaturaMaxima) {
         this.temperaturaMaxima = temperaturaMaxima;
     }
 
     /**
-     * @param umidadeMinima the umidadeMinima to set
+     * Metodo set para mudar a umidade mínima aceitável para a granja
+     * @param umidadeMinimaCritica A umidade minima critica a alterar
      */
     public void setUmidadeMinima(int umidadeMinima) {
         this.umidadeMinima = umidadeMinima;
     }
 
     /**
-     * @param umidadeMaxima the umidadeMaxima to set
+     * Metodo set para mudar a umidade máxima aceitável para a granja
+     * @param umidadeMaximaCritica A umidade máxima critica a alterar
      */
     public void setUmidadeMaxima(int umidadeMaxima) {
         this.umidadeMaxima = umidadeMaxima;
     }
 
     /**
-     * @param luminosidadeMinima the luminosidadeMinima to set
+     * Metodo set para mudar a luminosidade máínima aceitável para a granja
+     * @param luminosidadeMinimaCritica A luminosidade Mínima Critica a alterar
      */
     public void setLuminosidadeMinima(int luminosidadeMinima) {
         this.luminosidadeMinima = luminosidadeMinima;
     }
 
     /**
-     * @param luminosidadeMaxima the luminosidadeMaxima to set
+     * Metodo set para mudar a luminosidade máxima aceitável para a granja
+     * @param luminosidadeMaximaCritica A luminosidade Máxima Critica a alterar
      */
     public void setLuminosidadeMaxima(int luminosidadeMaxima) {
         this.luminosidadeMaxima = luminosidadeMaxima;
     }
 
     /**
-     * @return the temperaturaInicial
+     * Método get que retorna a temperatura inicial da granja
+     * @return a temperatura Inicial
      */
     public int getTemperaturaInicial() {
         return temperaturaInicial;
     }
 
     /**
-     * @return the umidadeInicial
+     * Método get que retorna a umidade inicial da granja
+     * @return a umidade inicial
      */
     public int getUmidadeInicial() {
         return umidadeInicial;
     }
 
     /**
-     * @return the luminosidadeInicial
+     * Metodo get que retorna a luminosidade inicial da granja
+     * @return a luminosidade inicial
      */
     public int getLuminosidadeInicial() {
         return luminosidadeInicial;

@@ -14,8 +14,11 @@ import br.unesp.rc.integratesys.simulacao.EstadoAmbiente;
 import br.unesp.rc.integratesys.simulacao.SimuladorCondicoesMeteorologicas;
 
 /**
- *
- * @author Helton
+ * Classe que gera o ambiente de simulação da granja, fazendo as configurações 
+ * iniciais, inicializando parâmetros, tarefas, atuadores e sensores e iniciando
+ * a simulação das condições metereológicas
+ * 
+ * @author Raquel
  */
 public class Ambiente {
 
@@ -37,7 +40,10 @@ public class Ambiente {
         tempoDecorridoUltimaSimulacao = 0;
         configurarCondicoesIniciais();
     }
-
+    
+    /**
+     * Configura as condições iniciais da granja, utilizando os valores iniciais passados pelos sensores
+     */
     private void configurarCondicoesIniciais() {
         //apenas os valores iniciais dos sensores são disponibilizados
         IntegrateSysLibraryLoader.getLibrary().setLuminosidade(simulador.getPrevisaoTempo().getLuminosidade().toInteger());
@@ -49,7 +55,12 @@ public class Ambiente {
         IntegrateSysLibraryLoader.getLibrary().setNivelUmidificador(Nivel.DESLIGADO.getValor());
         IntegrateSysLibraryLoader.getLibrary().setNivelVentilador(Nivel.DESLIGADO.getValor());
     }
-
+    
+    /**
+     * Retorna o estado do ambiente atual da granja, incluindo os valores de luminosidade, temperatura e umidade
+     * 
+     * @return ambienteInterno Retorna o objeto com as informações do estado do ambiente
+     */
     public EstadoAmbiente getAmbienteInterno() {
         EstadoAmbiente ambienteInterno = new EstadoAmbiente();
         ambienteInterno.setLuminosidade(new Luminosidade(IntegrateSysLibraryLoader.getLibrary().getLuminosidade()));
@@ -57,16 +68,24 @@ public class Ambiente {
         ambienteInterno.setUmidade(new Umidade(IntegrateSysLibraryLoader.getLibrary().getUmidade()));
         return ambienteInterno;
     }
-
+    
+    /**
+     * Atualiza o ambiente interno de acordo com os parâmetros atuais do ciclo, gerando um novo ciclo
+     */
     public void atualizarAmbienteInterno() {
         agendadorTarefas.executarProximoCiclo();
     }
-
+    
+    /**
+     * Atualiza o ambiente externo de acordo com os parâmetros atuais do ciclo, gerando um novo ciclo
+     */
     public void atualizarAmbienteExterno() {
         simulador.atualizarAmbienteExterno();
     }
 
     /**
+     * Método get para obter os atuadores da granja
+     * 
      * @return the atuadores
      */
     public Atuadores getAtuadores() {
@@ -74,6 +93,8 @@ public class Ambiente {
     }
 
     /**
+     * Método get para obter os sensores da granja
+     * 
      * @return the sensores
      */
     public Sensores getSensores() {
@@ -81,6 +102,8 @@ public class Ambiente {
     }
 
     /**
+     * Método get para obter os parametros da granja
+     * 
      * @return the parametros
      */
     public Parametros getParametros() {
@@ -88,6 +111,8 @@ public class Ambiente {
     }
 
     /**
+     * Método get para obter o agendador de tarefas atual da granja
+     * 
      * @return the agendadorTarefas
      */
     public AgendadorTarefas getAgendadorTarefas() {
@@ -95,6 +120,8 @@ public class Ambiente {
     }
 
     /**
+     * Método get para obter o simulador da granja
+     * 
      * @return the simulador
      */
     public SimuladorCondicoesMeteorologicas getSimuladorCondicoesMeteorologicas() {
