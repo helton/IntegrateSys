@@ -10,6 +10,7 @@ import br.unesp.rc.integratesys.atuadores.Nivel;
 import br.unesp.rc.integratesys.utils.CondicaoTempo;
 import br.unesp.rc.integratesys.utils.Tarefa;
 import java.awt.Component;
+import java.awt.EventQueue;
 import java.util.Hashtable;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -155,7 +156,7 @@ public class FormAmbiente extends FormBase {
                         horasDecorridas, minutosDecorridos, segundosDecorridos);
 
             }
-            
+
             private void atualizarInformacoesControleSimulacao() {
                 lblCiclos.setText(Integer.toString(ambiente.getControladorSimulacao().getAgendadorTarefas().getIndiceProximoCiclo() - 1));
                 lblTempoAtual.setText(formatarTempoDecorrido(ambiente.getControladorSimulacao().getTempoDecorridoSimulacaoAtual()));
@@ -214,6 +215,7 @@ public class FormAmbiente extends FormBase {
         lblTituloIntervaloPorCiclo = new javax.swing.JLabel();
         lblIntervaloPorCiclo = new javax.swing.JLabel();
         lblCondicaoTempo = new javax.swing.JLabel();
+        tbtnParametros = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IntegrateSys v1.0");
@@ -546,6 +548,13 @@ public class FormAmbiente extends FormBase {
         lblCondicaoTempo.setName(""); // NOI18N
         lblCondicaoTempo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        tbtnParametros.setText("Parâmetros");
+        tbtnParametros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbtnParametrosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -566,19 +575,22 @@ public class FormAmbiente extends FormBase {
                             .addComponent(lblIntervaloPorCiclo)
                             .addComponent(lblCiclos))
                         .addGap(106, 106, 106))
+                    .addComponent(lblCondicaoTempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(chkSimuladorCondicoesMeteorologicas)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblCondicaoTempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tbtnIniciarSimulacao)
-                .addGap(62, 62, 62))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkSimuladorCondicoesMeteorologicas)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tbtnIniciarSimulacao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tbtnParametros)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(tbtnIniciarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tbtnIniciarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tbtnParametros))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTituloCiclos)
@@ -652,6 +664,15 @@ public class FormAmbiente extends FormBase {
         ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas().setLigado(((JCheckBox) evt.getSource()).isSelected());
     }//GEN-LAST:event_chkSimuladorCondicoesMeteorologicasStateChanged
 
+    private void tbtnParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtnParametrosActionPerformed
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new FormParametros().exibir();
+            }
+        });        // TODO add your handling code here:
+    }//GEN-LAST:event_tbtnParametrosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox chkSimuladorCondicoesMeteorologicas;
     private javax.swing.JPanel jPanel1;
@@ -689,5 +710,6 @@ public class FormAmbiente extends FormBase {
     private javax.swing.JSlider sliUmidificador;
     private javax.swing.JSlider sliVentilador;
     private final javax.swing.JToggleButton tbtnIniciarSimulacao = new javax.swing.JToggleButton();
+    private javax.swing.JButton tbtnParametros;
     // End of variables declaration//GEN-END:variables
 }
