@@ -5,24 +5,11 @@
  */
 package br.unesp.rc.integratesys.view;
 
-import br.unesp.rc.integratesys.ambiente.Ambiente;
 import br.unesp.rc.integratesys.ambiente.Parametros;
-import br.unesp.rc.integratesys.atuadores.Nivel;
-import br.unesp.rc.integratesys.utils.CondicaoTempo;
-import br.unesp.rc.integratesys.utils.Tarefa;
-import java.awt.Component;
-import java.util.Hashtable;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  *
- * @author Helton
+ * @author Waldeilson
  */
 public class FormParametros extends FormBase {
 
@@ -30,8 +17,7 @@ public class FormParametros extends FormBase {
 
     public FormParametros() {
         initComponents();
-        definirImagemSensores();
-        definirImagemAtuadores();
+        definirImagemSensores();        
         parametros = new Parametros();
         getParametros();
     }
@@ -40,14 +26,6 @@ public class FormParametros extends FormBase {
         lblSensorTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/temperatura.png")));
         lblSensorUmidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/umidade.png")));
         lblSensorLuminosidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sensores/luminosidade.png")));
-    }
-
-    private void definirImagemAtuadores() {
-        lblVentilador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/ventilador.png")));
-        lblAquecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/aquecedor.png")));
-        lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador.png")));
-        lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada.png")));
-
     }
     
     private void getParametros(){
@@ -65,27 +43,31 @@ public class FormParametros extends FormBase {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtabParametros = new javax.swing.JTabbedPane();
+        btnSalvar = new javax.swing.JButton();
+        pnlParametros = new javax.swing.JPanel();
+        pnlSensorTemperatura = new javax.swing.JPanel();
+        lblSensorTemperatura = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtTemperaturaIdeal = new javax.swing.JTextField();
         txtTemperaturaMinima = new javax.swing.JTextField();
         txtTemperaturaMaxima = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        sepAtuadores = new javax.swing.JSeparator();
-        btnSalvar = new javax.swing.JButton();
+        pnlSensorLuminosidade = new javax.swing.JPanel();
+        lblSensorLuminosidade = new javax.swing.JLabel();
+        pnlSensorUmidade = new javax.swing.JPanel();
+        lblSensorUmidade = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("IntegrateSys v1.0");
 
-        jtabParametros.setName(""); // NOI18N
+        btnSalvar.setText("OK");
 
-        pnlControleTemperatura.setBorder(javax.swing.BorderFactory.createTitledBorder("Controle de Temperatura"));
-        pnlControleTemperatura.setName(""); // NOI18N
+        pnlParametros.setBorder(javax.swing.BorderFactory.createTitledBorder("Parametros"));
+        pnlParametros.setName(""); // NOI18N
 
-        pnlSensorTemperatura.setBorder(javax.swing.BorderFactory.createTitledBorder("Sensor"));
+        pnlSensorTemperatura.setBorder(javax.swing.BorderFactory.createTitledBorder("Temperatura"));
 
-        lblSensorTemperatura.setText("sensor de temperatura");
         lblSensorTemperatura.setBorder(new javax.swing.border.MatteBorder(null));
         lblSensorTemperatura.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblSensorTemperatura.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -137,140 +119,11 @@ public class FormParametros extends FormBase {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTemperaturaMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
-        pnlAtuadoresTemperatura.setBorder(javax.swing.BorderFactory.createTitledBorder("Atuadores"));
+        pnlSensorLuminosidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Luminosidade"));
 
-        lblVentilador.setText("ventilador");
-        lblVentilador.setBorder(new javax.swing.border.MatteBorder(null));
-        lblVentilador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblVentilador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        lblAquecedor.setText("aquecedor");
-        lblAquecedor.setBorder(new javax.swing.border.MatteBorder(null));
-        lblAquecedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblAquecedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        sepAtuadores.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        javax.swing.GroupLayout pnlAtuadoresTemperaturaLayout = new javax.swing.GroupLayout(pnlAtuadoresTemperatura);
-        pnlAtuadoresTemperatura.setLayout(pnlAtuadoresTemperaturaLayout);
-        pnlAtuadoresTemperaturaLayout.setHorizontalGroup(
-            pnlAtuadoresTemperaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAtuadoresTemperaturaLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(lblVentilador, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(sepAtuadores, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(lblAquecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
-        );
-        pnlAtuadoresTemperaturaLayout.setVerticalGroup(
-            pnlAtuadoresTemperaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAtuadoresTemperaturaLayout.createSequentialGroup()
-                .addGroup(pnlAtuadoresTemperaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAquecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblVentilador, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pnlAtuadoresTemperaturaLayout.createSequentialGroup()
-                .addComponent(sepAtuadores)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout pnlControleTemperaturaLayout = new javax.swing.GroupLayout(pnlControleTemperatura);
-        pnlControleTemperatura.setLayout(pnlControleTemperaturaLayout);
-        pnlControleTemperaturaLayout.setHorizontalGroup(
-            pnlControleTemperaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlControleTemperaturaLayout.createSequentialGroup()
-                .addComponent(pnlSensorTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAtuadoresTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        pnlControleTemperaturaLayout.setVerticalGroup(
-            pnlControleTemperaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlAtuadoresTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlSensorTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jtabParametros.addTab("Temperatura", pnlControleTemperatura);
-        pnlControleTemperatura.getAccessibleContext().setAccessibleDescription("");
-
-        pnlControleUmidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Controle de Umidade"));
-
-        pnlSensorUmidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Sensor"));
-
-        lblSensorUmidade.setText("sensor de umidade");
-        lblSensorUmidade.setBorder(new javax.swing.border.MatteBorder(null));
-        lblSensorUmidade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblSensorUmidade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        javax.swing.GroupLayout pnlSensorUmidadeLayout = new javax.swing.GroupLayout(pnlSensorUmidade);
-        pnlSensorUmidade.setLayout(pnlSensorUmidadeLayout);
-        pnlSensorUmidadeLayout.setHorizontalGroup(
-            pnlSensorUmidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSensorUmidadeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSensorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlSensorUmidadeLayout.setVerticalGroup(
-            pnlSensorUmidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSensorUmidadeLayout.createSequentialGroup()
-                .addComponent(lblSensorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(216, Short.MAX_VALUE))
-        );
-
-        pnlAtuadorUmidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Atuador"));
-
-        lblUmidificador.setText("umidificador");
-        lblUmidificador.setBorder(new javax.swing.border.MatteBorder(null));
-        lblUmidificador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblUmidificador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        javax.swing.GroupLayout pnlAtuadorUmidadeLayout = new javax.swing.GroupLayout(pnlAtuadorUmidade);
-        pnlAtuadorUmidade.setLayout(pnlAtuadorUmidadeLayout);
-        pnlAtuadorUmidadeLayout.setHorizontalGroup(
-            pnlAtuadorUmidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAtuadorUmidadeLayout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
-                .addComponent(lblUmidificador, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-        );
-        pnlAtuadorUmidadeLayout.setVerticalGroup(
-            pnlAtuadorUmidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAtuadorUmidadeLayout.createSequentialGroup()
-                .addComponent(lblUmidificador, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pnlControleUmidadeLayout = new javax.swing.GroupLayout(pnlControleUmidade);
-        pnlControleUmidade.setLayout(pnlControleUmidadeLayout);
-        pnlControleUmidadeLayout.setHorizontalGroup(
-            pnlControleUmidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlControleUmidadeLayout.createSequentialGroup()
-                .addComponent(pnlSensorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAtuadorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlControleUmidadeLayout.setVerticalGroup(
-            pnlControleUmidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlControleUmidadeLayout.createSequentialGroup()
-                .addGroup(pnlControleUmidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlSensorUmidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlAtuadorUmidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jtabParametros.addTab("Umidade", pnlControleUmidade);
-
-        pnlControleLuminosidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Controle de Luminosidade"));
-
-        pnlSensorLuminosidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Sensor"));
-
-        lblSensorLuminosidade.setText("sensor de luminosidade");
         lblSensorLuminosidade.setBorder(new javax.swing.border.MatteBorder(null));
         lblSensorLuminosidade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblSensorLuminosidade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -291,50 +144,46 @@ public class FormParametros extends FormBase {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlAtuadorLuminosidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Atuador"));
+        pnlSensorUmidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Umidade"));
 
-        lblLampada.setText("lâmpada");
-        lblLampada.setBorder(new javax.swing.border.MatteBorder(null));
-        lblLampada.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblLampada.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lblSensorUmidade.setBorder(new javax.swing.border.MatteBorder(null));
+        lblSensorUmidade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblSensorUmidade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        javax.swing.GroupLayout pnlAtuadorLuminosidadeLayout = new javax.swing.GroupLayout(pnlAtuadorLuminosidade);
-        pnlAtuadorLuminosidade.setLayout(pnlAtuadorLuminosidadeLayout);
-        pnlAtuadorLuminosidadeLayout.setHorizontalGroup(
-            pnlAtuadorLuminosidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAtuadorLuminosidadeLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(lblLampada, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+        javax.swing.GroupLayout pnlSensorUmidadeLayout = new javax.swing.GroupLayout(pnlSensorUmidade);
+        pnlSensorUmidade.setLayout(pnlSensorUmidadeLayout);
+        pnlSensorUmidadeLayout.setHorizontalGroup(
+            pnlSensorUmidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSensorUmidadeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSensorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pnlAtuadorLuminosidadeLayout.setVerticalGroup(
-            pnlAtuadorLuminosidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAtuadorLuminosidadeLayout.createSequentialGroup()
-                .addComponent(lblLampada, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(216, Short.MAX_VALUE))
+        pnlSensorUmidadeLayout.setVerticalGroup(
+            pnlSensorUmidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSensorUmidadeLayout.createSequentialGroup()
+                .addComponent(lblSensorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout pnlControleLuminosidadeLayout = new javax.swing.GroupLayout(pnlControleLuminosidade);
-        pnlControleLuminosidade.setLayout(pnlControleLuminosidadeLayout);
-        pnlControleLuminosidadeLayout.setHorizontalGroup(
-            pnlControleLuminosidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlControleLuminosidadeLayout.createSequentialGroup()
-                .addComponent(pnlSensorLuminosidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout pnlParametrosLayout = new javax.swing.GroupLayout(pnlParametros);
+        pnlParametros.setLayout(pnlParametrosLayout);
+        pnlParametrosLayout.setHorizontalGroup(
+            pnlParametrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlParametrosLayout.createSequentialGroup()
+                .addComponent(pnlSensorTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAtuadorLuminosidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlSensorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlSensorLuminosidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pnlControleLuminosidadeLayout.setVerticalGroup(
-            pnlControleLuminosidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlControleLuminosidadeLayout.createSequentialGroup()
-                .addGroup(pnlControleLuminosidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlAtuadorLuminosidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlSensorLuminosidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+        pnlParametrosLayout.setVerticalGroup(
+            pnlParametrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlSensorTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlSensorUmidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlSensorLuminosidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        jtabParametros.addTab("Luminosidade", pnlControleLuminosidade);
-
-        btnSalvar.setText("OK");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -343,21 +192,21 @@ public class FormParametros extends FormBase {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSalvar)
-                    .addComponent(jtabParametros, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 24, Short.MAX_VALUE))
+                    .addComponent(pnlParametros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jtabParametros, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlParametros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalvar)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jtabParametros.getAccessibleContext().setAccessibleName("tabParametros");
-        jtabParametros.getAccessibleContext().setAccessibleDescription("");
         btnSalvar.getAccessibleContext().setAccessibleName("Salvar");
+        pnlParametros.getAccessibleContext().setAccessibleName("Parametros");
+        pnlParametros.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -368,24 +217,13 @@ public class FormParametros extends FormBase {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTabbedPane jtabParametros;
-    private final javax.swing.JLabel lblAquecedor = new javax.swing.JLabel();
-    private final javax.swing.JLabel lblLampada = new javax.swing.JLabel();
-    private final javax.swing.JLabel lblSensorLuminosidade = new javax.swing.JLabel();
-    private final javax.swing.JLabel lblSensorTemperatura = new javax.swing.JLabel();
-    private final javax.swing.JLabel lblSensorUmidade = new javax.swing.JLabel();
-    private final javax.swing.JLabel lblUmidificador = new javax.swing.JLabel();
-    private final javax.swing.JLabel lblVentilador = new javax.swing.JLabel();
-    private final javax.swing.JPanel pnlAtuadorLuminosidade = new javax.swing.JPanel();
-    private final javax.swing.JPanel pnlAtuadorUmidade = new javax.swing.JPanel();
-    private final javax.swing.JPanel pnlAtuadoresTemperatura = new javax.swing.JPanel();
-    private final javax.swing.JPanel pnlControleLuminosidade = new javax.swing.JPanel();
-    private final javax.swing.JPanel pnlControleTemperatura = new javax.swing.JPanel();
-    private final javax.swing.JPanel pnlControleUmidade = new javax.swing.JPanel();
-    private final javax.swing.JPanel pnlSensorLuminosidade = new javax.swing.JPanel();
-    private final javax.swing.JPanel pnlSensorTemperatura = new javax.swing.JPanel();
-    private final javax.swing.JPanel pnlSensorUmidade = new javax.swing.JPanel();
-    private javax.swing.JSeparator sepAtuadores;
+    private javax.swing.JLabel lblSensorLuminosidade;
+    private javax.swing.JLabel lblSensorTemperatura;
+    private javax.swing.JLabel lblSensorUmidade;
+    private javax.swing.JPanel pnlParametros;
+    private javax.swing.JPanel pnlSensorLuminosidade;
+    private javax.swing.JPanel pnlSensorTemperatura;
+    private javax.swing.JPanel pnlSensorUmidade;
     private javax.swing.JTextField txtTemperaturaIdeal;
     private javax.swing.JTextField txtTemperaturaMaxima;
     private javax.swing.JTextField txtTemperaturaMinima;
