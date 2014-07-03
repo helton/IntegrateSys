@@ -29,8 +29,8 @@ public class SimuladorCondicoesMeteorologicas {
     private final Random random;
 
     private static final int VARIACAO_TEMPERATURA_PREVISAO_TEMPO = 2;
-    private static final int VARIACAO_UMIDADE_PREVISAO_TEMPO = 5;
-    private static final int VARIACAO_LUMINOSIDADE_PREVISAO_TEMPO = 5;
+    private static final int VARIACAO_UMIDADE_PREVISAO_TEMPO = 3;
+    private static final int VARIACAO_LUMINOSIDADE_PREVISAO_TEMPO = 3;
 
     public SimuladorCondicoesMeteorologicas(Sensores sensores, AgendadorTarefas agendadorTarefas, Parametros parametros) {
         this.ligado = false;
@@ -51,15 +51,18 @@ public class SimuladorCondicoesMeteorologicas {
                 case DIA_CHUVOSO:
                     previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(10, 20)));
                     previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(70, 90)));
-                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(10, 40)));
+                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(10, 30)));
+                    break;
                 case DIA_NUBLADO:
                     previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(10, 20)));
                     previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(50, 65)));
-                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(10, 40)));
+                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(30, 50)));
+                    break;                    
                 case DIA_ENSOLARADO:
                     previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(25, 35)));
                     previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(40, 60)));
-                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(60, 90)));
+                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(70, 90)));
+                    break;                    
             }
         }
         return previsaoTempo;

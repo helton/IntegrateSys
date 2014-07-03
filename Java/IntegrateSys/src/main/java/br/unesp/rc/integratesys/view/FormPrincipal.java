@@ -15,8 +15,10 @@ import br.unesp.rc.integratesys.simulacao.Tarefa;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.util.Hashtable;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -29,6 +31,7 @@ public class FormPrincipal extends FormBase {
     private final Ambiente ambiente;
     private final ExecutorTarefas atualizadorAmbienteInterno;
     private final ExecutorTarefas atualizadorAmbienteExterno;
+    private final ExecutorTarefas atualizadorTempoDecorrido;
 
     private static final int INTERVALO_ATUALIZACAO_AMBIENTE_INTERNO = 3;
     private static final int INTERVALO_ATUALIZACAO_AMBIENTE_EXTERNO = 10;
@@ -73,6 +76,13 @@ public class FormPrincipal extends FormBase {
         });
     }
 
+    private void definirImagemInicialAtuadores() {
+        lblAquecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/aquecedor.png")));
+        lblVentilador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/ventilador.png")));
+        lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador.png")));
+        lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada.png")));
+    }
+
     private void atualizarPrevisaoTempo() {
         SimuladorCondicoesMeteorologicas simulador = ambiente.getSimuladorCondicoesMeteorologicas();
         EstadoAmbiente previsaoTempo = simulador.getPrevisaoTempo();
@@ -103,8 +113,7 @@ public class FormPrincipal extends FormBase {
         if (ambiente.getAtuadores().getVentilador().getNivel() == Nivel.DESLIGADO) {
             lblVentilador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/ventilador.png")));
             sliAquecedor.setEnabled(true);
-        } 
-        else {
+        } else {
             lblVentilador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/ventilador_ligado.png")));
             sliAquecedor.setEnabled(false);
         }
@@ -112,8 +121,7 @@ public class FormPrincipal extends FormBase {
         if (ambiente.getAtuadores().getAquecedor().getNivel() == Nivel.DESLIGADO) {
             lblAquecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/aquecedor.png")));
             sliVentilador.setEnabled(true);
-        } 
-        else {
+        } else {
             lblAquecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/aquecedor_ligado.png")));
             sliVentilador.setEnabled(false);
         }
@@ -125,15 +133,13 @@ public class FormPrincipal extends FormBase {
 
         if (ambiente.getAtuadores().getUmidificador().getNivel() == Nivel.DESLIGADO) {
             lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador.png")));
-        } 
-        else {
+        } else {
             lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador_ligado.png")));
         }
 
         if (ambiente.getAtuadores().getLampada().getNivel() == Nivel.DESLIGADO) {
             lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada.png")));
-        } 
-        else {
+        } else {
             lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada_ligada.png")));
         }
 
@@ -145,30 +151,101 @@ public class FormPrincipal extends FormBase {
     public FormPrincipal() {
         initComponents();
         configurarSliders();
-        ambiente = new Ambiente(null);
+        definirImagemInicialAtuadores();
+        ambiente = new Ambiente();
+
+        atualizadorTempoDecorrido = new ExecutorTarefas(1, new Tarefa() {
+            private String formatarTempoDecorrido(long diferencaEmMilisegundos) {
+
+                long segundosEmMilisegundos = 1000;
+                long minutosEmMilisegundos = segundosEmMilisegundos * 60;
+                long horasEmMilisegundos = minutosEmMilisegundos * 60;
+
+                long horasDecorridas = diferencaEmMilisegundos / horasEmMilisegundos;
+                diferencaEmMilisegundos = diferencaEmMilisegundos % horasEmMilisegundos;
+
+                long minutosDecorridos = diferencaEmMilisegundos / minutosEmMilisegundos;
+                diferencaEmMilisegundos = diferencaEmMilisegundos % minutosEmMilisegundos;
+
+                long segundosDecorridos = diferencaEmMilisegundos / segundosEmMilisegundos;
+
+                return String.format("%02d:%02d:%02d",
+                        horasDecorridas, minutosDecorridos, segundosDecorridos);
+
+            }
+
+            @Override
+            public void executar() {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        lblTempoAtual.setText(formatarTempoDecorrido(ambiente.getTempoDecorridoSimulacaoAtual()));
+                        lblTempoAcumulado.setText(formatarTempoDecorrido(ambiente.getTempoTotalSimulacaoDecorrido()));
+                    }
+                });
+            }
+
+        });
+
         atualizadorAmbienteExterno = new ExecutorTarefas(INTERVALO_ATUALIZACAO_AMBIENTE_EXTERNO, new Tarefa() {
             @Override
             public void executar() {
-                atualizarAmbienteExterno();
-                ambiente.atualizarAmbienteExterno();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        atualizarAmbienteExterno();
+                        ambiente.atualizarAmbienteExterno();
+                    }
+                });
             }
         });
+
         atualizadorAmbienteInterno = new ExecutorTarefas(INTERVALO_ATUALIZACAO_AMBIENTE_INTERNO, new Tarefa() {
             @Override
             public void executar() {
-                atualizarAmbienteInterno();
-                ambiente.atualizarAmbienteInterno();                
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        atualizarAmbienteInterno();
+                        ambiente.atualizarAmbienteInterno();
+                    }
+                });
             }
         });
+        btnIniciarSimulacao.setIcon(new ImageIcon(getClass().getResource("/imagens/simulacao/iniciar.png")));
+        btnPausarSimulacao.setIcon(new ImageIcon(getClass().getResource("/imagens/simulacao/pausar.png")));        
+        btnParametros.setIcon(new ImageIcon(getClass().getResource("/imagens/simulacao/configuracoes.png")));        
     }
 
     private void iniciarSimulacao() {
+        btnIniciarSimulacao.setEnabled(false);
+        btnPausarSimulacao.setEnabled(true);
+        btnParametros.setEnabled(false);
+
+        sliAquecedor.setEnabled(true);
+        sliVentilador.setEnabled(true);
+        sliUmidificador.setEnabled(true);
+        sliLampada.setEnabled(true);
+
         atualizarPrevisaoTempo();
+        ambiente.iniciarSimulacao();
+        atualizadorTempoDecorrido.iniciar();
         atualizadorAmbienteExterno.iniciar();
         atualizadorAmbienteInterno.iniciar();
     }
 
     private void pausarSimulacao() {
+        btnIniciarSimulacao.setEnabled(true);
+        btnPausarSimulacao.setEnabled(false);
+        btnParametros.setEnabled(true);
+
+        sliAquecedor.setEnabled(false);
+        sliVentilador.setEnabled(false);
+        sliUmidificador.setEnabled(false);
+        sliLampada.setEnabled(false);
+
+        ambiente.pausarSimulacao();
+        atualizadorTempoDecorrido.pausar();
         atualizadorAmbienteExterno.pausar();
         atualizadorAmbienteInterno.pausar();
     }
@@ -209,9 +286,13 @@ public class FormPrincipal extends FormBase {
         sliAquecedor = new javax.swing.JSlider();
         sliVentilador = new javax.swing.JSlider();
         pnlControleSimulacao = new javax.swing.JPanel();
+        lblTituloTempoAcumulado = new javax.swing.JLabel();
+        lblTempoAcumulado = new javax.swing.JLabel();
+        lblTituloTempoAtual = new javax.swing.JLabel();
+        lblTempoAtual = new javax.swing.JLabel();
         btnIniciarSimulacao = new javax.swing.JButton();
         btnPausarSimulacao = new javax.swing.JButton();
-        btnConfigurarParametros = new javax.swing.JButton();
+        btnParametros = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IntegrateSys 1.0");
@@ -392,6 +473,7 @@ public class FormPrincipal extends FormBase {
         sliUmidificador.setPaintLabels(true);
         sliUmidificador.setSnapToTicks(true);
         sliUmidificador.setValue(0);
+        sliUmidificador.setEnabled(false);
 
         lblLampada.setText("lâmpada");
         lblLampada.setBorder(new javax.swing.border.MatteBorder(null));
@@ -402,6 +484,7 @@ public class FormPrincipal extends FormBase {
         sliLampada.setPaintLabels(true);
         sliLampada.setSnapToTicks(true);
         sliLampada.setValue(0);
+        sliLampada.setEnabled(false);
 
         lblAquecedor.setText("aquecedor");
         lblAquecedor.setBorder(new javax.swing.border.MatteBorder(null));
@@ -412,6 +495,7 @@ public class FormPrincipal extends FormBase {
         sliAquecedor.setPaintLabels(true);
         sliAquecedor.setSnapToTicks(true);
         sliAquecedor.setValue(0);
+        sliAquecedor.setEnabled(false);
 
         lblVentilador.setText("ventilador");
         lblVentilador.setBorder(new javax.swing.border.MatteBorder(null));
@@ -422,6 +506,7 @@ public class FormPrincipal extends FormBase {
         sliVentilador.setPaintLabels(true);
         sliVentilador.setSnapToTicks(true);
         sliVentilador.setValue(0);
+        sliVentilador.setEnabled(false);
 
         javax.swing.GroupLayout pnlAtuadorUmidadeLayout = new javax.swing.GroupLayout(pnlAtuadorUmidade);
         pnlAtuadorUmidade.setLayout(pnlAtuadorUmidadeLayout);
@@ -432,7 +517,7 @@ public class FormPrincipal extends FormBase {
                     .addGroup(pnlAtuadorUmidadeLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(lblAquecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
+                        .addGap(92, 92, 92)
                         .addComponent(lblVentilador, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlAtuadorUmidadeLayout.createSequentialGroup()
                         .addComponent(sliAquecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -474,25 +559,34 @@ public class FormPrincipal extends FormBase {
 
         pnlControleSimulacao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controle de simulação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 16))); // NOI18N
 
-        btnIniciarSimulacao.setText("Iniciar simulação");
-        btnIniciarSimulacao.setToolTipText("");
+        lblTituloTempoAcumulado.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblTituloTempoAcumulado.setText("Tempo acumulado:");
+
+        lblTempoAcumulado.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        lblTempoAcumulado.setText("00:00:00");
+
+        lblTituloTempoAtual.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblTituloTempoAtual.setText("Tempo atual:");
+
+        lblTempoAtual.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        lblTempoAtual.setText("00:00:00");
+
+        btnIniciarSimulacao.setLabel("");
         btnIniciarSimulacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarSimulacaoActionPerformed(evt);
             }
         });
 
-        btnPausarSimulacao.setText("Pausar simulação");
         btnPausarSimulacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPausarSimulacaoActionPerformed(evt);
             }
         });
 
-        btnConfigurarParametros.setText("Configurar parâmetros");
-        btnConfigurarParametros.addActionListener(new java.awt.event.ActionListener() {
+        btnParametros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfigurarParametrosActionPerformed(evt);
+                btnParametrosActionPerformed(evt);
             }
         });
 
@@ -501,22 +595,40 @@ public class FormPrincipal extends FormBase {
         pnlControleSimulacaoLayout.setHorizontalGroup(
             pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlControleSimulacaoLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnIniciarSimulacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPausarSimulacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfigurarParametros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(btnParametros, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnIniciarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPausarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(pnlControleSimulacaoLayout.createSequentialGroup()
+                        .addComponent(lblTituloTempoAtual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
+                        .addComponent(lblTempoAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlControleSimulacaoLayout.createSequentialGroup()
+                        .addComponent(lblTituloTempoAcumulado)
+                        .addGap(27, 27, 27)
+                        .addComponent(lblTempoAcumulado, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16))
         );
         pnlControleSimulacaoLayout.setVerticalGroup(
             pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlControleSimulacaoLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btnIniciarSimulacao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPausarSimulacao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnConfigurarParametros)
+            .addGroup(pnlControleSimulacaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlControleSimulacaoLayout.createSequentialGroup()
+                        .addGroup(pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblTituloTempoAtual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTempoAtual))
+                        .addGap(3, 3, 3)
+                        .addGroup(pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblTituloTempoAcumulado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTempoAcumulado)))
+                    .addComponent(btnIniciarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPausarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnParametros, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -527,7 +639,9 @@ public class FormPrincipal extends FormBase {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlAtuadorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlAtuadorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlPrevisaoTempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -535,8 +649,8 @@ public class FormPrincipal extends FormBase {
                             .addComponent(pnlAmbienteExterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnlAmbienteInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlControleSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(pnlControleSimulacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,11 +659,13 @@ public class FormPrincipal extends FormBase {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlPrevisaoTempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(pnlAmbienteExterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pnlAmbienteInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlControleSimulacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(pnlControleSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlAtuadorUmidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -565,18 +681,18 @@ public class FormPrincipal extends FormBase {
         pausarSimulacao();
     }//GEN-LAST:event_btnPausarSimulacaoActionPerformed
 
-    private void btnConfigurarParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigurarParametrosActionPerformed
+    private void btnParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParametrosActionPerformed
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new FormParametros(ambiente.getParametros()).exibir();
             }
         });
-    }//GEN-LAST:event_btnConfigurarParametrosActionPerformed
+    }//GEN-LAST:event_btnParametrosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConfigurarParametros;
     private javax.swing.JButton btnIniciarSimulacao;
+    private javax.swing.JButton btnParametros;
     private javax.swing.JButton btnPausarSimulacao;
     private javax.swing.JLabel lblAmbienteExternoLuminosidade;
     private javax.swing.JLabel lblAmbienteExternoTemperatura;
@@ -599,6 +715,10 @@ public class FormPrincipal extends FormBase {
     private javax.swing.JLabel lblPrevisaoTempoTituloTemperatura;
     private javax.swing.JLabel lblPrevisaoTempoTituloUmidade;
     private javax.swing.JLabel lblPrevisaoTempoUmidade;
+    private javax.swing.JLabel lblTempoAcumulado;
+    private javax.swing.JLabel lblTempoAtual;
+    private javax.swing.JLabel lblTituloTempoAcumulado;
+    private javax.swing.JLabel lblTituloTempoAtual;
     private final javax.swing.JLabel lblUmidificador = new javax.swing.JLabel();
     private final javax.swing.JLabel lblVentilador = new javax.swing.JLabel();
     private javax.swing.JPanel pnlAmbienteExterno;
