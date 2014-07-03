@@ -25,9 +25,9 @@ public class Ambiente {
     private final Parametros parametros;
     
     public Ambiente(Tarefa tarefaExecutadoPorCiclo) {
-        controladorSimulacao = new ControladorSimulacao(tarefaExecutadoPorCiclo);
         parametros = new Parametros();
         sensores = new Sensores();
+        controladorSimulacao = new ControladorSimulacao(tarefaExecutadoPorCiclo, parametros);
         atuadores = new Atuadores(sensores, controladorSimulacao.getAgendadorTarefas());
         configurarCondicoesIniciais();
     }

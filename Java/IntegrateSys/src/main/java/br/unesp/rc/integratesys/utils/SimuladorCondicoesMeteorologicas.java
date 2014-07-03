@@ -5,11 +5,9 @@
  */
 package br.unesp.rc.integratesys.utils;
 
+import br.unesp.rc.integratesys.ambiente.Parametros;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,12 +17,14 @@ public class SimuladorCondicoesMeteorologicas {
 
     private boolean ligado;
     private final AgendadorTarefas agendadorTarefas;
+    private final Parametros parametros;
     private final Random random;
     private PrevisaoTempo previsaoTempo;
 
-    public SimuladorCondicoesMeteorologicas(AgendadorTarefas agendadorTarefas) {
+    public SimuladorCondicoesMeteorologicas(AgendadorTarefas agendadorTarefas, Parametros parametros) {
         this.ligado = false;
         this.agendadorTarefas = agendadorTarefas;
+        this.parametros = parametros;
         this.random = new Random();
     }
 
@@ -53,21 +53,49 @@ public class SimuladorCondicoesMeteorologicas {
                     previsaoTempo.setTemperatura(getNumeroAleatorioComFaixa(25, 35));
                     previsaoTempo.setUmidade(getNumeroAleatorioComFaixa(40, 60));
                     previsaoTempo.setLuminosidade(getNumeroAleatorioComFaixa(60, 90));
+                
+                System.out.println("Temperatura = " + Integer.toString(previsaoTempo.getTemperatura()) + " ºC");
+                System.out.println("Umidade = " + Integer.toString(previsaoTempo.getUmidade()) + " %");
+                System.out.println("Luminosidade = " + Integer.toString(previsaoTempo.getLuminosidade()) + " %");                                        
             }
         }
         return previsaoTempo;
     }
+    
+   /* private void agendarAlteracao(final int ciclo, final int incremento) {
+        agendadorTarefas.agendarTarefa(new Tarefa() {
+            @Override
+            public void executar() {
+                setValor(getValorSensor() + incremento);
+            }
+        }, ciclo);
+    }        
+    
+    private void alterarEstado(int variacao) {
+        List<Integer> incrementos = DistribuidorValores.distribuir(variacao, getIncrementoPorCiclo());
+        for (int ciclo = 0; ciclo < incrementos.size(); ciclo++) {
+            agendarAlteracao(ciclo, incrementos.get(ciclo));            
+        }
+    }  */     
 
     public void simular() {
         if (isLigado()) {
             agendadorTarefas.agendarTarefa(new Tarefa() {
                 @Override
                 public void executar() {
-                    IntegrateSysLibraryLoader.getLibrary().setTemperatura(getPrevisaoTempo().getTemperatura());
-                    IntegrateSysLibraryLoader.getLibrary().setUmidade(getPrevisaoTempo().getUmidade());
-                    IntegrateSysLibraryLoader.getLibrary().setLuminosidade(getPrevisaoTempo().getLuminosidade());
+                    int novaVariacaoTemperatura = parametros.getTemperaturaInicial() - getPrevisaoTempo().getTemperatura();
+                    System.out.println("Variação da temperatura = " + Integer.toString(novaVariacaoTemperatura));
+                    IntegrateSysLibraryLoader.getLibrary().setTemperatura(IntegrateSysLibraryLoader.getLibrary().getTemperatura() + novaVariacaoTemperatura);
+                    
+                    int novaVariacaoUmidade = parametros.getUmidadeInicial() - getPrevisaoTempo().getTemperatura();
+                    System.out.println("Variação da umidade = " + Integer.toString(novaVariacaoUmidade));
+                    IntegrateSysLibraryLoader.getLibrary().setUmidade(IntegrateSysLibraryLoader.getLibrary().getUmidade() + novaVariacaoUmidade);
+
+                    int novaVariacaoLuminosidade = parametros.getLuminosidadeInicial() - getPrevisaoTempo().getTemperatura();
+                    System.out.println("Variação da luminosidade = " + Integer.toString(novaVariacaoLuminosidade));                    
+                    IntegrateSysLibraryLoader.getLibrary().setLuminosidade(IntegrateSysLibraryLoader.getLibrary().getLuminosidade() + novaVariacaoLuminosidade);
                 }
-            }, 1);
+            }, 2);
         }
     }
 
