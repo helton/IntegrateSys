@@ -34,7 +34,7 @@ public class App {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new FormPrincipal().exibir();
+                new FormAmbiente().exibir();
             }
         });
     }    

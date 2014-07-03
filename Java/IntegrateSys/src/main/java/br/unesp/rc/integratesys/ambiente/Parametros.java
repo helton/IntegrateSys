@@ -5,21 +5,23 @@
  */
 package br.unesp.rc.integratesys.ambiente;
 
+import com.sun.org.apache.xml.internal.utils.XML11Char;
+
 /**
  *
  * @author Helton
  */
 public class Parametros {
-
+    
     //condições iniciais
     private final int temperaturaInicial;
     private final int umidadeInicial;
     private final int luminosidadeInicial;
 
     //Condições ideais
-    private int temperaturaIdeal;
-    private int umidadeIdeal;
-    private int luminosidadeIdeal;
+    private int temperaturaIdeal =  25;
+    private int umidadeIdeal = 70;
+    private int luminosidadeIdeal = 60;
 
     //Condições críticas
     private int temperaturaMinimaCritica = 22;
@@ -32,7 +34,7 @@ public class Parametros {
     public Parametros() {
         temperaturaInicial = 30;
         umidadeInicial = 60;
-        luminosidadeInicial = 50;
+        luminosidadeInicial = 60;
     }
 
     /**
