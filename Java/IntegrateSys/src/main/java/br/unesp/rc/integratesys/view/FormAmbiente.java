@@ -102,7 +102,7 @@ public class FormAmbiente extends FormBase {
             }
 
             private void definirImagemAtuadores() {
-                if (ambiente.getAtuadores().getVentilador().getNivel().getValor() == 0) {
+                if (ambiente.getAtuadores().getVentilador().getNivel() == Nivel.DESLIGADO) {
                     lblVentilador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/ventilador.png")));
                     sliAquecedor.setEnabled(true);
                 } else {
@@ -110,7 +110,7 @@ public class FormAmbiente extends FormBase {
                     sliAquecedor.setEnabled(false);
                 }
 
-                if (ambiente.getAtuadores().getAquecedor().getNivel().getValor() == 0) {
+                if (ambiente.getAtuadores().getAquecedor().getNivel() == Nivel.DESLIGADO) {
                     lblAquecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/aquecedor.png")));
                     sliVentilador.setEnabled(true);
                 } else {
@@ -123,13 +123,13 @@ public class FormAmbiente extends FormBase {
                     sliVentilador.setEnabled(true);
                 }
 
-                if (ambiente.getAtuadores().getUmidificador().getNivel().getValor() == 0) {
+                if (ambiente.getAtuadores().getUmidificador().getNivel() == Nivel.DESLIGADO) {
                     lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador.png")));
                 } else {
                     lblUmidificador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/umidificador_ligado.png")));
                 }
 
-                if (ambiente.getAtuadores().getLampada().getNivel().getValor() == 0) {
+                if (ambiente.getAtuadores().getLampada().getNivel() == Nivel.DESLIGADO) {
                     lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada.png")));
                 } else {
                     lblLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/atuadores/lampada_ligada.png")));
@@ -151,8 +151,7 @@ public class FormAmbiente extends FormBase {
 
                 long segundosDecorridos = diferencaEmMilisegundos / segundosEmMilisegundos;
 
-                return String.format(
-                        "%02d:%02d:%02d",
+                return String.format("%02d:%02d:%02d",
                         horasDecorridas, minutosDecorridos, segundosDecorridos);
 
             }

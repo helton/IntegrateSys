@@ -6,7 +6,7 @@
 
 package br.unesp.rc.integratesys.utils;
 
-import java.util.Date;
+import br.unesp.rc.integratesys.ambiente.Parametros;
 
 /**
  *
@@ -20,10 +20,10 @@ public class ControladorSimulacao {
     private final Varredor varredor;
     private boolean emSimulacao;
 
-    public ControladorSimulacao(Tarefa tarefaExecutadoPorCiclo) {
+    public ControladorSimulacao(Tarefa tarefaExecutadaPorCiclo, Parametros parametros) {
         agendadorTarefas = new AgendadorTarefas();
-        simulador = new SimuladorCondicoesMeteorologicas(agendadorTarefas);        
-        varredor = new Varredor(agendadorTarefas, tarefaExecutadoPorCiclo);
+        simulador = new SimuladorCondicoesMeteorologicas(agendadorTarefas, parametros);
+        varredor = new Varredor(agendadorTarefas, tarefaExecutadaPorCiclo);
         tempoDecorridoUltimaSimulacao = 0;
         tempoInicioSimulacaoAtual = 0;
         emSimulacao = false;
