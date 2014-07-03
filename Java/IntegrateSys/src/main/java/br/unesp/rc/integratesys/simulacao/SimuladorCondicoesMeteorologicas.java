@@ -57,17 +57,17 @@ public class SimuladorCondicoesMeteorologicas {
             switch (getCondicaoTempo()) {
                 case DIA_CHUVOSO:
                     previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(18, 20)));
-                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(50, 60)));
+                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(55, 75)));
                     previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(30, 50)));
                     break;
                 case DIA_NUBLADO:
                     previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(18, 25)));
-                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(50, 60)));
+                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(55, 70)));
                     previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(50, 55)));
                     break;                    
                 case DIA_ENSOLARADO:
                     previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(20, 25)));
-                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(20, 40)));
+                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(40, 60)));
                     previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(50, 90)));
                     break;                    
             }

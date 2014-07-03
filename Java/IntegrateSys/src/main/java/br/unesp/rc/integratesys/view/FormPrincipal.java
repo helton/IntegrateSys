@@ -12,7 +12,6 @@ import br.unesp.rc.integratesys.simulacao.EstadoAmbiente;
 import br.unesp.rc.integratesys.simulacao.ExecutorTarefas;
 import br.unesp.rc.integratesys.simulacao.SimuladorCondicoesMeteorologicas;
 import br.unesp.rc.integratesys.simulacao.Tarefa;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.util.Hashtable;
@@ -127,7 +126,7 @@ public class FormPrincipal extends FormBase {
         int temperaturaMinima = ambiente.getParametros().getTemperaturaMinima();
         int temperaturaMaxima = ambiente.getParametros().getTemperaturaMinima();        
         
-        if (Math.abs(temperaturaAtual - temperaturaIdeal) == TOLERANCIA_VARIACAO_TEMPERATURA) {
+        if (Math.abs(temperaturaAtual - temperaturaIdeal) <= TOLERANCIA_VARIACAO_TEMPERATURA) {
             lblSensorTemperatura.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/temperatura.png")));
             lblSensorTemperatura.setText("temperatura ideal");
         }
@@ -145,7 +144,7 @@ public class FormPrincipal extends FormBase {
         int umidadeMinima = ambiente.getParametros().getUmidadeMinima();
         int umidadeMaxima = ambiente.getParametros().getUmidadeMinima();        
         
-        if (Math.abs(umidadeAtual - umidadeIdeal) == TOLERANCIA_VARIACAO_UMIDADE) {
+        if (Math.abs(umidadeAtual - umidadeIdeal) <= TOLERANCIA_VARIACAO_UMIDADE) {
             lblSensorUmidade.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/umidade.png")));
             lblSensorUmidade.setText("umidade ideal");
         }
@@ -163,7 +162,7 @@ public class FormPrincipal extends FormBase {
         int luminosidadeMinima = ambiente.getParametros().getLuminosidadeMinima();
         int luminosidadeMaxima = ambiente.getParametros().getLuminosidadeMinima();        
         
-        if (Math.abs(luminosidadeAtual - luminosidadeIdeal) == TOLERANCIA_VARIACAO_LUMINOSIDADE) {
+        if (Math.abs(luminosidadeAtual - luminosidadeIdeal) <= TOLERANCIA_VARIACAO_LUMINOSIDADE) {
             lblSensorLuminosidade.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/luminosidade.png")));
             lblSensorLuminosidade.setText("luminosidade ideal");
         }
@@ -640,13 +639,13 @@ public class FormPrincipal extends FormBase {
         lblTempoAtual.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         lblTempoAtual.setText("00:00:00");
 
-        btnIniciarSimulacao.setLabel("");
         btnIniciarSimulacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarSimulacaoActionPerformed(evt);
             }
         });
 
+        btnPausarSimulacao.setEnabled(false);
         btnPausarSimulacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPausarSimulacaoActionPerformed(evt);

@@ -12,7 +12,6 @@ import br.unesp.rc.integratesys.sensores.Sensores;
 import br.unesp.rc.integratesys.simulacao.AgendadorTarefas;
 import br.unesp.rc.integratesys.simulacao.EstadoAmbiente;
 import br.unesp.rc.integratesys.simulacao.SimuladorCondicoesMeteorologicas;
-import br.unesp.rc.integratesys.simulacao.Tarefa;
 
 /**
  *

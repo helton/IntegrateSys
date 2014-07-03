@@ -17,8 +17,6 @@ public class ParametrosArmazenados {
     private static int temperaturaIdeal =  25;
     private static int umidadeIdeal = 70;
     private static int luminosidadeIdeal = 60;    
-    private static int temperaturaMinimaCritica = 22;
-    private static int temperaturaMaximaCritica = 30;
 
     public static int getTemperaturaInicial() {
         return temperaturaInicial;
@@ -68,56 +66,59 @@ public class ParametrosArmazenados {
         ParametrosArmazenados.luminosidadeIdeal = luminosidadeIdeal;
     }
 
-    public static int getTemperaturaMinimaCritica() {
-        return temperaturaMinimaCritica;
+    public static int getTemperaturaMinima() {
+        return temperaturaMinima;
     }
 
-    public static void setTemperaturaMinimaCritica(int temperaturaMinimaCritica) {
-        ParametrosArmazenados.temperaturaMinimaCritica = temperaturaMinimaCritica;
+    public static void setTemperaturaMinima(int temperaturaMinima) {
+        ParametrosArmazenados.temperaturaMinima = temperaturaMinima;
     }
 
-    public static int getTemperaturaMaximaCritica() {
-        return temperaturaMaximaCritica;
+    public static int getTemperaturaMaxima() {
+        return temperaturaMaxima;
     }
 
-    public static void setTemperaturaMaximaCritica(int temperaturaMaximaCritica) {
-        ParametrosArmazenados.temperaturaMaximaCritica = temperaturaMaximaCritica;
+    public static void setTemperaturaMaxima(int temperaturaMaxima) {
+        ParametrosArmazenados.temperaturaMaxima = temperaturaMaxima;
     }
 
-    public static int getUmidadeMinimaCritica() {
-        return umidadeMinimaCritica;
+    public static int getUmidadeMinima() {
+        return umidadeMinima;
     }
 
-    public static void setUmidadeMinimaCritica(int umidadeMinimaCritica) {
-        ParametrosArmazenados.umidadeMinimaCritica = umidadeMinimaCritica;
+    public static void setUmidadeMinima(int umidadeMinima) {
+        ParametrosArmazenados.umidadeMinima = umidadeMinima;
     }
 
-    public static int getUmidadeMaximaCritica() {
-        return umidadeMaximaCritica;
+    public static int getUmidadeMaxima() {
+        return umidadeMaxima;
     }
 
-    public static void setUmidadeMaximaCritica(int umidadeMaximaCritica) {
-        ParametrosArmazenados.umidadeMaximaCritica = umidadeMaximaCritica;
+    public static void setUmidadeMaxima(int umidadeMaxima) {
+        ParametrosArmazenados.umidadeMaxima = umidadeMaxima;
     }
 
-    public static int getLuminosidadeMinimaCritica() {
-        return luminosidadeMinimaCritica;
+    public static int getLuminosidadeMinima() {
+        return luminosidadeMinima;
     }
 
-    public static void setLuminosidadeMinimaCritica(int luminosidadeMinimaCritica) {
-        ParametrosArmazenados.luminosidadeMinimaCritica = luminosidadeMinimaCritica;
+    public static void setLuminosidadeMinima(int luminosidadeMinima) {
+        ParametrosArmazenados.luminosidadeMinima = luminosidadeMinima;
     }
 
-    public static int getLuminosidadeMaximaCritica() {
-        return luminosidadeMaximaCritica;
+    public static int getLuminosidadeMaxima() {
+        return luminosidadeMaxima;
     }
 
-    public static void setLuminosidadeMaximaCritica(int luminosidadeMaximaCritica) {
-        ParametrosArmazenados.luminosidadeMaximaCritica = luminosidadeMaximaCritica;
+    public static void setLuminosidadeMaxima(int luminosidadeMaxima) {
+        ParametrosArmazenados.luminosidadeMaxima = luminosidadeMaxima;
     }
-    private static int umidadeMinimaCritica = 60;
-    private static int umidadeMaximaCritica = 80;
-    private static int luminosidadeMinimaCritica = 50;
-    private static int luminosidadeMaximaCritica = 95;
+    
+    private static int umidadeMinima = 60;
+    private static int umidadeMaxima = 80;
+    private static int luminosidadeMinima = 50;
+    private static int luminosidadeMaxima = 95;
+    private static int temperaturaMinima = 22;
+    private static int temperaturaMaxima = 30;
 
 }

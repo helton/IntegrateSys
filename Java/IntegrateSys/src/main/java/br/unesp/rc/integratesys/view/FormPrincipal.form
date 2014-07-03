@@ -661,14 +661,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnIniciarSimulacao">
-          <Properties>
-            <Property name="label" type="java.lang.String" value=""/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciarSimulacaoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnPausarSimulacao">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPausarSimulacaoActionPerformed"/>
           </Events>
