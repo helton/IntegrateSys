@@ -27,7 +27,7 @@ public class Parametros {
     private int umidadeMinimaCritica = 60;
     private int umidadeMaximaCritica = 80;
     private int luminosidadeMinimaCritica = 50;
-    private int luminosidadeMaximaCritica = 100;
+    private int luminosidadeMaximaCritica = 95;
 
     public Parametros() {
         temperaturaInicial = 30;
