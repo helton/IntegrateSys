@@ -124,7 +124,7 @@ public class FormPrincipal extends FormBase {
         int temperaturaAtual = ambiente.getSensores().getSensorTemperatura().getTemperatura();
         int temperaturaIdeal = ambiente.getParametros().getTemperaturaIdeal();
         int temperaturaMinima = ambiente.getParametros().getTemperaturaMinima();
-        int temperaturaMaxima = ambiente.getParametros().getTemperaturaMinima();        
+        int temperaturaMaxima = ambiente.getParametros().getTemperaturaMaxima();  
         
         if (Math.abs(temperaturaAtual - temperaturaIdeal) <= TOLERANCIA_VARIACAO_TEMPERATURA) {
             lblSensorTemperatura.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/temperatura.png")));
@@ -138,11 +138,15 @@ public class FormPrincipal extends FormBase {
             lblSensorTemperatura.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/temperatura_alta.png")));
             lblSensorTemperatura.setText("temperatura alta");            
         }
+        else {
+            lblSensorTemperatura.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/temperatura.png")));
+            lblSensorTemperatura.setText("temperatura aceitável");             
+        }
         
         int umidadeAtual = ambiente.getSensores().getSensorUmidade().getUmidade();
         int umidadeIdeal = ambiente.getParametros().getUmidadeIdeal();
         int umidadeMinima = ambiente.getParametros().getUmidadeMinima();
-        int umidadeMaxima = ambiente.getParametros().getUmidadeMinima();        
+        int umidadeMaxima = ambiente.getParametros().getUmidadeMaxima();        
         
         if (Math.abs(umidadeAtual - umidadeIdeal) <= TOLERANCIA_VARIACAO_UMIDADE) {
             lblSensorUmidade.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/umidade.png")));
@@ -156,11 +160,15 @@ public class FormPrincipal extends FormBase {
             lblSensorUmidade.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/umidade_alta.png")));
             lblSensorUmidade.setText("umidade alta");            
         }
+        else {
+            lblSensorUmidade.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/umidade.png")));
+            lblSensorUmidade.setText("umidade aceitável");            
+        }
         
         int luminosidadeAtual = ambiente.getSensores().getSensorLuminosidade().getLuminosidade();
         int luminosidadeIdeal = ambiente.getParametros().getLuminosidadeIdeal();
         int luminosidadeMinima = ambiente.getParametros().getLuminosidadeMinima();
-        int luminosidadeMaxima = ambiente.getParametros().getLuminosidadeMinima();        
+        int luminosidadeMaxima = ambiente.getParametros().getLuminosidadeMaxima();        
         
         if (Math.abs(luminosidadeAtual - luminosidadeIdeal) <= TOLERANCIA_VARIACAO_LUMINOSIDADE) {
             lblSensorLuminosidade.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/luminosidade.png")));
@@ -173,7 +181,11 @@ public class FormPrincipal extends FormBase {
         else if (luminosidadeAtual > luminosidadeMaxima) {
             lblSensorLuminosidade.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/luminosidade_alta.png")));
             lblSensorLuminosidade.setText("luminosidade alta");
-        }         
+        }
+        else {
+            lblSensorLuminosidade.setIcon(new ImageIcon(getClass().getResource("/imagens/sensores/luminosidade.png")));
+            lblSensorLuminosidade.setText("luminosidade aceitável");            
+        }
     }
 
     private void definirImagemAtuadores() {
