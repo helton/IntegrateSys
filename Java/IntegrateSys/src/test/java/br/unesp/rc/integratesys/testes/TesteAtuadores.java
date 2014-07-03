@@ -13,7 +13,7 @@ import br.unesp.rc.integratesys.atuadores.Umidificador;
 import br.unesp.rc.integratesys.atuadores.Ventilador;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.Sensores;
-import br.unesp.rc.integratesys.utils.AgendadorTarefas;
+import br.unesp.rc.integratesys.simulacao.AgendadorTarefas;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -7,12 +7,13 @@ package br.unesp.rc.integratesys.view;
 
 import br.unesp.rc.integratesys.ambiente.Ambiente;
 import br.unesp.rc.integratesys.atuadores.Nivel;
-import br.unesp.rc.integratesys.utils.CondicaoTempo;
-import br.unesp.rc.integratesys.utils.EstadoAmbiente;
-import br.unesp.rc.integratesys.utils.ExecutorTarefas;
-import br.unesp.rc.integratesys.utils.SimuladorCondicoesMeteorologicas;
-import br.unesp.rc.integratesys.utils.Tarefa;
+import br.unesp.rc.integratesys.simulacao.CondicaoTempo;
+import br.unesp.rc.integratesys.simulacao.EstadoAmbiente;
+import br.unesp.rc.integratesys.simulacao.ExecutorTarefas;
+import br.unesp.rc.integratesys.simulacao.SimuladorCondicoesMeteorologicas;
+import br.unesp.rc.integratesys.simulacao.Tarefa;
 import java.awt.Component;
+import java.awt.EventQueue;
 import java.util.Hashtable;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
@@ -73,7 +74,7 @@ public class FormPrincipal extends FormBase {
     }
 
     private void atualizarPrevisaoTempo() {
-        SimuladorCondicoesMeteorologicas simulador = ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas();
+        SimuladorCondicoesMeteorologicas simulador = ambiente.getSimuladorCondicoesMeteorologicas();
         EstadoAmbiente previsaoTempo = simulador.getPrevisaoTempo();
         CondicaoTempo condicaoTempo = simulador.getCondicaoTempo();
         lblPrevisaoTempoImagem.setIcon(condicaoTempo.getImagem());
@@ -83,7 +84,7 @@ public class FormPrincipal extends FormBase {
     }
 
     private void atualizarAmbienteExterno() {
-        SimuladorCondicoesMeteorologicas simulador = ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas();
+        SimuladorCondicoesMeteorologicas simulador = ambiente.getSimuladorCondicoesMeteorologicas();
         EstadoAmbiente ambienteExterno = simulador.getNovoAmbienteExterno();
         lblAmbienteExternoTemperatura.setText(ambienteExterno.getTemperatura().toString());
         lblAmbienteExternoUmidade.setText(ambienteExterno.getUmidade().toString());
@@ -210,9 +211,10 @@ public class FormPrincipal extends FormBase {
         pnlControleSimulacao = new javax.swing.JPanel();
         btnIniciarSimulacao = new javax.swing.JButton();
         btnPausarSimulacao = new javax.swing.JButton();
+        btnConfigurarParametros = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("IntegrateSys v1.0");
+        setTitle("IntegrateSys 1.0");
 
         pnlPrevisaoTempo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Previsão do tempo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 16))); // NOI18N
 
@@ -487,31 +489,35 @@ public class FormPrincipal extends FormBase {
             }
         });
 
+        btnConfigurarParametros.setText("Configurar parâmetros");
+        btnConfigurarParametros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigurarParametrosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlControleSimulacaoLayout = new javax.swing.GroupLayout(pnlControleSimulacao);
         pnlControleSimulacao.setLayout(pnlControleSimulacaoLayout);
         pnlControleSimulacaoLayout.setHorizontalGroup(
             pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlControleSimulacaoLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(btnPausarSimulacao)
+                .addGroup(pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnIniciarSimulacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPausarSimulacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnConfigurarParametros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlControleSimulacaoLayout.createSequentialGroup()
-                    .addGap(30, 30, 30)
-                    .addComponent(btnIniciarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(31, Short.MAX_VALUE)))
         );
         pnlControleSimulacaoLayout.setVerticalGroup(
             pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlControleSimulacaoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(btnIniciarSimulacao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPausarSimulacao)
-                .addGap(47, 47, 47))
-            .addGroup(pnlControleSimulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlControleSimulacaoLayout.createSequentialGroup()
-                    .addGap(53, 53, 53)
-                    .addComponent(btnIniciarSimulacao)
-                    .addContainerGap(87, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnConfigurarParametros)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -559,7 +565,17 @@ public class FormPrincipal extends FormBase {
         pausarSimulacao();
     }//GEN-LAST:event_btnPausarSimulacaoActionPerformed
 
+    private void btnConfigurarParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigurarParametrosActionPerformed
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new FormParametros(ambiente.getParametros()).exibir();
+            }
+        });
+    }//GEN-LAST:event_btnConfigurarParametrosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfigurarParametros;
     private javax.swing.JButton btnIniciarSimulacao;
     private javax.swing.JButton btnPausarSimulacao;
     private javax.swing.JLabel lblAmbienteExternoLuminosidade;

@@ -12,7 +12,7 @@ import javax.swing.JFrame;
  *
  * @author Helton
  */
-public class FormBase extends JFrame {
+public abstract class FormBase extends JFrame {
     
     public void exibir() {
         pack();

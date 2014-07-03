@@ -33,7 +33,7 @@ public class App {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new FormAmbiente().exibir();
+                new FormPrincipal().exibir();
             }
         });
     }    

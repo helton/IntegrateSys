@@ -6,7 +6,7 @@
 
 package br.unesp.rc.integratesys.testes;
 
-import br.unesp.rc.integratesys.utils.DistribuidorValores;
+import br.unesp.rc.integratesys.simulacao.DistribuidorValores;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;

@@ -7,7 +7,7 @@
 package br.unesp.rc.integratesys.atuadores;
 
 import br.unesp.rc.integratesys.sensores.Sensores;
-import br.unesp.rc.integratesys.utils.AgendadorTarefas;
+import br.unesp.rc.integratesys.simulacao.AgendadorTarefas;
 import java.util.ArrayList;
 
 /**

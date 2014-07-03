@@ -6,7 +6,6 @@
 package br.unesp.rc.integratesys.view;
 
 import br.unesp.rc.integratesys.ambiente.Parametros;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,10 +15,10 @@ public class FormParametros extends FormBase {
 
     private final Parametros parametros;
 
-    public FormParametros() {
+    public FormParametros(Parametros parametros) {
+        this.parametros = parametros;
         initComponents();
         definirImagemSensores();
-        parametros = new Parametros();
         getParametros();
     }
 
@@ -51,6 +50,7 @@ public class FormParametros extends FormBase {
         parametros.setLuminosidadeIdeal(Integer.parseInt(txtLuminosidadeIdeal.getText()));
         parametros.setLuminosidadeMaximaCritica(Integer.parseInt(txtLuminosidadeMaxima.getText()));
         parametros.setLuminosidadeMinimaCritica(Integer.parseInt(txtLuminosidadeMinima.getText()));
+        dispose();
     }
 
     /**
@@ -63,34 +63,28 @@ public class FormParametros extends FormBase {
     private void initComponents() {
 
         btnSalvar = new javax.swing.JButton();
-        pnlParametros = new javax.swing.JPanel();
-        pnlSensorTemperatura = new javax.swing.JPanel();
-        lblSensorTemperatura = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtTemperaturaIdeal = new javax.swing.JTextField();
         txtTemperaturaMinima = new javax.swing.JTextField();
         txtTemperaturaMaxima = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        pnlSensorLuminosidade = new javax.swing.JPanel();
-        lblSensorLuminosidade = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtLuminosidadeIdeal = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtLuminosidadeMinima = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtLuminosidadeMaxima = new javax.swing.JTextField();
-        pnlSensorUmidade = new javax.swing.JPanel();
-        lblSensorUmidade = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtUmidadeIdeal = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtUmidadeMinima = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtUmidadeMaxima = new javax.swing.JTextField();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("IntegrateSys v1.0");
+        setTitle("Parâmetros - IntegrateSys 1.0");
 
         btnSalvar.setText("OK");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +149,7 @@ public class FormParametros extends FormBase {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTemperaturaMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlSensorLuminosidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Luminosidade"));
@@ -284,19 +278,31 @@ public class FormParametros extends FormBase {
         );
         pnlParametrosLayout.setVerticalGroup(
             pnlParametrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlSensorTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlSensorUmidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlSensorLuminosidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlSensorUmidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlSensorTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSalvar)
-                    .addComponent(pnlParametros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlParametros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -304,12 +310,13 @@ public class FormParametros extends FormBase {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlParametros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalvar)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnCancelar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnSalvar.getAccessibleContext().setAccessibleName("Salvar");
-        pnlParametros.getAccessibleContext().setAccessibleName("Parametros");
         pnlParametros.getAccessibleContext().setAccessibleDescription("");
 
         pack();
@@ -319,8 +326,13 @@ public class FormParametros extends FormBase {
         setParametros();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -331,13 +343,13 @@ public class FormParametros extends FormBase {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel lblSensorLuminosidade;
-    private javax.swing.JLabel lblSensorTemperatura;
-    private javax.swing.JLabel lblSensorUmidade;
-    private javax.swing.JPanel pnlParametros;
-    private javax.swing.JPanel pnlSensorLuminosidade;
-    private javax.swing.JPanel pnlSensorTemperatura;
-    private javax.swing.JPanel pnlSensorUmidade;
+    private final javax.swing.JLabel lblSensorLuminosidade = new javax.swing.JLabel();
+    private final javax.swing.JLabel lblSensorTemperatura = new javax.swing.JLabel();
+    private final javax.swing.JLabel lblSensorUmidade = new javax.swing.JLabel();
+    private final javax.swing.JPanel pnlParametros = new javax.swing.JPanel();
+    private final javax.swing.JPanel pnlSensorLuminosidade = new javax.swing.JPanel();
+    private final javax.swing.JPanel pnlSensorTemperatura = new javax.swing.JPanel();
+    private final javax.swing.JPanel pnlSensorUmidade = new javax.swing.JPanel();
     private javax.swing.JTextField txtLuminosidadeIdeal;
     private javax.swing.JTextField txtLuminosidadeMaxima;
     private javax.swing.JTextField txtLuminosidadeMinima;

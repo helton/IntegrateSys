@@ -5,8 +5,8 @@
  */
 package br.unesp.rc.integratesys.testes;
 
-import br.unesp.rc.integratesys.utils.AgendadorTarefas;
-import br.unesp.rc.integratesys.utils.Tarefa;
+import br.unesp.rc.integratesys.simulacao.AgendadorTarefas;
+import br.unesp.rc.integratesys.simulacao.Tarefa;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.After;

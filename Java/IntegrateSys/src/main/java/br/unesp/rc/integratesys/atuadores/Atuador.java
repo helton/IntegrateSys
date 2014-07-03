@@ -6,8 +6,8 @@
 
 package br.unesp.rc.integratesys.atuadores;
 
-import br.unesp.rc.integratesys.utils.AgendadorTarefas;
-import br.unesp.rc.integratesys.utils.Agendavel;
+import br.unesp.rc.integratesys.simulacao.AgendadorTarefas;
+import br.unesp.rc.integratesys.simulacao.Agendavel;
 
 /**
  *

@@ -5,8 +5,6 @@
  */
 package br.unesp.rc.integratesys.ambiente;
 
-import com.sun.org.apache.xml.internal.utils.XML11Char;
-
 /**
  *
  * @author Helton

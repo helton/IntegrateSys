@@ -10,9 +10,10 @@ import br.unesp.rc.integratesys.atuadores.Atuadores;
 import br.unesp.rc.integratesys.atuadores.Nivel;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.Sensores;
-import br.unesp.rc.integratesys.utils.ControladorSimulacao;
-import br.unesp.rc.integratesys.utils.EstadoAmbiente;
-import br.unesp.rc.integratesys.utils.Tarefa;
+import br.unesp.rc.integratesys.simulacao.AgendadorTarefas;
+import br.unesp.rc.integratesys.simulacao.EstadoAmbiente;
+import br.unesp.rc.integratesys.simulacao.SimuladorCondicoesMeteorologicas;
+import br.unesp.rc.integratesys.simulacao.Tarefa;
 
 /**
  *
@@ -20,24 +21,27 @@ import br.unesp.rc.integratesys.utils.Tarefa;
  */
 public class Ambiente {
     
-    private final ControladorSimulacao controladorSimulacao;
-    private final Atuadores atuadores;
-    private final Sensores sensores;
     private final Parametros parametros;
+    private final AgendadorTarefas agendadorTarefas;
+    private final Sensores sensores;
+    private final Atuadores atuadores;
+    private final SimuladorCondicoesMeteorologicas simulador;
+    
     
     public Ambiente(Tarefa tarefaExecutadoPorCiclo) {
         parametros = new Parametros();
+        agendadorTarefas = new AgendadorTarefas();
         sensores = new Sensores();
-        controladorSimulacao = new ControladorSimulacao(tarefaExecutadoPorCiclo, parametros);
-        atuadores = new Atuadores(sensores, controladorSimulacao.getAgendadorTarefas());
+        atuadores = new Atuadores(sensores, agendadorTarefas);
+        simulador = new SimuladorCondicoesMeteorologicas(sensores, agendadorTarefas, parametros);
         configurarCondicoesIniciais();
     }
     
     private void configurarCondicoesIniciais() {
         //apenas os valores iniciais dos sensores são disponibilizados
-        IntegrateSysLibraryLoader.getLibrary().setLuminosidade(controladorSimulacao.getSimuladorCondicoesMeteorologicas().getPrevisaoTempo().getLuminosidade().toInteger());
-        IntegrateSysLibraryLoader.getLibrary().setTemperatura(controladorSimulacao.getSimuladorCondicoesMeteorologicas().getPrevisaoTempo().getTemperatura().toInteger());        
-        IntegrateSysLibraryLoader.getLibrary().setUmidade(controladorSimulacao.getSimuladorCondicoesMeteorologicas().getPrevisaoTempo().getUmidade().toInteger());                
+        IntegrateSysLibraryLoader.getLibrary().setLuminosidade(simulador.getPrevisaoTempo().getLuminosidade().toInteger());
+        IntegrateSysLibraryLoader.getLibrary().setTemperatura(simulador.getPrevisaoTempo().getTemperatura().toInteger());        
+        IntegrateSysLibraryLoader.getLibrary().setUmidade(simulador.getPrevisaoTempo().getUmidade().toInteger());                
         //todos os atuadores ficam desligados por padrão
         IntegrateSysLibraryLoader.getLibrary().setNivelAquecedor(Nivel.DESLIGADO.getValor());
         IntegrateSysLibraryLoader.getLibrary().setNivelLampada(Nivel.DESLIGADO.getValor());
@@ -54,12 +58,12 @@ public class Ambiente {
     }
     
     public void atualizarAmbienteInterno() {
-        controladorSimulacao.getAgendadorTarefas().executarProximoCiclo();
+        agendadorTarefas.executarProximoCiclo();
     }
     
     
     public void atualizarAmbienteExterno() {
-        controladorSimulacao.getSimuladorCondicoesMeteorologicas().atualizarAmbienteExterno();
+        simulador.atualizarAmbienteExterno();
     }
     
     /**
@@ -84,10 +88,17 @@ public class Ambiente {
     }
 
     /**
-     * @return the controladorSimulacao
+     * @return the agendadorTarefas
      */
-    public ControladorSimulacao getControladorSimulacao() {
-        return controladorSimulacao;
+    public AgendadorTarefas getAgendadorTarefas() {
+        return agendadorTarefas;
     }
+
+    /**
+     * @return the simulador
+     */
+    public SimuladorCondicoesMeteorologicas getSimuladorCondicoesMeteorologicas() {
+        return simulador;
+    }      
    
 }

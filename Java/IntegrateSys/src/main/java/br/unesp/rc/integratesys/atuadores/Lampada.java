@@ -8,7 +8,7 @@ package br.unesp.rc.integratesys.atuadores;
 
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.SensorLuminosidade;
-import br.unesp.rc.integratesys.utils.AgendadorTarefas;
+import br.unesp.rc.integratesys.simulacao.AgendadorTarefas;
 
 /**
  *
