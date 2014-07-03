@@ -164,7 +164,7 @@ public class FormAmbiente extends FormBase {
                 lblIntervaloPorCiclo.setText(ambiente.getControladorSimulacao().getVarredor().INTERVALO_POR_CICLO + " segundos");
                 lblCondicaoTempo.setVisible(ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas().isLigado());
                 if (lblCondicaoTempo.isVisible() && lblCondicaoTempo.getIcon() == null) {
-                    CondicaoTempo condicaoTempo = ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas().getPrevisaoTempo().getCondicaoTempo();
+                    CondicaoTempo condicaoTempo = ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas().getCondicaoTempo();
                     lblCondicaoTempo.setIcon(condicaoTempo.getImagem());
                 }
             }
@@ -178,7 +178,7 @@ public class FormAmbiente extends FormBase {
                 definirImagemSensores();
                 definirImagemAtuadores();
                 verificarSituacaoCritica();
-                ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas().simular();
+                //ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas().simular();
             }
         };
     }

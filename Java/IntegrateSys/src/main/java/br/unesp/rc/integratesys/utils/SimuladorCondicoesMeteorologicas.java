@@ -5,7 +5,10 @@
  */
 package br.unesp.rc.integratesys.utils;
 
+import br.unesp.rc.integratesys.ambiente.Luminosidade;
 import br.unesp.rc.integratesys.ambiente.Parametros;
+import br.unesp.rc.integratesys.ambiente.Temperatura;
+import br.unesp.rc.integratesys.ambiente.Umidade;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import java.util.Random;
 
@@ -17,86 +20,62 @@ public class SimuladorCondicoesMeteorologicas {
 
     private boolean ligado;
     private final AgendadorTarefas agendadorTarefas;
-    private final Parametros parametros;
     private final Random random;
-    private PrevisaoTempo previsaoTempo;
+    private EstadoAmbiente previsaoTempo;
+    private EstadoAmbiente ambienteExterno;
+    private CondicaoTempo condicaoTempo;
+
+    private static final int VARIACAO_TEMPERATURA_PREVISAO_TEMPO = 2;
+    private static final int VARIACAO_UMIDADE_PREVISAO_TEMPO = 5;
+    private static final int VARIACAO_LUMINOSIDADE_PREVISAO_TEMPO = 5;
 
     public SimuladorCondicoesMeteorologicas(AgendadorTarefas agendadorTarefas, Parametros parametros) {
         this.ligado = false;
         this.agendadorTarefas = agendadorTarefas;
-        this.parametros = parametros;
         this.random = new Random();
-    }
-
-    private CondicaoTempo gerarCondicaoTempo() {
-        int valorAleatorio = random.nextInt(CondicaoTempo.values().length);
-        return CondicaoTempo.fromInt(valorAleatorio);
     }
 
     public int getNumeroAleatorioComFaixa(int minimo, int maximo) {
         return random.nextInt(maximo - minimo + 1) + minimo;
     }
 
-    public PrevisaoTempo getPrevisaoTempo() {
+    public EstadoAmbiente getPrevisaoTempo() {
         if (previsaoTempo == null) {
-            previsaoTempo = new PrevisaoTempo(gerarCondicaoTempo());
-            switch (previsaoTempo.getCondicaoTempo()) {
+            previsaoTempo = new EstadoAmbiente();
+            switch (getCondicaoTempo()) {
                 case DIA_CHUVOSO:
-                    previsaoTempo.setTemperatura(getNumeroAleatorioComFaixa(10, 20));
-                    previsaoTempo.setUmidade(getNumeroAleatorioComFaixa(70, 90));
-                    previsaoTempo.setLuminosidade(getNumeroAleatorioComFaixa(10, 40));
+                    previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(10, 20)));
+                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(70, 90)));
+                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(10, 40)));
                 case DIA_NUBLADO:
-                    previsaoTempo.setTemperatura(getNumeroAleatorioComFaixa(10, 20));
-                    previsaoTempo.setUmidade(getNumeroAleatorioComFaixa(50, 65));
-                    previsaoTempo.setLuminosidade(getNumeroAleatorioComFaixa(10, 40));
+                    previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(10, 20)));
+                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(50, 65)));
+                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(10, 40)));
                 case DIA_ENSOLARADO:
-                    previsaoTempo.setTemperatura(getNumeroAleatorioComFaixa(25, 35));
-                    previsaoTempo.setUmidade(getNumeroAleatorioComFaixa(40, 60));
-                    previsaoTempo.setLuminosidade(getNumeroAleatorioComFaixa(60, 90));
-                
-                System.out.println("Temperatura = " + Integer.toString(previsaoTempo.getTemperatura()) + " ºC");
-                System.out.println("Umidade = " + Integer.toString(previsaoTempo.getUmidade()) + " %");
-                System.out.println("Luminosidade = " + Integer.toString(previsaoTempo.getLuminosidade()) + " %");                                        
+                    previsaoTempo.setTemperatura(new Temperatura(getNumeroAleatorioComFaixa(25, 35)));
+                    previsaoTempo.setUmidade(new Umidade(getNumeroAleatorioComFaixa(40, 60)));
+                    previsaoTempo.setLuminosidade(new Luminosidade(getNumeroAleatorioComFaixa(60, 90)));
             }
         }
         return previsaoTempo;
     }
-    
-   /* private void agendarAlteracao(final int ciclo, final int incremento) {
-        agendadorTarefas.agendarTarefa(new Tarefa() {
-            @Override
-            public void executar() {
-                setValor(getValorSensor() + incremento);
-            }
-        }, ciclo);
-    }        
-    
-    private void alterarEstado(int variacao) {
-        List<Integer> incrementos = DistribuidorValores.distribuir(variacao, getIncrementoPorCiclo());
-        for (int ciclo = 0; ciclo < incrementos.size(); ciclo++) {
-            agendarAlteracao(ciclo, incrementos.get(ciclo));            
-        }
-    }  */     
 
-    public void simular() {
-        if (isLigado()) {
-            agendadorTarefas.agendarTarefa(new Tarefa() {
-                @Override
-                public void executar() {
-                    int novaVariacaoTemperatura = parametros.getTemperaturaInicial() - getPrevisaoTempo().getTemperatura();
-                    System.out.println("Variação da temperatura = " + Integer.toString(novaVariacaoTemperatura));
-                    IntegrateSysLibraryLoader.getLibrary().setTemperatura(IntegrateSysLibraryLoader.getLibrary().getTemperatura() + novaVariacaoTemperatura);
-                    
-                    int novaVariacaoUmidade = parametros.getUmidadeInicial() - getPrevisaoTempo().getTemperatura();
-                    System.out.println("Variação da umidade = " + Integer.toString(novaVariacaoUmidade));
-                    IntegrateSysLibraryLoader.getLibrary().setUmidade(IntegrateSysLibraryLoader.getLibrary().getUmidade() + novaVariacaoUmidade);
+    public EstadoAmbiente getNovoAmbienteExterno() {
+        ambienteExterno = new EstadoAmbiente();
 
-                    int novaVariacaoLuminosidade = parametros.getLuminosidadeInicial() - getPrevisaoTempo().getTemperatura();
-                    System.out.println("Variação da luminosidade = " + Integer.toString(novaVariacaoLuminosidade));                    
-                    IntegrateSysLibraryLoader.getLibrary().setLuminosidade(IntegrateSysLibraryLoader.getLibrary().getLuminosidade() + novaVariacaoLuminosidade);
-                }
-            }, 2);
-        }
+        Temperatura temperatura = new Temperatura(previsaoTempo.getTemperatura().toInteger()
+                + getNumeroAleatorioComFaixa(-VARIACAO_TEMPERATURA_PREVISAO_TEMPO, VARIACAO_TEMPERATURA_PREVISAO_TEMPO));
+        ambienteExterno.setTemperatura(temperatura);
+
+        Umidade umidade = new Umidade(previsaoTempo.getUmidade().toInteger()
+                + getNumeroAleatorioComFaixa(-VARIACAO_UMIDADE_PREVISAO_TEMPO, VARIACAO_UMIDADE_PREVISAO_TEMPO));
+        ambienteExterno.setUmidade(umidade);
+
+        Luminosidade luminosidade = new Luminosidade(previsaoTempo.getLuminosidade().toInteger()
+                + getNumeroAleatorioComFaixa(-VARIACAO_LUMINOSIDADE_PREVISAO_TEMPO, VARIACAO_LUMINOSIDADE_PREVISAO_TEMPO));
+        ambienteExterno.setLuminosidade(luminosidade);
+
+        return ambienteExterno;
     }
 
     /**
@@ -111,6 +90,99 @@ public class SimuladorCondicoesMeteorologicas {
      */
     public void setLigado(boolean ligado) {
         this.ligado = ligado;
+    }
+
+    /**
+     * @return the condicaoTempo
+     */
+    public CondicaoTempo getCondicaoTempo() {
+        if (condicaoTempo == null) {
+            int valorAleatorio = random.nextInt(CondicaoTempo.values().length);
+            condicaoTempo = CondicaoTempo.fromInt(valorAleatorio);
+        }
+        return condicaoTempo;
+    }
+
+
+    private void agendaAlteracaoTemperaturaAmbienteExterno() {
+        agendadorTarefas.alterarEstado(new Agendavel() {
+
+            @Override
+            public int getVariacaoPorNivel() {
+                return 1;
+            }
+
+            @Override
+            public int getIncrementoPorCiclo() {
+                return 1;                
+            }
+
+            @Override
+            public int getValor() {
+                return IntegrateSysLibraryLoader.getLibrary().getTemperatura();
+            }
+
+            @Override
+            public void setValor(int valor) {
+                IntegrateSysLibraryLoader.getLibrary().setTemperatura(valor);
+            }
+        }, previsaoTempo.getTemperatura().toInteger() - ambienteExterno.getTemperatura().toInteger());        
+    }
+    
+    private void agendaAlteracaoUmidadeAmbienteExterno() {
+        agendadorTarefas.alterarEstado(new Agendavel() {
+
+            @Override
+            public int getVariacaoPorNivel() {
+                return 1;
+            }
+
+            @Override
+            public int getIncrementoPorCiclo() {
+                return 1;                
+            }
+
+            @Override
+            public int getValor() {
+                return IntegrateSysLibraryLoader.getLibrary().getUmidade();
+            }
+
+            @Override
+            public void setValor(int valor) {
+                IntegrateSysLibraryLoader.getLibrary().setUmidade(valor);
+            }
+        }, previsaoTempo.getUmidade().toInteger() - ambienteExterno.getUmidade().toInteger());        
+    }
+    
+    private void agendaAlteracaoLuminosidadeAmbienteExterno() {
+        agendadorTarefas.alterarEstado(new Agendavel() {
+
+            @Override
+            public int getVariacaoPorNivel() {
+                return 1;
+            }
+
+            @Override
+            public int getIncrementoPorCiclo() {
+                return 1;                
+            }
+
+            @Override
+            public int getValor() {
+                return IntegrateSysLibraryLoader.getLibrary().getLuminosidade();
+            }
+
+            @Override
+            public void setValor(int valor) {
+                IntegrateSysLibraryLoader.getLibrary().setLuminosidade(valor);
+            }
+        }, previsaoTempo.getLuminosidade().toInteger() - ambienteExterno.getLuminosidade().toInteger());        
+    }            
+    
+    public void atualizarAmbienteExterno() {
+        agendaAlteracaoTemperaturaAmbienteExterno();
+        agendaAlteracaoUmidadeAmbienteExterno();
+        agendaAlteracaoLuminosidadeAmbienteExterno();
     }
 
 }

@@ -26,7 +26,7 @@ public abstract class AtuadorDeTemperatura extends Atuador {
     }   
     
     @Override
-    public int getValorSensor() {
+    public int getValor() {
         return sensorTemperatura.getTemperatura();
     }
     

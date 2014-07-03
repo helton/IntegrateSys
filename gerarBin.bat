@@ -14,7 +14,7 @@ copy /y "Java\IntegrateSys\target\IntegrateSys-1.0-SNAPSHOT-jar-with-dependencie
 copy /y "C++\IntegrateSysLib\Release\IntegrateSysLib.dll" "bin\32 bits\IntegrateSysLib.dll"
 copy /y "C++\IntegrateSysLib\x64\Release\IntegrateSysLib.dll" "bin\64 bits\IntegrateSysLib.dll"
 
-echo Processo concluído.
+echo Processo concluido.
 pause
 
 @echo on

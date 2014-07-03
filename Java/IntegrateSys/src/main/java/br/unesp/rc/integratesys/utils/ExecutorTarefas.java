@@ -14,20 +14,18 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Helton
  */
-public class Varredor {
+public class ExecutorTarefas {
     
-    public final int INTERVALO_POR_CICLO = 3;
+    public final int intervaloExecucao;
     private final Runnable tarefaPeriodica;
     private ScheduledExecutorService executorTarefa;
     
-    public Varredor(final AgendadorTarefas agendadorTarefas, final Tarefa callback) {
-        tarefaPeriodica = new Runnable() {
+    public ExecutorTarefas(int intervaloExecucao, final Tarefa tarefa) {
+        this.intervaloExecucao = intervaloExecucao;
+        this.tarefaPeriodica = new Runnable() {
             @Override
             public void run() {
-                agendadorTarefas.executarProximoCiclo();
-                if (callback != null) {
-                    callback.executar();
-                }
+               tarefa.executar();
             }
         };        
     }
@@ -37,12 +35,12 @@ public class Varredor {
             executorTarefa.shutdown();
         }
         executorTarefa = Executors.newSingleThreadScheduledExecutor();
-        executorTarefa.scheduleAtFixedRate(tarefaPeriodica, 0, INTERVALO_POR_CICLO, TimeUnit.SECONDS);        
+        executorTarefa.scheduleAtFixedRate(tarefaPeriodica, 0, intervaloExecucao, TimeUnit.SECONDS);        
     }
     
     public void pausar() {
         executorTarefa.shutdown();
         executorTarefa = null;
     }
-    
+
 }

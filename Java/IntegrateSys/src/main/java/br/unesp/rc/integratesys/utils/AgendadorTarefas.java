@@ -8,6 +8,7 @@ package br.unesp.rc.integratesys.utils;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
@@ -21,7 +22,7 @@ public class AgendadorTarefas {
     private final Map<Integer, Ciclo> ciclos;
     
     public AgendadorTarefas() {
-        ciclos = new HashMap<>();
+    ciclos = new HashMap<>();
         indiceProximoCiclo = 0;
     }
     
@@ -51,6 +52,22 @@ public class AgendadorTarefas {
         return indiceProximoCiclo;
     }
 
+    private void agendarAlteracao(final Agendavel agendavel, final int ciclo, final int incremento) {
+        agendarTarefa(new Tarefa() {
+            @Override
+            public void executar() {
+                agendavel.setValor(agendavel.getValor() + incremento);
+            }
+        }, ciclo);
+    }    
+    
+    public void alterarEstado(Agendavel agendavel, int variacao) {
+        List<Integer> incrementos = DistribuidorValores.distribuir(variacao, agendavel.getIncrementoPorCiclo());
+        for (int ciclo = 0; ciclo < incrementos.size(); ciclo++) {
+            agendarAlteracao(agendavel, ciclo, incrementos.get(ciclo));            
+        }
+    }       
+    
 }
 
 class Ciclo {

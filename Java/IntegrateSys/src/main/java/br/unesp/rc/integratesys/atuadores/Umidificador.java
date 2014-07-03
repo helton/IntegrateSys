@@ -39,7 +39,7 @@ public class Umidificador extends Atuador {
     }      
     
     @Override
-    public int getValorSensor() {
+    public int getValor() {
         return sensorUmidade.getUmidade();
     }
     

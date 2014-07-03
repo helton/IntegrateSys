@@ -6,7 +6,6 @@
 
 package br.unesp.rc.integratesys.app;
 
-import br.unesp.rc.integratesys.view.FormAmbiente;
 import br.unesp.rc.integratesys.view.FormPrincipal;
 import java.awt.EventQueue;
 
@@ -25,7 +24,7 @@ public class App {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormAmbiente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }        
     }
     

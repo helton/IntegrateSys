@@ -39,7 +39,7 @@ public class Lampada extends Atuador {
     }      
     
     @Override
-    public int getValorSensor() {
+    public int getValor() {
         return sensorLuminosidade.getLuminosidade();
     }
     

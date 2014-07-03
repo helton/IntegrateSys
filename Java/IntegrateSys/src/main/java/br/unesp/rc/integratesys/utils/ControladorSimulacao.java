@@ -77,4 +77,8 @@ public class ControladorSimulacao {
         return emSimulacao;
     }
     
+    public void atualizarAmbienteExterno() {
+        
+    }
+    
 }

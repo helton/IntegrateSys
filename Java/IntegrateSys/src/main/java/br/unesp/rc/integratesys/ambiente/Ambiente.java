@@ -11,6 +11,7 @@ import br.unesp.rc.integratesys.atuadores.Nivel;
 import br.unesp.rc.integratesys.library.IntegrateSysLibraryLoader;
 import br.unesp.rc.integratesys.sensores.Sensores;
 import br.unesp.rc.integratesys.utils.ControladorSimulacao;
+import br.unesp.rc.integratesys.utils.EstadoAmbiente;
 import br.unesp.rc.integratesys.utils.Tarefa;
 
 /**
@@ -34,14 +35,31 @@ public class Ambiente {
     
     private void configurarCondicoesIniciais() {
         //apenas os valores iniciais dos sensores são disponibilizados
-        IntegrateSysLibraryLoader.getLibrary().setLuminosidade(parametros.getLuminosidadeInicial());
-        IntegrateSysLibraryLoader.getLibrary().setTemperatura(parametros.getTemperaturaInicial());        
-        IntegrateSysLibraryLoader.getLibrary().setUmidade(parametros.getUmidadeInicial());                
+        IntegrateSysLibraryLoader.getLibrary().setLuminosidade(controladorSimulacao.getSimuladorCondicoesMeteorologicas().getPrevisaoTempo().getLuminosidade().toInteger());
+        IntegrateSysLibraryLoader.getLibrary().setTemperatura(controladorSimulacao.getSimuladorCondicoesMeteorologicas().getPrevisaoTempo().getTemperatura().toInteger());        
+        IntegrateSysLibraryLoader.getLibrary().setUmidade(controladorSimulacao.getSimuladorCondicoesMeteorologicas().getPrevisaoTempo().getUmidade().toInteger());                
         //todos os atuadores ficam desligados por padrão
         IntegrateSysLibraryLoader.getLibrary().setNivelAquecedor(Nivel.DESLIGADO.getValor());
         IntegrateSysLibraryLoader.getLibrary().setNivelLampada(Nivel.DESLIGADO.getValor());
         IntegrateSysLibraryLoader.getLibrary().setNivelUmidificador(Nivel.DESLIGADO.getValor());
         IntegrateSysLibraryLoader.getLibrary().setNivelVentilador(Nivel.DESLIGADO.getValor());        
+    }
+    
+    public EstadoAmbiente getAmbienteInterno() {
+        EstadoAmbiente ambienteInterno = new EstadoAmbiente();
+        ambienteInterno.setLuminosidade(new Luminosidade(IntegrateSysLibraryLoader.getLibrary().getLuminosidade()));
+        ambienteInterno.setTemperatura(new Temperatura(IntegrateSysLibraryLoader.getLibrary().getTemperatura()));
+        ambienteInterno.setUmidade(new Umidade(IntegrateSysLibraryLoader.getLibrary().getUmidade()));
+        return ambienteInterno;
+    }
+    
+    public void atualizarAmbienteInterno() {
+        controladorSimulacao.getAgendadorTarefas().executarProximoCiclo();
+    }
+    
+    
+    public void atualizarAmbienteExterno() {
+        controladorSimulacao.getSimuladorCondicoesMeteorologicas().atualizarAmbienteExterno();
     }
     
     /**
