@@ -652,18 +652,6 @@ public class FormAmbiente extends FormBase {
         ambiente.getControladorSimulacao().getSimuladorCondicoesMeteorologicas().setLigado(((JCheckBox) evt.getSource()).isSelected());
     }//GEN-LAST:event_chkSimuladorCondicoesMeteorologicasStateChanged
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new FormAmbiente().exibir();
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox chkSimuladorCondicoesMeteorologicas;
     private javax.swing.JPanel jPanel1;
