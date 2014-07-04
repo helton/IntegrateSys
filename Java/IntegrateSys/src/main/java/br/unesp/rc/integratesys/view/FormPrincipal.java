@@ -36,9 +36,9 @@ public class FormPrincipal extends FormBase {
     private static final int INTERVALO_ATUALIZACAO_AMBIENTE_INTERNO = 3;
     private static final int INTERVALO_ATUALIZACAO_AMBIENTE_EXTERNO = 12;
     
-    private static final int TOLERANCIA_VARIACAO_TEMPERATURA = 3;
-    private static final int TOLERANCIA_VARIACAO_UMIDADE = 8;    
-    private static final int TOLERANCIA_VARIACAO_LUMINOSIDADE = 8;
+    private static final int TOLERANCIA_VARIACAO_TEMPERATURA = 2;
+    private static final int TOLERANCIA_VARIACAO_UMIDADE = 5;    
+    private static final int TOLERANCIA_VARIACAO_LUMINOSIDADE = 5;
 
     private void configurarSliders() {
         Hashtable<Integer, Component> labelTable = new Hashtable<>();
